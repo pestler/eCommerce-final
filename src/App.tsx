@@ -1,7 +1,7 @@
 import './App.scss'
 
 function App() {
-  const title = 'eCommerce'
+  const title = "eCommerce"
   return (
     <>
       <h1>{title}</h1>
