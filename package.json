@@ -13,8 +13,14 @@
     "precommit": "lint-staged"
   },
   "lint-staged": {
-    "*.ts": "eslint . --fix, prettier --write ./src/**/*.{ts,tsx} --config ./.prettierrc",
-    "*.tsx": "eslint . --fix, prettier --write ./src/**/*.{ts,tsx} --config ./.prettierrc"
+    "*.ts": [
+      "eslint --fix",
+      "prettier --write"
+    ],
+    "*.tsx": [
+      "eslint --fix",
+      "prettier --write"
+    ]
   },
   "husky": {
     "hooks": {
