@@ -14,12 +14,12 @@
   },
   "lint-staged": {
     "*.ts": [
-      "eslint --fix",
-      "prettier --write"
+      "eslint . --fix",
+      "prettier --write ./src/**/*.{ts,tsx} --config ./.prettierrc"
     ],
     "*.tsx": [
-      "eslint --fix",
-      "prettier --write"
+      "eslint . --fix",
+      "prettier --write ./src/**/*.{ts,tsx} --config ./.prettierrc"
     ]
   },
   "husky": {
