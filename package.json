@@ -13,16 +13,6 @@
     "precommit": "lint-staged",
     "prepare": "husky"
   },
-  "lint-staged": {
-    "*.ts": [
-      "eslint . --fix",
-      "prettier --write ./src/**/*.{ts,tsx} --config ./.prettierrc"
-    ],
-    "*.tsx": [
-      "eslint . --fix",
-      "prettier --write ./src/**/*.{ts,tsx} --config ./.prettierrc"
-    ]
-  },
   "husky": {
     "hooks": {
       "pre-commit": "npm run precommit"
