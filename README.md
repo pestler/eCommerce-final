@@ -24,8 +24,7 @@ With this application, users can:
 
 - TypeScript
 - React
-- Redux
-- CSS
+- SCSS
 - The project is managed using Trello board.
 
 ### 🤚 Backend
@@ -38,11 +37,11 @@ With this application, users can:
 
 ### 🤚 Linter and Formatter
 
-- ESLint, Prettier,
+- ESLint, Prettier, Husky
 
 ### 🤚 Tests
 
-- Jest
+- Vitest
 
 ## 🖥️ Run Locally
 
