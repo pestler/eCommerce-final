@@ -1,30 +1,103 @@
-# eCommerce
+# eCommerce Application
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Hello!
+This is a project for the final task in RSSchool, eCommerce Application for online flowers store.
+Application with beautiful flowers  for home. The application is very convenient to use.
 
-Currently, two official plugins are available:
+With this application, users can:
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+- Log in and registered
+- Manage profile
+- View the product catalog
+- View details of product
+- Order flowers
 
-## Expanding the ESLint configuration
+## Authors
 
-If you are developing a production application, we recommend updating the configuration to enable type aware lint rules:
+- [Ivan Haurylenka](https://github.com/ivankirik)
+- [Svetlana Antonova](https://github.com/claire-an)
+- [Aleh Kuis](https://github.com/pestler)
 
-- Configure the top-level `parserOptions` property like this:
+## 📜 Tech Stack
 
-```js
-export default {
-  // other rules...
-  parserOptions: {
-    ecmaVersion: 'latest',
-    sourceType: 'module',
-    project: ['./tsconfig.json', './tsconfig.node.json'],
-    tsconfigRootDir: __dirname,
-  },
-}
+### ✋ FRONTEND
+
+- TypeScript
+- React
+- Redux
+- CSS
+- The project is managed using Trello board.
+
+### 🤚 Backend
+
+- Commercetools
+
+### 🤚 Build
+
+- Vite
+
+### 🤚 Linter and Formatter
+
+- ESLint, Prettier,
+
+### 🤚 Tests
+
+- Jest
+
+## 🖥️ Run Locally
+
+Clone the project
+
+```bash  
+   git clone https://github.com/IvanKirik/eCommerce.git
 ```
 
-- Replace `plugin:@typescript-eslint/recommended` to `plugin:@typescript-eslint/recommended-type-checked` or `plugin:@typescript-eslint/strict-type-checked`
-- Optionally add `plugin:@typescript-eslint/stylistic-type-checked`
-- Install [eslint-plugin-react](https://github.com/jsx-eslint/eslint-plugin-react) and add `plugin:react/recommended` & `plugin:react/jsx-runtime` to the `extends` list
+Go to the project directory
+
+```bash
+   cd eCommerce
+```
+
+Install dependencies
+
+```bash
+  npm install --legacy-peer-deps
+```
+
+Start the project run
+
+```bash
+  npm run dev  
+```
+
+To build this project run
+
+```bash
+  npm run build
+```
+
+Now you can open in browser to the address: [http://localhost:5173]
+
+```bash
+  http://localhost:5173
+```
+
+## 🤚 Scripts
+
+To run tests, run the following command
+
+```bash
+  npm run test
+```
+
+To run eslint, run the following command
+
+```bash
+  npm run lint
+```
+
+To run prettier, run the following command
+
+```bash
+  npm run format
+```
