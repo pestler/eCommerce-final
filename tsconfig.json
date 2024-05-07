@@ -13,13 +13,14 @@
     "isolatedModules": true,
     "noEmit": true,
     "jsx": "react-jsx",
+    "esModuleInterop": true,
 
     /* Linting */
     "strict": true,
     "noUnusedLocals": true,
     "noUnusedParameters": true,
     "noFallthroughCasesInSwitch": true
-  },
-  "include": ["src"],
+  },  
+  "include": ["src", "src/**/*.d.ts", "src/**/*.ts", "src/**/*.js", "test-setup", "__tests__"],
   "references": [{ "path": "./tsconfig.node.json" }]
 }
