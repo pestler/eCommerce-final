@@ -1,22 +1,21 @@
-import { useEffect, useState } from 'react';
+import React from 'react';
+import {BrowserRouter, Route, Routes} from 'react-router-dom';
 import './App.scss';
-import { apiRoot } from './api/ApiRoot.ts';
+import Layout from './Layout.tsx';
+import { router } from './router';
 
-function App() {
-  const [title, setTitle] = useState('');
-
-  useEffect(() => {
-    apiRoot
-      .get()
-      .execute()
-      .then(({ body }) => setTitle(body.name));
-  });
-
+const App: React.FC = () => {
   return (
-    <>
-      <h1>{title}</h1>
-    </>
+      <BrowserRouter>
+          <Layout>
+              <Routes>
+                  {router.map((route, index) => (
+                      <Route key={index} path={route.path} element={route.element} />
+                  ))}
+              </Routes>
+          </Layout>
+      </BrowserRouter>
   );
-}
+};
 
 export default App;

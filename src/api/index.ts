@@ -1,1 +1,1 @@
-export * from './ApiRoot.ts';
+export { default as api } from './ApiRoot.ts';
