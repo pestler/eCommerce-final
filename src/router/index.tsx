@@ -1,5 +1,5 @@
-import {ReactNode} from "react";
-import {Login, Main, Registration} from "../pages";
+import { ReactNode } from 'react';
+import { Login, Main, Registration } from '../pages';
 
 interface Route {
   path: string;
