@@ -1,0 +1,97 @@
+:root {
+    --font-family: "Montserrat", sans-serif;
+    --second-family: "Lora", sans-serif;
+    --third-family: "Suisse Intl", sans-serif;
+}
+
+main {
+    width: 1440px;
+}
+
+.container {
+    display: flex;
+    align-items: center;
+    padding: 10px 275px 1px 100px;
+    width: 100%;
+}
+
+.picbox {
+    background: url('./../../assets/image/registration.png') no-repeat;
+    background-size: cover;
+    width: 421px;
+    height: 587px;
+}
+
+.form {
+    display: flex;
+    flex-direction: column;
+    width: 500px;
+    align-items: center;
+    gap: 10px;
+}
+
+.title {
+    font-family: var(--second-family);
+    font-weight: 400;
+    font-size: 36px;
+    line-height: 130%;
+    color: #202b21;
+}
+
+.fieldset {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    gap: 10px;
+
+}
+
+.btnWrapper {
+    width: 100%;
+}
+
+.button {
+    border-radius: 5px;
+    padding: 15px 40px;    
+    height: 51px;
+    background: #456f49;
+}
+
+.inputContainer {
+    border: 1.50px solid #2a592e;
+    border-radius: 3px;
+    padding: 10px;        
+}
+
+.input{
+    width: 100%;
+}
+
+.submit {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.login {
+    font-family: var(--font-family);
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 130%;
+    color: #519057;   
+    cursor: pointer;
+}
+
+.accaunt {
+    font-family: var(--font-family);
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 130%;
+    color: #2c2c2c;
+    display: flex;   
+    display: flex;
+}
+.options{
+    width: 150px;
+}
