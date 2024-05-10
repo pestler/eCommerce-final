@@ -1,4 +1,4 @@
-import style from './styles.module.scss';
+import style from './header.module.scss';
 
 import React from 'react';
 import { Link } from 'react-router-dom';

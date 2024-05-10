@@ -1,17 +1,15 @@
 import React, { useEffect } from 'react';
-import { api } from '../../api';
+import styles from './main.module.scss';
 
 const Main: React.FC = () => {
-  useEffect(() => {
-    api
-      .get()
-      .execute()
-      .then((r) => console.log(r));
-  });
+  useEffect(() => {});
+
+  const registrationHandler = async () => {};
 
   return (
-    <div>
+    <div className={styles.main}>
       <h2>Main</h2>
+      <button onClick={registrationHandler}>Войти</button>
     </div>
   );
 };
