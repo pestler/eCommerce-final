@@ -2,14 +2,9 @@ import React, { useEffect } from 'react';
 import styles from './main.module.scss';
 
 const Main: React.FC = () => {
-  useEffect(() => {
+  useEffect(() => {});
 
-
-  });
-
-  const registrationHandler = async () => {
-
-  }
+  const registrationHandler = async () => {};
 
   return (
     <div className={styles.main}>
