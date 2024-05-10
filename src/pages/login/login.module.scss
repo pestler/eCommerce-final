@@ -1,0 +1,111 @@
+:root {
+    --font-family: "Montserrat", sans-serif;
+    --second-family: "Lora", sans-serif;
+    --third-family: "Suisse Intl", sans-serif;
+}
+
+* {
+    box-sizing: border-box;
+    transition: all .3s;
+}
+main {
+    width: 1440px;
+}
+
+.container {    
+    display: flex;
+    width: 100%;
+    padding: 50px 50px 100px 50px;
+}
+
+.form {
+    padding: 15px;
+    display: flex;
+    flex-direction: column;
+    width: 430px;
+    align-items: center;
+    gap: 10px;
+}
+
+.title {
+    padding: 10px;
+    text-align: center;
+    font-family: var(--second-family);
+    font-weight: 400;
+    font-size: 36px;
+    line-height: 130%;
+    color: #202b21;
+}
+
+.inputContainer {
+    
+    
+    
+}
+
+.input {
+    border: 1.50px solid #2a592e;
+    border-radius: 3px;
+    padding: 20px 64px 20px 20px;
+    width: 100%;
+    height: 53px;
+}
+
+.checkbox {
+    position: absolute;
+    top: 25px;
+    right: 10px;
+}
+
+.button {
+    margin-top: 20px;
+    width: 100%;
+    padding: 7px;
+    font-size: 20px;
+    border: 0.1rem solid #0e0e0e;
+    cursor: pointer;
+}
+
+.submit {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.noaccaunt {
+    font-family: var(--font-family);
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 130%;
+    color: #2c2c2c;
+}
+
+.registration {
+    font-family: var(--font-family);
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 130%;
+    color: #519057;
+    display: flex;
+    cursor: pointer;
+}
+
+.picbox {
+    display: flex;
+    align-items: flex-end;
+}
+
+.big {
+    background: url('./../../assets/image/login.png') no-repeat;
+    background-size: cover;
+    width: 470px;
+    height: 515px;
+}
+
+.small {
+    background: url('./../../assets/image/login1.png') no-repeat;
+    background-size: cover;
+    width: 261px;
+    height: 327px;
+}
