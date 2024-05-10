@@ -1,12 +1,13 @@
-import React, {useEffect} from 'react';
-import {api} from "../../api";
+import React, { useEffect } from 'react';
+import { api } from '../../api';
 
 const Main: React.FC = () => {
-
-    useEffect(() => {
-        api.get().execute()
-            .then(r => console.log(r))
-    })
+  useEffect(() => {
+    api
+      .get()
+      .execute()
+      .then((r) => console.log(r));
+  });
 
   return (
     <div>
