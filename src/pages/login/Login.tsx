@@ -1,17 +1,14 @@
 import React from 'react';
 import { SubmitHandler, useForm } from 'react-hook-form';
 import styles from './login.module.scss';
+import Input from "../../components/Input/Input.tsx";
+import {loginValidation} from "../../validators/login-validation.ts";
+import {passwordValidation} from "../../validators/password-validation.ts";
 
 type FormInputs = {
   loginEmail: string;
   password: string;
   error?: string;
-};
-
-const message: FormInputs = {
-  loginEmail: 'Please enter loginEmail.',
-  password:
-    'Ваш пароль включает хотя бы одну строчную букву, одну прописную букву, одну цифру и один специальный символ.',
 };
 
 const Login: React.FC = () => {
@@ -25,7 +22,7 @@ const Login: React.FC = () => {
     defaultValues: {
       loginEmail: '',
       password: '',
-    },
+    }
   });
 
   const onSubmit: SubmitHandler<FormInputs> = (data) => {
@@ -37,33 +34,18 @@ const Login: React.FC = () => {
     <div className={styles.container}>
       <form className={styles.form} onSubmit={handleSubmit(onSubmit)}>
         <h3 className={styles.title}>Войти в личный кабинет</h3>
-        <input
-          {...register('loginEmail', {
-            pattern: /^\S+@\S+\.\S+$/,
-            required: true,
-          })}
-          className={styles.input}
+        <Input
+          {...register('loginEmail', loginValidation)}
           placeholder="Enter email"
           type="text"
+          error={errors.loginEmail}
         />
-        {errors.loginEmail && errors.loginEmail.type === 'pattern' && (
-          <span>{message.loginEmail}</span>
-        )}
-        <input
-          {...register('password', {
-            pattern: /^(?=.*[A-Z])(?=.*[a-z])(?=.*\d)(?=.*[!@#$%^&*])/,
-            required: true,
-          })}
-          className={styles.input}
+        <Input
+          {...register('password', passwordValidation)}
           placeholder="Enter password"
           type="text"
+          error={errors.password}
         />
-        {errors.password && errors.password.type === 'required' && (
-          <span>This is required</span>
-        )}
-        {errors.password && errors.password.type === 'pattern' && (
-          <span>{message.password}</span>
-        )}
         <label className={styles.checkbox}>
           <input className="checkbox-original" type="checkbox" />
           <span className="checkbox-custom"></span>
