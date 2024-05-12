@@ -1,12 +1,14 @@
 import React from 'react';
 import { SubmitHandler, useForm } from 'react-hook-form';
+import { Link } from 'react-router-dom';
+import Input from '../../components/Input/Input.tsx';
+import Button from '../../components/button/Button.tsx';
+import { loginValidation } from '../../validators/login-validation.ts';
+import { passwordValidation } from '../../validators/password-validation.ts';
 import styles from './login.module.scss';
-import Input from "../../components/Input/Input.tsx";
-import {loginValidation} from "../../validators/login-validation.ts";
-import {passwordValidation} from "../../validators/password-validation.ts";
 
-type FormInputs = {
-  loginEmail: string;
+export type LoginForm = {
+  email: string;
   password: string;
   error?: string;
 };
@@ -17,15 +19,15 @@ const Login: React.FC = () => {
     handleSubmit,
     formState: { errors },
     reset,
-  } = useForm<FormInputs>({
+  } = useForm<LoginForm>({
     mode: 'onChange',
     defaultValues: {
-      loginEmail: '',
+      email: '',
       password: '',
-    }
+    },
   });
 
-  const onSubmit: SubmitHandler<FormInputs> = (data) => {
+  const onSubmit: SubmitHandler<LoginForm> = (data) => {
     console.log(data);
     reset();
   };
@@ -35,25 +37,27 @@ const Login: React.FC = () => {
       <form className={styles.form} onSubmit={handleSubmit(onSubmit)}>
         <h3 className={styles.title}>Войти в личный кабинет</h3>
         <Input
-          {...register('loginEmail', loginValidation)}
+          {...register('email', loginValidation())}
           placeholder="Enter email"
           type="text"
-          error={errors.loginEmail}
+          error={errors.email}
         />
         <Input
-          {...register('password', passwordValidation)}
+          {...register('password', passwordValidation())}
           placeholder="Enter password"
-          type="text"
+          type="password"
           error={errors.password}
         />
         <label className={styles.checkbox}>
           <input className="checkbox-original" type="checkbox" />
           <span className="checkbox-custom"></span>
         </label>
-        <button className={styles.button}>Войти</button>
+        <Button className={styles.button}>Войти</Button>
         <div className={styles.submit}>
-          <div className={styles.noaccaunt}>Нет аккаунта</div>
-          <div className={styles.registration}>Зарегистрируйтесь</div>
+          <div className={styles.noaccaunt}>Нет аккаунта?</div>
+          <Link className={styles.registration} to="/registration">
+            Зарегистрируйтесь
+          </Link>
         </div>
       </form>
       <div className={styles.picbox}>
