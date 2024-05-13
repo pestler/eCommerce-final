@@ -35,7 +35,7 @@ const Header: React.FC = () => {
           <div className={style.menu__img}>
             {[login, bag].map((link) => {
               return (
-                <Link to={"/" + link} key={link}>
+                <Link to={'/' + link} key={link}>
                   <img src={link} />
                 </Link>
               );
@@ -44,7 +44,11 @@ const Header: React.FC = () => {
         </div>
         <div className={style.header__group}>
           {productGroup.map((group) => {
-            return <Link to="#" className={style.link} key={group}>{group}</Link>;
+            return (
+              <Link to="#" className={style.link} key={group}>
+                {group}
+              </Link>
+            );
           })}
         </div>
       </div>
