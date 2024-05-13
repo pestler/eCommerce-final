@@ -8,7 +8,7 @@ interface Route {
 
 export const router: Route[] = [
   {
-    path: '/',
+    path: '/main',
     element: <Main />,
   },
   {
