@@ -1,5 +1,46 @@
-.main {
+:root {
+  --font-family: "Montserrat", sans-serif;
+  --second-family: "Lora", sans-serif;
+  --third-family: "Suisse Intl", sans-serif;
+}
+
+main {
+  margin: 0 auto;
+}
+
+.main__wrapper {
+  max-width: 1400px;
+  position: relative;
+
   h2 {
-    color: red;
+    font-family: --second-family;
+    font-size: 60px;
+    color: #2A592E;
   }
+}
+
+.main__description {
+  padding-bottom: 200px;
+  font-family: --font-family;
+  width: 530px;
+  font-size: 18px;
+  color: #202B21;
+}
+
+.main__imgleft {
+  position: absolute;
+  right: 500px;
+  bottom: -10px;
+}
+
+.main__imgcenter {
+  position: absolute;
+  right: 200px;
+  bottom: -10px;
+}
+
+.main__imgright {
+  position: absolute;
+  right: 0;
+  bottom: -10px;
 }
