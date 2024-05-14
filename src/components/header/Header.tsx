@@ -17,13 +17,13 @@ const listButtonLink = [
   {
     id: 'login',
     to: '/login',
-    src: login
+    src: login,
   },
   {
     id: 'bag',
     to: '#',
-    src: bag
-  }
+    src: bag,
+  },
 ];
 
 const Header: React.FC = () => {
