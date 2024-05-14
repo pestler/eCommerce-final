@@ -9,9 +9,9 @@ import { repeatPasswordValidation } from '../../validators/repeat-password-valid
 import styles from './registration.module.scss';
 
 type RegistrationForm = {
-  email: string,
-  registerPassword: string,
-  repeatPassword: string,
+  email: string;
+  registerPassword: string;
+  repeatPassword: string;
 };
 
 const Registration: React.FC = () => {
