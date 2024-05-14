@@ -1,0 +1,46 @@
+:root {
+    --font-family: "Montserrat", sans-serif;
+    --second-family: "Lora", sans-serif;
+    --third-family: "Suisse Intl", sans-serif;
+}  
+
+.footer {
+    background-color: #648F64;
+    max-width: 1440px;
+    margin: 0 auto;
+}
+
+.wrapper {
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 50px 0;
+    display: flex;
+    justify-content: space-between;
+
+    @media (max-width: 1500px) {
+        padding: 50px;
+    }
+}
+
+h3 {
+    font-family: var(--font-family);
+    font-size: 16px;
+    font-weight: 600;
+    text-transform: uppercase;    
+    color: #2C2C2C;
+}
+
+.link {
+    font-family: var(--font-family);
+    font-size: 16px;
+    text-decoration: none;
+    color: #2C2C2C;
+}
+
+.footer_menu,
+.footer__group,
+.footer__team {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
