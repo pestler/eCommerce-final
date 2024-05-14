@@ -1,19 +1,19 @@
 export const listLinks = [
   {
     id: 1,
-    to: '/main',
+    to: '/',
     textLink: 'Главная',
     testid: 'main-link',
   },
   {
     id: 2,
-    to: '/catalog',
+    to: '#',
     textLink: 'Каталог',
     testid: 'catalog-link',
   },
   {
     id: 3,
-    to: '/feedback',
+    to: '#',
     textLink: 'Отзывы',
     testid: 'feedback-link',
   },

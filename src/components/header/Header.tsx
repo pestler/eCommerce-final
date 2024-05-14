@@ -13,6 +13,19 @@ const productGroup = [
   'Кашпо и горшки',
 ];
 
+const listButtonLink = [
+  {
+    id: 'login',
+    to: '/login',
+    src: login
+  },
+  {
+    id: 'bag',
+    to: '#',
+    src: bag
+  }
+];
+
 const Header: React.FC = () => {
   return (
     <div className={style.header}>
@@ -33,10 +46,10 @@ const Header: React.FC = () => {
             ))}
           </nav>
           <div className={style.menu__img}>
-            {[login, bag].map((link) => {
+            {listButtonLink.map((link) => {
               return (
-                <Link to={'/' + link} key={link}>
-                  <img src={link} />
+                <Link to={link.to} key={link.id}>
+                  <img src={link.src} />
                 </Link>
               );
             })}
