@@ -1,9 +1,9 @@
 import { MyCustomerDraft, MyCustomerSignin } from '@commercetools/platform-sdk';
-import { api } from '../api';
+import {authClient, passwordClient} from "../api";
 
 class CustomerService {
   public getByEmail(email: string) {
-    return api
+    return authClient
       .customers()
       .get({
         queryArgs: {
@@ -14,19 +14,23 @@ class CustomerService {
   }
 
   public getById(id: string) {
-    return api.customers().withId({ ID: id }).get().execute();
+    return authClient.customers().withId({ ID: id }).get().execute();
   }
 
   public registration(dto: Pick<MyCustomerDraft, 'email' | 'password'>) {
-    return api.customers().post({ body: dto }).execute();
+    return authClient.customers().post({ body: dto }).execute();
   }
 
-  public login(dto: Pick<MyCustomerSignin, 'email' | 'password'>) {
-    return api.me().login().post({ body: dto }).execute();
+  public login({ email, password }: Pick<MyCustomerSignin, 'email' | 'password'>) {
+    return passwordClient({ username: email, password })
+        .login()
+        .post({ body: { email, password } })
+        .execute();
   }
+
 
   public logout() {
-    //Логика по удалению токена из локального хранилища
+    // TODO - Логика по удалению токена из локального хранилища
   }
 }
 

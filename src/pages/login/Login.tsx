@@ -1,11 +1,12 @@
 import React from 'react';
 import { SubmitHandler, useForm } from 'react-hook-form';
-import { Link } from 'react-router-dom';
+import {Link, useNavigate} from 'react-router-dom';
 import Input from '../../components/Input/Input.tsx';
 import Button from '../../components/button/Button.tsx';
 import { loginValidation } from '../../validators/login-validation.ts';
 import { passwordValidation } from '../../validators/password-validation.ts';
 import styles from './login.module.scss';
+import {customerService} from "../../services/customer.service.ts";
 
 export type LoginForm = {
   email: string;
@@ -14,11 +15,11 @@ export type LoginForm = {
 };
 
 const Login: React.FC = () => {
+  const navigate = useNavigate();
   const {
     register,
     handleSubmit,
     formState: { errors },
-    reset,
   } = useForm<LoginForm>({
     mode: 'onChange',
     defaultValues: {
@@ -27,9 +28,11 @@ const Login: React.FC = () => {
     },
   });
 
-  const onSubmit: SubmitHandler<LoginForm> = (data) => {
-    console.log(data);
-    reset();
+  const onSubmit: SubmitHandler<LoginForm> = async (data) => {
+    const { statusCode } = await customerService.login(data);
+    if (statusCode === 200) {
+      navigate("/main");
+    }
   };
 
   return (

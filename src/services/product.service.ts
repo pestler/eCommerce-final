@@ -1,16 +1,17 @@
-import { api } from '../api';
+import {anonymousClient} from "../api";
+
 
 class ProductService {
   public getAll(limit?: number) {
-    return api.products().get({ queryArgs: { limit } }).execute();
+    return anonymousClient.products().get({ queryArgs: { limit } }).execute();
   }
 
   public getDiscounts() {
-    return api.productDiscounts().get().execute();
+    return anonymousClient.productDiscounts().get().execute();
   }
 
   public getProjectionsSort(fieldSort: string) {
-    return api
+    return anonymousClient
       .productProjections()
       .search()
       .get({
@@ -22,7 +23,7 @@ class ProductService {
   }
 
   public searchProjections(search: string) {
-    return api
+    return anonymousClient
       .productProjections()
       .search()
       .get({
@@ -35,7 +36,7 @@ class ProductService {
   }
 
   public getAllProjections(limit: number, offset: number) {
-    return api
+    return anonymousClient
       .productProjections()
       .search()
       .get({ queryArgs: { limit, offset } })
@@ -43,15 +44,15 @@ class ProductService {
   }
 
   public getByKey(key: string) {
-    return api.products().withKey({ key }).get().execute();
+    return anonymousClient.products().withKey({ key }).get().execute();
   }
 
   public getByID(ID: string) {
-    return api.products().withId({ ID }).get().execute();
+    return anonymousClient.products().withId({ ID }).get().execute();
   }
 
   public getByCategory(ID: string) {
-    return api.categories().withId({ ID }).get().execute();
+    return anonymousClient.categories().withId({ ID }).get().execute();
   }
 }
 
