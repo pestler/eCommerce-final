@@ -66,10 +66,7 @@ const Header: React.FC = () => {
             })}
           </div>
           {/* <InputSearch placeholder="Search"/> */}
-          <input
-            className={style.inputSearch}
-            type="text"
-          />
+          <input className={style.inputSearch} type="text" />
         </div>
       </div>
     </div>
