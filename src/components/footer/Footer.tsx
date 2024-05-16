@@ -32,22 +32,22 @@ const Footer: React.FC = () => {
     <footer className={style.footer}>
       <div className="container">
         <div className={style.wrapper}>
-          <img src={Logo} className={style.footer__logo}/>
+          <img src={Logo} className={style.footer__logo} />
           <div className={style.footer_menu}>
             <h3>Меню</h3>
             {listLinks.map((link) => (
-                <Link key={link.id} to={link.to} className={style.link}>
-                  {link.textLink}
-                </Link>
+              <Link key={link.id} to={link.to} className={style.link}>
+                {link.textLink}
+              </Link>
             ))}
           </div>
           <div className={style.footer__group}>
             <h3>КАТЕГОРИИ</h3>
             {productGroup.map((group) => {
               return (
-                  <Link to="#" className={style.link} key={group}>
-                    {group}
-                  </Link>
+                <Link to="#" className={style.link} key={group}>
+                  {group}
+                </Link>
               );
             })}
           </div>
@@ -55,14 +55,14 @@ const Footer: React.FC = () => {
             <h3>Разработчики</h3>
             {team.map((value) => {
               return (
-                  <Link
-                      to={'https://github.com/' + value.gitHub}
-                      className={style.link}
-                      key={value.gitHub}
-                      title={value.name}
-                  >
-                    {value.gitHub}
-                  </Link>
+                <Link
+                  to={'https://github.com/' + value.gitHub}
+                  className={style.link}
+                  key={value.gitHub}
+                  title={value.name}
+                >
+                  {value.gitHub}
+                </Link>
               );
             })}
           </div>
