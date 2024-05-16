@@ -38,7 +38,7 @@ const Login: React.FC = () => {
   return (
     <div className={styles.container}>
       <form className={styles.form} onSubmit={handleSubmit(onSubmit)}>
-        <h3 className={styles.title}>Войти в личный кабинет</h3>
+        <h3 className={styles.titleForm}>Войти в личный кабинет</h3>
         <Input
           {...register('email', loginValidation())}
           placeholder="Enter email"

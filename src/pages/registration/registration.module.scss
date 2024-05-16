@@ -4,15 +4,9 @@
     --third-family: "Suisse Intl", sans-serif;
 }
 
-main {
-    width: 1440px;
-}
-
 .container {
     display: flex;
     align-items: center;
-    padding: 10px 275px 1px 100px;
-    width: 100%;
 }
 
 .picbox {
@@ -31,11 +25,14 @@ main {
 }
 
 .title {
+    text-align: center;
     font-family: var(--second-family);
     font-weight: 400;
     font-size: 36px;
-    line-height: 130%;
+    line-height: 46px;
     color: #202b21;
+    text-transform: none;
+    margin-bottom: 35px;
 }
 
 .fieldset {
@@ -52,6 +49,7 @@ main {
 
 .button {
     width: 100%;
+    margin-top: 45px;
 }
 
 .inputContainer {

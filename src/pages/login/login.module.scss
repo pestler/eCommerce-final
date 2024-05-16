@@ -1,11 +1,10 @@
 .container {
     display: flex;
     width: 100%;
-    padding: 50px 50px 100px 50px;
+    padding-top: 50px;
 }
 
 .form {
-    padding: 15px;
     display: flex;
     flex-direction: column;
     width: 430px;
@@ -13,20 +12,15 @@
     gap: 10px;
 }
 
-.title {
-    padding: 10px;
+.titleForm {
     text-align: center;
     font-family: var(--second-family);
     font-weight: 400;
     font-size: 36px;
-    line-height: 130%;
+    line-height: 46px;
     color: #202b21;
-}
-
-.inputContainer {
-
-
-
+    text-transform: none;
+    margin-bottom: 35px;
 }
 
 .input {
@@ -45,6 +39,7 @@
 
 .button {
     width: 100%;
+    margin-top: 45px;
 }
 
 .submit {
