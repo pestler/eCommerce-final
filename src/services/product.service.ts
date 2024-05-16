@@ -1,5 +1,4 @@
-import {anonymousClient} from "../api";
-
+import { anonymousClient } from '../api';
 
 class ProductService {
   public getAll(limit?: number) {

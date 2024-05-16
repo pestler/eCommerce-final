@@ -1,13 +1,13 @@
 import React from 'react';
 import { SubmitHandler, useForm } from 'react-hook-form';
-import {Link, useNavigate} from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import Input from '../../components/Input/Input.tsx';
 import Button from '../../components/button/Button.tsx';
+import { customerService } from '../../services/customer.service.ts';
 import { loginValidation } from '../../validators/login-validation.ts';
 import { passwordValidation } from '../../validators/password-validation.ts';
 import { repeatPasswordValidation } from '../../validators/repeat-password-validation.ts';
 import styles from './registration.module.scss';
-import {customerService} from "../../services/customer.service.ts";
 
 type RegistrationForm = {
   email: string;
@@ -33,10 +33,16 @@ const Registration: React.FC = () => {
 
   const passwordValue = watch('registerPassword');
 
-  const onSubmit: SubmitHandler<RegistrationForm> = async ({ email, registerPassword  }) => {
-    const { statusCode } = await customerService.registration({ email, password: registerPassword });
+  const onSubmit: SubmitHandler<RegistrationForm> = async ({
+    email,
+    registerPassword,
+  }) => {
+    const { statusCode } = await customerService.registration({
+      email,
+      password: registerPassword,
+    });
     if (statusCode === 201) {
-      navigate("/login");
+      navigate('/login');
     }
   };
 
