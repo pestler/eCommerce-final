@@ -51,7 +51,7 @@ const Footer: React.FC = () => {
           })}
         </div>
         <div className={style.footer__team}>
-          <h3>Команда разработчиков</h3>
+          <h3>Разработчики</h3>
           {team.map((value) => {
             return (
               <Link
