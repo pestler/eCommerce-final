@@ -55,14 +55,21 @@ const Header: React.FC = () => {
             })}
           </div>
         </div>
-        <div className={style.header__group}>
-          {productGroup.map((group) => {
-            return (
-              <Link to="#" className={style.link} key={group}>
-                {group}
-              </Link>
-            );
-          })}
+        <div className={style.header__bottom}>
+          <div className={style.header__group}>
+            {productGroup.map((group) => {
+              return (
+                <Link to="#" className={style.link} key={group}>
+                  {group}
+                </Link>
+              );
+            })}
+          </div>
+          {/* <InputSearch placeholder="Search"/> */}
+          <input
+            className={style.inputSearch}
+            type="text"
+          />
         </div>
       </div>
     </div>
