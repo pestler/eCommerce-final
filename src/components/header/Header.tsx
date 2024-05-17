@@ -1,10 +1,12 @@
 import React from 'react';
-import {Link, NavLink, useNavigate} from 'react-router-dom';
+import { Link, NavLink, useNavigate } from 'react-router-dom';
 import login from '../../assets/images/login.svg';
 import logo from '../../assets/images/logo.svg';
+import Profile from '../../assets/svg/profile.svg';
+import { useAuth } from '../../providers/AuthProvider.tsx';
+import BasicMenu from '../menu/Menu.tsx';
 import style from './header.module.scss';
 import { listLinks } from './listLink';
-import BasicMenu from "../menu/Menu.tsx";
 
 const productGroup = [
   'Комнатные растения',
@@ -12,12 +14,14 @@ const productGroup = [
   'Сухоцветы',
   'Кашпо и горшки',
 ];
-export type eventType = 'Войти' | 'Зарегистриваться';
-const eventsMenu: eventType[] = ['Войти', 'Зарегистриваться'];
+
+const eventsMenu: ('Войти' | 'Зарегистрироваться' | 'Выйти')[] = ['Войти', 'Зарегистрироваться', 'Выйти'];
 
 const Header: React.FC = () => {
   const navigate = useNavigate();
-  const menuEvent = (event: eventType) => {
+  const { isAuthenticated, logout } = useAuth();
+
+  const menuEvent = (event: string) => {
     switch (event) {
       case 'Войти':
         navigate('/login');
@@ -25,8 +29,12 @@ const Header: React.FC = () => {
       case 'Зарегистриваться':
         navigate('/registration');
         break;
+      case 'Выйти':
+        logout();
+        navigate('/login');
+        break;
     }
-  }
+  };
 
   return (
     <div className="container">
@@ -48,9 +56,13 @@ const Header: React.FC = () => {
               ))}
             </nav>
             <BasicMenu
-                buttonContent={<img src={login}/>}
-                menuItems={eventsMenu}
-                menuEvent={menuEvent}
+              buttonContent={
+                isAuthenticated ? <img src={Profile} /> : <img src={login} />
+              }
+              menuItems={eventsMenu.filter((item: string) =>
+                isAuthenticated ? item === 'Выйти' : item !== 'Выйти',
+              )}
+              menuEvent={menuEvent}
             />
           </div>
           <div className={style.header__bottom}>

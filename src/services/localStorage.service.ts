@@ -8,7 +8,7 @@ class LocalStorageService {
       return null;
     }
   }
-  
+
   public set<T>(key: string, value: T): void {
     try {
       localStorage.setItem(key, JSON.stringify(value));
@@ -16,15 +16,14 @@ class LocalStorageService {
       console.error(e);
     }
   }
-  
+
   public remove(key: string): void {
     localStorage.removeItem(key);
   }
-  
+
   public clear(): void {
     localStorage.clear();
   }
 }
-  
+
 export const localStorageService = new LocalStorageService();
-  

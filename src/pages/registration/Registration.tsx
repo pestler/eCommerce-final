@@ -32,7 +32,7 @@ const Registration: React.FC = () => {
     email,
     registerPassword,
   }) => {
-    const { statusCode} = await customerService.registration({
+    const { statusCode } = await customerService.registration({
       email,
       password: registerPassword,
     });

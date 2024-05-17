@@ -3,6 +3,7 @@ import { SubmitHandler, useForm } from 'react-hook-form';
 import { Link, useNavigate } from 'react-router-dom';
 import Input from '../../components/Input/Input.tsx';
 import Button from '../../components/button/Button.tsx';
+import { useAuth } from '../../providers/AuthProvider.tsx';
 import { customerService } from '../../services/customer.service.ts';
 import { loginValidation } from '../../validators/login-validation.ts';
 import { passwordValidation } from '../../validators/password-validation.ts';
@@ -16,17 +17,19 @@ export type LoginForm = {
 
 const Login: React.FC = () => {
   const navigate = useNavigate();
+  const { login } = useAuth();
   const {
     register,
     handleSubmit,
     formState: { errors },
   } = useForm<LoginForm>({
-    mode: 'onChange'
+    mode: 'onChange',
   });
 
   const onSubmit: SubmitHandler<LoginForm> = async (data) => {
     const { statusCode } = await customerService.login(data);
     if (statusCode === 200) {
+      login();
       navigate('/');
     }
   };
