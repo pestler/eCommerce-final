@@ -1,10 +1,10 @@
 import React from 'react';
-import { Link, NavLink } from 'react-router-dom';
-import bag from '../../assets/images/bag.svg';
+import {Link, NavLink, useNavigate} from 'react-router-dom';
 import login from '../../assets/images/login.svg';
 import logo from '../../assets/images/logo.svg';
 import style from './header.module.scss';
 import { listLinks } from './listLink';
+import BasicMenu from "../menu/Menu.tsx";
 
 const productGroup = [
   'Комнатные растения',
@@ -12,21 +12,22 @@ const productGroup = [
   'Сухоцветы',
   'Кашпо и горшки',
 ];
-
-const listButtonLink = [
-  {
-    id: 'login',
-    to: '/login',
-    src: login,
-  },
-  {
-    id: 'bag',
-    to: '#',
-    src: bag,
-  },
-];
+export type eventType = 'Войти' | 'Зарегистриваться';
+const eventsMenu: eventType[] = ['Войти', 'Зарегистриваться'];
 
 const Header: React.FC = () => {
+  const navigate = useNavigate();
+  const menuEvent = (event: eventType) => {
+    switch (event) {
+      case 'Войти':
+        navigate('/login');
+        break;
+      case 'Зарегистриваться':
+        navigate('/registration');
+        break;
+    }
+  }
+
   return (
     <div className="container">
       <div className={style.header}>
@@ -46,15 +47,11 @@ const Header: React.FC = () => {
                 </NavLink>
               ))}
             </nav>
-            <div className={style.menu__img}>
-              {listButtonLink.map((link) => {
-                return (
-                  <Link to={link.to} key={link.id}>
-                    <img src={link.src} />
-                  </Link>
-                );
-              })}
-            </div>
+            <BasicMenu
+                buttonContent={<img src={login}/>}
+                menuItems={eventsMenu}
+                menuEvent={menuEvent}
+            />
           </div>
           <div className={style.header__bottom}>
             <div className={style.header__group}>

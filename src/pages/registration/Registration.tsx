@@ -24,11 +24,6 @@ const Registration: React.FC = () => {
     watch,
   } = useForm<RegistrationForm>({
     mode: 'onChange',
-    defaultValues: {
-      email: '',
-      registerPassword: '',
-      repeatPassword: '',
-    },
   });
 
   const passwordValue = watch('registerPassword');
@@ -37,12 +32,13 @@ const Registration: React.FC = () => {
     email,
     registerPassword,
   }) => {
-    const { statusCode } = await customerService.registration({
+    const { statusCode} = await customerService.registration({
       email,
       password: registerPassword,
     });
     if (statusCode === 201) {
       navigate('/login');
+      return;
     }
   };
 

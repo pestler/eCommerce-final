@@ -21,17 +21,13 @@ const Login: React.FC = () => {
     handleSubmit,
     formState: { errors },
   } = useForm<LoginForm>({
-    mode: 'onChange',
-    defaultValues: {
-      email: '',
-      password: '',
-    },
+    mode: 'onChange'
   });
 
   const onSubmit: SubmitHandler<LoginForm> = async (data) => {
     const { statusCode } = await customerService.login(data);
     if (statusCode === 200) {
-      navigate('/main');
+      navigate('/');
     }
   };
 
@@ -51,10 +47,6 @@ const Login: React.FC = () => {
           type="password"
           error={errors.password}
         />
-        <label className={styles.checkbox}>
-          <input className="checkbox-original" type="checkbox" />
-          <span className="checkbox-custom"></span>
-        </label>
         <Button className={styles.button}>Войти</Button>
         <div className={styles.submit}>
           <div className={styles.noaccaunt}>Нет аккаунта?</div>
