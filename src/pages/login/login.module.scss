@@ -1,25 +1,10 @@
-:root {
-    --font-family: "Montserrat", sans-serif;
-    --second-family: "Lora", sans-serif;
-    --third-family: "Suisse Intl", sans-serif;
-}
-
-* {
-    box-sizing: border-box;
-    transition: all .3s;
-}
-main {
-    width: 1440px;
-}
-
-.container {    
+.container {
     display: flex;
     width: 100%;
-    padding: 50px 50px 100px 50px;
+    padding-top: 50px;
 }
 
 .form {
-    padding: 15px;
     display: flex;
     flex-direction: column;
     width: 430px;
@@ -27,20 +12,15 @@ main {
     gap: 10px;
 }
 
-.title {
-    padding: 10px;
+.titleForm {
     text-align: center;
     font-family: var(--second-family);
     font-weight: 400;
     font-size: 36px;
-    line-height: 130%;
+    line-height: 46px;
     color: #202b21;
-}
-
-.inputContainer {
-    
-    
-    
+    text-transform: none;
+    margin-bottom: 35px;
 }
 
 .input {
@@ -58,12 +38,8 @@ main {
 }
 
 .button {
-    margin-top: 20px;
     width: 100%;
-    padding: 7px;
-    font-size: 20px;
-    border: 0.1rem solid #0e0e0e;
-    cursor: pointer;
+    margin-top: 45px;
 }
 
 .submit {
@@ -97,14 +73,14 @@ main {
 }
 
 .big {
-    background: url('./../../assets/image/login.png') no-repeat;
+    background: url('../../assets/images/login.png') no-repeat;
     background-size: cover;
     width: 470px;
     height: 515px;
 }
 
 .small {
-    background: url('./../../assets/image/login1.png') no-repeat;
+    background: url('../../assets/images/login1.png') no-repeat;
     background-size: cover;
     width: 261px;
     height: 327px;

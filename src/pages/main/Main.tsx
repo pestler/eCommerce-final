@@ -1,13 +1,10 @@
-import imgLeft from '../../assets/image/login.png';
-import imgRight from '../../assets/image/login1.png';
-import imgCenter from '../../assets/image/registration.png';
+import React from 'react';
+import imgLeft from '../../assets/images/login.png';
+import imgRight from '../../assets/images/login1.png';
+import imgCenter from '../../assets/images/registration.png';
 import styles from './main.module.scss';
 
 const Main: React.FC = () => {
-  // useEffect(() => {});
-
-  // const registrationHandler = async () => {};
-
   return (
     <div className={styles.main__wrapper}>
       <h2>

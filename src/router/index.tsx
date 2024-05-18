@@ -1,5 +1,6 @@
 import { ReactNode } from 'react';
 import { Login, Main, Registration } from '../pages';
+import AuthGuard from './guards/auth.guard.tsx';
 
 interface Route {
   path: string;
@@ -13,10 +14,10 @@ export const router: Route[] = [
   },
   {
     path: '/login',
-    element: <Login />,
+    element: <AuthGuard element={<Login />} />,
   },
   {
     path: '/registration',
-    element: <Registration />,
+    element: <AuthGuard element={<Registration />} />,
   },
 ];

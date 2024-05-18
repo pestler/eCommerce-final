@@ -1,0 +1,17 @@
+:root {
+  --font-family: "Montserrat", sans-serif;
+  --second-family: "Lora", sans-serif;
+  --third-family: "Suisse Intl", sans-serif;
+}
+
+* {
+  box-sizing: border-box;
+  transition: all .3s;
+  margin: 0;
+  padding: 0;
+}
+
+.container {
+  max-width: 1240px;
+  margin: 0 auto;
+}

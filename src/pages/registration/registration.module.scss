@@ -4,15 +4,9 @@
     --third-family: "Suisse Intl", sans-serif;
 }
 
-main {
-    width: 1440px;
-}
-
 .container {
     display: flex;
     align-items: center;
-    padding: 10px 275px 1px 100px;
-    width: 100%;
 }
 
 .picbox {
@@ -31,11 +25,14 @@ main {
 }
 
 .title {
+    text-align: center;
     font-family: var(--second-family);
     font-weight: 400;
     font-size: 36px;
-    line-height: 130%;
+    line-height: 46px;
     color: #202b21;
+    text-transform: none;
+    margin-bottom: 35px;
 }
 
 .fieldset {
@@ -51,16 +48,14 @@ main {
 }
 
 .button {
-    border-radius: 5px;
-    padding: 15px 40px;    
-    height: 51px;
-    background: #456f49;
+    width: 100%;
+    margin-top: 45px;
 }
 
 .inputContainer {
     border: 1.50px solid #2a592e;
     border-radius: 3px;
-    padding: 10px;        
+    padding: 10px;
 }
 
 .input{
@@ -79,7 +74,7 @@ main {
     font-weight: 400;
     font-size: 16px;
     line-height: 130%;
-    color: #519057;   
+    color: #519057;
     cursor: pointer;
 }
 
@@ -89,7 +84,7 @@ main {
     font-size: 16px;
     line-height: 130%;
     color: #2c2c2c;
-    display: flex;   
+    display: flex;
     display: flex;
 }
 .options{
