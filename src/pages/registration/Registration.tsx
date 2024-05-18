@@ -8,11 +8,12 @@ import { loginValidation } from '../../validators/login-validation.ts';
 import { passwordValidation } from '../../validators/password-validation.ts';
 import { repeatPasswordValidation } from '../../validators/repeat-password-validation.ts';
 import styles from './registration.module.scss';
+import { nameValidation } from '../../validators/name-validation.ts';
 
 type RegistrationForm = {
   firstName: string;
   lastName: string;
-  dateOfBirth: string;
+  //dateOfBirth: string;
   email: string;
   registerPassword: string;
   repeatPassword: string;
@@ -34,15 +35,15 @@ const Registration: React.FC = () => {
   const onSubmit: SubmitHandler<RegistrationForm> = async ({
     firstName,
     lastName,
-    //  dateOfBirth,
+//    dateOfBirth,
     email,
     registerPassword,
   }) => {
     const { statusCode } = await customerService.registration({
-      firstName: firstName,
-      lastName: lastName,
-      //dateOfBirth: dateOfBirth,
-      email: email,
+      firstName,
+      lastName,
+  //    dateOfBirth: dateOfBirth,
+      email,
       password: registerPassword,
     });
     if (statusCode === 201) {
@@ -56,42 +57,44 @@ const Registration: React.FC = () => {
       <form className={styles.form} onSubmit={handleSubmit(onSubmit)}>
         <h3 className={styles.title}>Регистрация на сайте</h3>
         <h4 className={styles.info__container}>Личная информация</h4>
-        <input
-          {...register('firstName')}
-          className={styles.input}
-          id="first-name"
-          type="text"
-          name="first-name"
+
+        <Input
+          {...register('firstName',  nameValidation())}
           placeholder="First Name"
+          type="text"          
+          error={errors.firstName}          
         />
-        <input
-          {...register('lastName')}
-          className={styles.input}
+
+        <Input
+          {...register('lastName', nameValidation())}        
           id="last-name"
-          type="text"
-          name="last-name"
           placeholder="Last Name"
+          type="text"          
+          error={errors.lastName}          
         />
-        {/*    <input
-          {...register('dateOfBirth')}
-          className={styles.input}
+
+        {/* {<input
+          {...register('dateOfBirth')}          
           id="date-birth"
           type="text"
           name="date-birth"
           placeholder="dateOfBirth"
-        /> */}
+        /> } */}
+
         <Input
           {...register('email', loginValidation())}
           placeholder="Enter email"
           type="text"
           error={errors.email}
         />
+        
         <Input
           {...register('registerPassword', passwordValidation())}
           placeholder="Enter password"
           type="password"
           error={errors.registerPassword}
         />
+
         <Input
           {...register(
             'repeatPassword',
