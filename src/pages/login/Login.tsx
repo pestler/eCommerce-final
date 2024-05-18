@@ -3,6 +3,7 @@ import { SubmitHandler, useForm } from 'react-hook-form';
 import { Link, useNavigate } from 'react-router-dom';
 import Input from '../../components/Input/Input.tsx';
 import Button from '../../components/button/Button.tsx';
+import { useAuth } from '../../providers/AuthProvider.tsx';
 import { customerService } from '../../services/customer.service.ts';
 import { loginValidation } from '../../validators/login-validation.ts';
 import { passwordValidation } from '../../validators/password-validation.ts';
@@ -16,29 +17,27 @@ export type LoginForm = {
 
 const Login: React.FC = () => {
   const navigate = useNavigate();
+  const { login } = useAuth();
   const {
     register,
     handleSubmit,
     formState: { errors },
   } = useForm<LoginForm>({
     mode: 'onChange',
-    defaultValues: {
-      email: '',
-      password: '',
-    },
   });
 
   const onSubmit: SubmitHandler<LoginForm> = async (data) => {
     const { statusCode } = await customerService.login(data);
     if (statusCode === 200) {
-      navigate('/main');
+      login();
+      navigate('/');
     }
   };
 
   return (
     <div className={styles.container}>
       <form className={styles.form} onSubmit={handleSubmit(onSubmit)}>
-        <h3 className={styles.title}>Войти в личный кабинет</h3>
+        <h3 className={styles.titleForm}>Войти в личный кабинет</h3>
         <Input
           {...register('email', loginValidation())}
           placeholder="Enter email"
@@ -51,10 +50,6 @@ const Login: React.FC = () => {
           type="password"
           error={errors.password}
         />
-        <label className={styles.checkbox}>
-          <input className="checkbox-original" type="checkbox" />
-          <span className="checkbox-custom"></span>
-        </label>
         <Button className={styles.button}>Войти</Button>
         <div className={styles.submit}>
           <div className={styles.noaccaunt}>Нет аккаунта?</div>

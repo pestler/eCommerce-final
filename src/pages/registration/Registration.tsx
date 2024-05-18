@@ -24,11 +24,6 @@ const Registration: React.FC = () => {
     watch,
   } = useForm<RegistrationForm>({
     mode: 'onChange',
-    defaultValues: {
-      email: '',
-      registerPassword: '',
-      repeatPassword: '',
-    },
   });
 
   const passwordValue = watch('registerPassword');
@@ -43,6 +38,7 @@ const Registration: React.FC = () => {
     });
     if (statusCode === 201) {
       navigate('/login');
+      return;
     }
   };
 
