@@ -5,10 +5,10 @@ import Input from '../../components/Input/Input.tsx';
 import Button from '../../components/button/Button.tsx';
 import { customerService } from '../../services/customer.service.ts';
 import { loginValidation } from '../../validators/login-validation.ts';
+import { nameValidation } from '../../validators/name-validation.ts';
 import { passwordValidation } from '../../validators/password-validation.ts';
 import { repeatPasswordValidation } from '../../validators/repeat-password-validation.ts';
 import styles from './registration.module.scss';
-import { nameValidation } from '../../validators/name-validation.ts';
 
 type RegistrationForm = {
   firstName: string;
@@ -35,14 +35,14 @@ const Registration: React.FC = () => {
   const onSubmit: SubmitHandler<RegistrationForm> = async ({
     firstName,
     lastName,
-//    dateOfBirth,
+    //    dateOfBirth,
     email,
     registerPassword,
   }) => {
     const { statusCode } = await customerService.registration({
       firstName,
       lastName,
-  //    dateOfBirth: dateOfBirth,
+      //    dateOfBirth: dateOfBirth,
       email,
       password: registerPassword,
     });
@@ -59,18 +59,18 @@ const Registration: React.FC = () => {
         <h4 className={styles.info__container}>Личная информация</h4>
 
         <Input
-          {...register('firstName',  nameValidation())}
+          {...register('firstName', nameValidation())}
           placeholder="First Name"
-          type="text"          
-          error={errors.firstName}          
+          type="text"
+          error={errors.firstName}
         />
 
         <Input
-          {...register('lastName', nameValidation())}        
+          {...register('lastName', nameValidation())}
           id="last-name"
           placeholder="Last Name"
-          type="text"          
-          error={errors.lastName}          
+          type="text"
+          error={errors.lastName}
         />
 
         {/* {<input
@@ -87,7 +87,7 @@ const Registration: React.FC = () => {
           type="text"
           error={errors.email}
         />
-        
+
         <Input
           {...register('registerPassword', passwordValidation())}
           placeholder="Enter password"

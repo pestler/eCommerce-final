@@ -18,7 +18,10 @@ class CustomerService {
   }
 
   public registration(
-    dto: Pick<MyCustomerDraft, 'firstName' | 'lastName' | 'dateOfBirth' | 'email' | 'password'>,
+    dto: Pick<
+      MyCustomerDraft,
+      'firstName' | 'lastName' | 'dateOfBirth' | 'email' | 'password'
+    >,
   ) {
     return authClient.customers().post({ body: dto }).execute();
   }
