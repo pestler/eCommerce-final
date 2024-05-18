@@ -1,4 +1,4 @@
- <fieldset className={styles.fieldset}>
+/*  <fieldset className={styles.fieldset}>
    <legend>Личная информация</legend>
    <div className={styles.inputContainer}>
      <label htmlFor="registration-email">Email</label>
@@ -71,8 +71,6 @@
      </label>
    </div>
  </fieldset>
-
-
 
 
  <fieldset className={styles.fieldset}>
@@ -248,4 +246,4 @@
        <label htmlFor="billing-checkbox">Select only this address</label>
      </div>
    </div>
- </fieldset>
+ </fieldset> */

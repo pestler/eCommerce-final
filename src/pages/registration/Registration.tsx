@@ -34,7 +34,7 @@ const Registration: React.FC = () => {
   const onSubmit: SubmitHandler<RegistrationForm> = async ({
     firstName,
     lastName,
-  //  dateOfBirth,
+    //  dateOfBirth,
     email,
     registerPassword,
   }) => {
