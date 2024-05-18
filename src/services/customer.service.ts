@@ -17,7 +17,7 @@ class CustomerService {
     return authClient.customers().withId({ ID: id }).get().execute();
   }
 
-  public registration(dto: Pick<MyCustomerDraft, 'email' | 'password'>) {
+  public registration(dto: Pick<MyCustomerDraft, 'email' | 'password' | 'firstName'| 'lastName'>) {
     return authClient.customers().post({ body: dto }).execute();
   }
 

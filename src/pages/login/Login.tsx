@@ -35,7 +35,7 @@ const Login: React.FC = () => {
   };
 
   return (
-    <div className={styles.container}>
+    <div className={styles.container__login}>
       <form className={styles.form} onSubmit={handleSubmit(onSubmit)}>
         <h3 className={styles.titleForm}>Войти в личный кабинет</h3>
         <Input
