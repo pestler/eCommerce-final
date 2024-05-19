@@ -69,7 +69,7 @@ const Registration: React.FC = () => {
           <Input
             {...register('lastName', nameValidation())}
             id="last-name"
-                       placeholder="Фамилия"
+            placeholder="Фамилия"
             type="text"
             error={errors.lastName}
           />
