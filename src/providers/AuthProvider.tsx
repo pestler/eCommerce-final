@@ -1,19 +1,15 @@
-import {
-  createContext,
-  ReactNode,
-  useEffect,
-  useState,
-} from 'react';
+import { Customer } from '@commercetools/platform-sdk';
+import { createContext, ReactNode, useEffect, useState } from 'react';
 import {
   ACCESS_TOKEN,
   EXPIRATION_TIME,
-  REFRESH_TOKEN, USER_CUSTOMER,
+  REFRESH_TOKEN,
+  USER_CUSTOMER,
 } from '../contstants/storage-keys.constants.ts';
-import {localStorageService} from "../services";
-import {Customer} from "@commercetools/platform-sdk";
+import { localStorageService } from '../services';
 
 export interface IAuthContext {
-  user: Customer | null,
+  user: Customer | null;
   isAuthenticated: boolean;
   login: (user: Customer) => void;
   logout: () => void;

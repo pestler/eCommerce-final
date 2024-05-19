@@ -1,6 +1,6 @@
 import { MyCustomerSignin } from '@commercetools/platform-sdk';
 import { authClient, passwordClient } from '../api';
-import {RegistrationDto} from "../interface/registration.dto.ts";
+import { RegistrationDto } from '../interface/registration.dto.ts';
 
 class CustomerService {
   public getByEmail(email: string) {

@@ -3,10 +3,10 @@ import { Link, NavLink, useNavigate } from 'react-router-dom';
 import login from '../../assets/images/login.svg';
 import logo from '../../assets/images/logo.svg';
 import Profile from '../../assets/svg/profile.svg';
+import { useAuth } from '../../hooks/useAuth.ts';
 import BasicMenu from '../menu/Menu.tsx';
 import style from './header.module.scss';
 import { listLinks } from './listLink';
-import {useAuth} from "../../hooks/useAuth.ts";
 
 const productGroup = [
   'Комнатные растения',
@@ -60,15 +60,19 @@ const Header: React.FC = () => {
               ))}
             </nav>
             <div className={style.user}>
-              {user && <span>Привет, {user.firstName ? user.firstName : user.email}</span>}
+              {user && (
+                <span>
+                  Привет, {user.firstName ? user.firstName : user.email}
+                </span>
+              )}
               <BasicMenu
-                  buttonContent={
-                    isAuthenticated ? <img src={Profile} /> : <img src={login} />
-                  }
-                  menuItems={eventsMenu.filter((item: string) =>
-                      isAuthenticated ? item === 'Выйти' : item !== 'Выйти',
-                  )}
-                  menuEvent={menuEvent}
+                buttonContent={
+                  isAuthenticated ? <img src={Profile} /> : <img src={login} />
+                }
+                menuItems={eventsMenu.filter((item: string) =>
+                  isAuthenticated ? item === 'Выйти' : item !== 'Выйти',
+                )}
+                menuEvent={menuEvent}
               />
             </div>
           </div>

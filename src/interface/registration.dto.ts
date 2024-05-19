@@ -1,3 +1,3 @@
-import {RegistrationForm} from "./registrationForm.ts";
+import { RegistrationForm } from './registrationForm.ts';
 
 export type RegistrationDto = RegistrationForm;
