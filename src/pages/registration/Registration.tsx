@@ -62,14 +62,14 @@ const Registration: React.FC = () => {
 
           <Input
             {...register('firstName', nameValidation())}
-            placeholder="First Name"
+            placeholder="Имя"
             type="text"
             error={errors.firstName}
           />
           <Input
             {...register('lastName', nameValidation())}
             id="last-name"
-            placeholder="Last Name"
+                       placeholder="Фамилия"
             type="text"
             error={errors.lastName}
           />
@@ -77,20 +77,20 @@ const Registration: React.FC = () => {
             {...register('dateOfBirth', dateValidation())}
             id="date-birth"
             type="date"
-            placeholder="dateOfBirth"
+            placeholder="Дата рождения"
             error={errors.dateOfBirth}
             aria-invalid="true"
           />
 
           <Input
             {...register('email', loginValidation())}
-            placeholder="Enter email"
+            placeholder="Электронная почта"
             type="text"
             error={errors.email}
           />
           <Input
             {...register('registerPassword', passwordValidation())}
-            placeholder="Enter password"
+            placeholder="Пароль"
             type="password"
             error={errors.registerPassword}
           />
@@ -99,7 +99,7 @@ const Registration: React.FC = () => {
               'repeatPassword',
               repeatPasswordValidation(passwordValue),
             )}
-            placeholder="Repeat password"
+            placeholder="Повторите пароль"
             type="password"
             error={errors.repeatPassword}
           />
@@ -109,37 +109,37 @@ const Registration: React.FC = () => {
           <h4 className={styles.info__title}>Адрес для выставления счетов</h4>
           <Input
             {...register('billingCountry', generalValidation())}
-            placeholder="Country"
+            placeholder="Страна"
             id="country"
             error={errors.billingCountry}
           />
           <Input
             {...register('billingCity', generalValidation())}
-            placeholder="City"
+            placeholder="Город"
             id="billingCity"
             error={errors.billingCity}
           />
           <Input
             {...register('billingStreet', generalValidation())}
-            placeholder="Stret"
+            placeholder="Улица"
             id="billingStreet"
             error={errors.billingStreet}
           />
           <Input
             {...register('billingHouseNumber', generalValidation())}
-            placeholder="HouseNumber"
+            placeholder="Дом"
             id="billingHouseNumber"
             error={errors.billingHouseNumber}
           />
           <Input
             {...register('billingApartment', generalValidation())}
-            placeholder="Apartment"
+            placeholder="Квартира"
             id="billingApartment"
             error={errors.billingApartment}
           />
           <Input
             {...register('billingPostcode', generalValidation())}
-            placeholder="Postcode"
+            placeholder="Индекс"
             id="billingPostcode"
             error={errors.billingPostcode}
           />
@@ -149,45 +149,43 @@ const Registration: React.FC = () => {
           <h4 className={styles.info__title}>Адрес доставки</h4>
           <Input
             {...register('shippingCountry', generalValidation())}
-            placeholder="Country"
+            placeholder="Страна"
             id="bilingCountry"
             error={errors.shippingCountry}
           />
           <Input
             {...register('shippingCity', generalValidation())}
-            placeholder="City"
+            placeholder="Город"
             id="shippingCity"
             error={errors.shippingCity}
           />
           <Input
             {...register('shippingStreet', generalValidation())}
-            placeholder="Stret"
+            placeholder="Улица"
             id="shippingStreet"
             error={errors.shippingStreet}
           />
           <Input
             {...register('shippingHouseNumber', generalValidation())}
-            placeholder="HouseNumber"
+            placeholder="Дом"
             id="shippingHouseNumber"
             error={errors.shippingHouseNumber}
           />
           <Input
             {...register('shippingApartment', generalValidation())}
-            placeholder="Apartment"
+            placeholder="Квартира"
             id="shippingApartment"
             error={errors.shippingApartment}
           />
           <Input
             {...register('shippingPostcode', generalValidation())}
-            placeholder="Postcode"
+            placeholder="Индекс"
             id="shippingPostcode"
             error={errors.shippingPostcode}
           />
         </div>
       </div>
-
       <Button className={styles.button}>Регистрация</Button>
-
       <div className={styles.submit}>
         <div className={styles.accaunt}>Уже есть аккаунт?</div>
         <Link className={styles.login} to="/login">
