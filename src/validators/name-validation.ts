@@ -10,14 +10,3 @@ export const nameValidation = () => ({
   },
 });
 
-/* validate: {
-    space: (value) => {
-      return !/\s+/g.test(String(value)) ? true : 'spaceValidation';
-    },
-    special: (value) => {
-      return !/[!-/:-@[-`{-~]/.test(String(value)) ? true : 'noSpecialSymbols';
-    },
-    numbers: (value) => {
-      return !/[0-9]/.test(String(value)) ? true : 'noNumbers';
-    },
-  }, */

@@ -1,5 +1,5 @@
 export const repeatPasswordValidation = (passwordValue: string) => ({
-  required: 'Repeat password is required',
+  required: 'Требуется повторить пароль',
   validate: (value: string) =>
-    value === passwordValue || 'Passwords do not match',
+    value === passwordValue || 'Пароли не совпадают',
 });
