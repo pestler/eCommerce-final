@@ -1,17 +1,9 @@
-:root {
-  --font-family: "Montserrat", sans-serif;
-  --second-family: "Lora", sans-serif;
-  --third-family: "Suisse Intl", sans-serif;
-}
-
 .header {
   display: flex;
   align-items: center;
   justify-content: space-between;
   gap: 10px;
   padding: 35px 0;
-  margin: 0 auto;
-  max-width: 1400px;
 
   .link {
     font-family: var(--font-family);
@@ -28,7 +20,7 @@
     }
   }
 
-  @media (max-width: 1500px) {
+  @media (max-width: 1300px) {
     padding: 25px 50px;
   }
 

@@ -1,23 +1,18 @@
-:root {
-    --font-family: "Montserrat", sans-serif;
-    --second-family: "Lora", sans-serif;
-    --third-family: "Suisse Intl", sans-serif;
-}
-
 .footer {
     background-color: #648F64;
+    max-width: 1340px;
+    margin: 0 auto;
     position: relative;
     z-index: 200;
 }
 
 .wrapper {
-    max-width: 1400px;
-    margin: 0 auto;
     padding: 50px 0;
     display: flex;
     justify-content: space-between;
+    gap: 10px;
 
-    @media (max-width: 1500px) {
+    @media (max-width: 1300px) {
         padding: 50px;
     }
 
