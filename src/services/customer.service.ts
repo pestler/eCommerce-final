@@ -1,7 +1,6 @@
-//import { MyCustomerDraft, MyCustomerSignin } from '@commercetools/platform-sdk';
 import { MyCustomerSignin } from '@commercetools/platform-sdk';
 import { authClient, passwordClient } from '../api';
-import { RegistrationFormState } from '../interface/registrationForm';
+import { RegistrationDto } from '../interface/registration.dto.ts';
 
 class CustomerService {
   public getByEmail(email: string) {
@@ -19,7 +18,7 @@ class CustomerService {
     return authClient.customers().withId({ ID: id }).get().execute();
   }
 
-  public registration(dto: RegistrationFormState) {
+  public registration(dto: RegistrationDto) {
     return authClient.customers().post({ body: dto }).execute();
   }
 

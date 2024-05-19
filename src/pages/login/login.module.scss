@@ -9,7 +9,7 @@
     flex-direction: column;
     width: 430px;
     align-items: center;
-    gap: 10px;
+    gap: 27px;
 }
 
 .titleForm {
@@ -39,7 +39,6 @@
 
 .button {
     width: 100%;
-    margin-top: 45px;
 }
 
 .submit {
@@ -47,6 +46,8 @@
     display: flex;
     align-items: center;
     gap: 10px;
+    text-align: center;
+    justify-content: center;
 }
 
 .noaccaunt {
@@ -65,6 +66,7 @@
     color: #519057;
     display: flex;
     cursor: pointer;
+    text-align: center;
 }
 
 .picbox {

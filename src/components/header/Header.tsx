@@ -3,7 +3,7 @@ import { Link, NavLink, useNavigate } from 'react-router-dom';
 import login from '../../assets/images/login.svg';
 import logo from '../../assets/images/logo.svg';
 import Profile from '../../assets/svg/profile.svg';
-import { useAuth } from '../../providers/AuthProvider.tsx';
+import { useAuth } from '../../hooks/useAuth.ts';
 import BasicMenu from '../menu/Menu.tsx';
 import style from './header.module.scss';
 import { listLinks } from './listLink';
@@ -23,14 +23,14 @@ const eventsMenu: ('Войти' | 'Зарегистрироваться' | 'Вы
 
 const Header: React.FC = () => {
   const navigate = useNavigate();
-  const { isAuthenticated, logout } = useAuth();
+  const { isAuthenticated, logout, user } = useAuth();
 
   const menuEvent = (event: string) => {
     switch (event) {
       case 'Войти':
         navigate('/login');
         break;
-      case 'Зарегистриваться':
+      case 'Зарегистрироваться':
         navigate('/registration');
         break;
       case 'Выйти':
@@ -59,15 +59,22 @@ const Header: React.FC = () => {
                 </NavLink>
               ))}
             </nav>
-            <BasicMenu
-              buttonContent={
-                isAuthenticated ? <img src={Profile} /> : <img src={login} />
-              }
-              menuItems={eventsMenu.filter((item: string) =>
-                isAuthenticated ? item === 'Выйти' : item !== 'Выйти',
+            <div className={style.user}>
+              {user && (
+                <span>
+                  Привет, {user.firstName ? user.firstName : user.email}
+                </span>
               )}
-              menuEvent={menuEvent}
-            />
+              <BasicMenu
+                buttonContent={
+                  isAuthenticated ? <img src={Profile} /> : <img src={login} />
+                }
+                menuItems={eventsMenu.filter((item: string) =>
+                  isAuthenticated ? item === 'Выйти' : item !== 'Выйти',
+                )}
+                menuEvent={menuEvent}
+              />
+            </div>
           </div>
           <div className={style.header__bottom}>
             <div className={style.header__group}>
