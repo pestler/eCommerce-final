@@ -4,10 +4,10 @@ import login from '../../assets/images/login.svg';
 import logo from '../../assets/images/logo.svg';
 import Profile from '../../assets/svg/profile.svg';
 import { useAuth } from '../../providers/AuthProvider.tsx';
+import InputSearch from '../inputSearch/InputSearch.tsx';
 import BasicMenu from '../menu/Menu.tsx';
 import style from './header.module.scss';
 import { listLinks } from './listLink';
-import InputSearch from '../inputSearch/InputSearch.tsx';
 
 const productGroup = [
   'Комнатные растения',
@@ -80,7 +80,7 @@ const Header: React.FC = () => {
                 );
               })}
             </div>
-            <InputSearch placeholder="Поиск"/>
+            <InputSearch placeholder="Поиск" />
           </div>
         </div>
       </div>

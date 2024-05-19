@@ -12,7 +12,7 @@ const Main: React.FC = () => {
         Если в большом городе вы скучаете по природе, ничто не мешает вам
         превратить в оазис квартиру или офис. И мы поможем вам это сделать!
       </p>
-      <img src={imgCenter} className={styles.main__imgcenter} /> 
+      <img src={imgCenter} className={styles.main__imgcenter} />
     </div>
   );
 };
