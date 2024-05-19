@@ -7,6 +7,7 @@ import {
   USER_CUSTOMER,
 } from '../contstants/storage-keys.constants.ts';
 import { localStorageService } from '../services';
+import {useSnackbar} from "notistack";
 
 export interface IAuthContext {
   user: Customer | null;
@@ -24,6 +25,7 @@ export const AuthContext = createContext<IAuthContext | undefined>(undefined);
 export const AuthProvider = ({ children }: Props) => {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
   const [user, setUser] = useState<Customer | null>(null);
+  const { enqueueSnackbar } = useSnackbar();
 
   useEffect(() => {
     const token = localStorageService.get<string | null>(ACCESS_TOKEN);
@@ -47,6 +49,7 @@ export const AuthProvider = ({ children }: Props) => {
     localStorageService.remove(USER_CUSTOMER);
     setUser(null);
     setIsAuthenticated(false);
+    enqueueSnackbar('Вы вышли из системы', { variant: "success" })
   };
 
   return (

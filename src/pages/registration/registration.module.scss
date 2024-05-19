@@ -1,7 +1,53 @@
 
 .container__registration {
     display: flex;
+    justify-content: space-around;
+    flex-wrap: wrap;
     align-items: center;
+    gap: 20px;
+
+    @media (max-width: 800px) {
+        flex-wrap: nowrap;
+        flex-direction: column;
+        justify-content: center;
+    }
+}
+
+.container__general {
+    display: flex;
+    flex-direction: column;
+    width: 30%;
+
+    @media (max-width: 800px) {
+        width: 100%;
+    }
+}
+
+.container__billing {
+    display: flex;
+    flex-direction: column;
+    width: 33%;
+
+    @media (max-width: 800px) {
+        width: 100%;
+    }
+}
+
+.container__shipping {
+    display: flex;
+    flex-direction: column;
+    width: 30%;
+
+    @media (max-width: 800px) {
+        width: 100%;
+    }
+}
+
+.picbox {
+    background: url('./../../assets/image/registration.png') no-repeat;
+    background-size: cover;
+    width: 421px;
+    height: 587px;
 }
 
 .form {
@@ -13,6 +59,8 @@
     width: 100%;
     flex-direction: column;
     display: flex;
+    //width: 500px;
+    width: 100%;
     align-items: center;
     gap: 10px;
 }
@@ -43,10 +91,15 @@
     margin-bottom: 35px;
 }
 
-.info__container{
+.info__container {
     color: #2f5533;
+}
+.info__title {
+    background-color: #2f5533;
+    color: #fff;
     margin: 0 auto;
     padding: 10px;
+    width: 100%;
 }
 
 .fieldset {
@@ -95,8 +148,8 @@
     line-height: 130%;
     color: #2c2c2c;
     display: flex;
-    display: flex;
 }
-.options{
+
+.options {
     width: 150px;
 }
