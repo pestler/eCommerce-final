@@ -1,7 +1,7 @@
 import { ReactNode } from 'react';
 import { Login, Main, Registration } from '../pages';
-import AuthGuard from './guards/auth.guard.tsx';
 import NotFoundPage from '../pages/notFoundPage/NotFoundPage.tsx';
+import AuthGuard from './guards/auth.guard.tsx';
 
 interface Route {
   path: string;
@@ -24,5 +24,5 @@ export const router: Route[] = [
   {
     path: '*',
     element: <AuthGuard element={<NotFoundPage />} />,
-  }
+  },
 ];

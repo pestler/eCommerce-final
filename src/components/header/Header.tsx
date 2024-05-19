@@ -7,6 +7,7 @@ import { useAuth } from '../../providers/AuthProvider.tsx';
 import BasicMenu from '../menu/Menu.tsx';
 import style from './header.module.scss';
 import { listLinks } from './listLink';
+import InputSearch from '../inputSearch/InputSearch.tsx';
 
 const productGroup = [
   'Комнатные растения',
@@ -15,7 +16,11 @@ const productGroup = [
   'Кашпо и горшки',
 ];
 
-const eventsMenu: ('Войти' | 'Зарегистрироваться' | 'Выйти')[] = ['Войти', 'Зарегистрироваться', 'Выйти'];
+const eventsMenu: ('Войти' | 'Зарегистрироваться' | 'Выйти')[] = [
+  'Войти',
+  'Зарегистрироваться',
+  'Выйти',
+];
 
 const Header: React.FC = () => {
   const navigate = useNavigate();
@@ -75,8 +80,7 @@ const Header: React.FC = () => {
                 );
               })}
             </div>
-            {/* <InputSearch placeholder="Search"/> */}
-            <input className={style.inputSearch} type="text" />
+            <InputSearch placeholder="Поиск"/>
           </div>
         </div>
       </div>
