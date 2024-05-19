@@ -1,4 +1,5 @@
 import { Customer } from '@commercetools/platform-sdk';
+import { useSnackbar } from 'notistack';
 import { createContext, ReactNode, useEffect, useState } from 'react';
 import {
   ACCESS_TOKEN,
@@ -7,7 +8,6 @@ import {
   USER_CUSTOMER,
 } from '../contstants/storage-keys.constants.ts';
 import { localStorageService } from '../services';
-import {useSnackbar} from "notistack";
 
 export interface IAuthContext {
   user: Customer | null;
@@ -49,7 +49,7 @@ export const AuthProvider = ({ children }: Props) => {
     localStorageService.remove(USER_CUSTOMER);
     setUser(null);
     setIsAuthenticated(false);
-    enqueueSnackbar('Вы вышли из системы', { variant: "success" })
+    enqueueSnackbar('Вы вышли из системы', { variant: 'success' });
   };
 
   return (
