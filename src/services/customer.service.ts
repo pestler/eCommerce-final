@@ -1,5 +1,7 @@
-import { MyCustomerDraft, MyCustomerSignin } from '@commercetools/platform-sdk';
+//import { MyCustomerDraft, MyCustomerSignin } from '@commercetools/platform-sdk';
+import { MyCustomerSignin } from '@commercetools/platform-sdk';
 import { authClient, passwordClient } from '../api';
+import { RegistrationFormState } from '../interface/registrationForm';
 
 class CustomerService {
   public getByEmail(email: string) {
@@ -17,33 +19,7 @@ class CustomerService {
     return authClient.customers().withId({ ID: id }).get().execute();
   }
 
-  public registration(
-    dto: Pick<
-      MyCustomerDraft,
-      | 'email'
-      | 'firstName'
-      | 'lastName'
-      | 'dateOfBirth'
-      | 'shippingCountry'
-      | 'shippingCity'
-      | 'billingCity'
-      | 'shippingStreet,'
-      | 'billingStreet'
-      | 'shippingHouseNumber'
-      | 'billingHouseNumber'
-      | 'shippingApartment'
-      | 'billingApartment'
-      | 'shippingPostcode'
-      | 'billingPostcode'
-      | 'sameAddress'
-      | 'defaultBilling'
-      | 'defaultShipping'
-      | 'newPassword'
-      | 'currentPassword'
-      | 'registerPassword'
-      | 'password'
-    >,
-  ) {
+  public registration(dto: RegistrationFormState){
     return authClient.customers().post({ body: dto }).execute();
   }
 
