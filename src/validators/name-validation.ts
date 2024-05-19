@@ -9,4 +9,3 @@ export const nameValidation = () => ({
     message: 'Поле обязательно для заполнения!',
   },
 });
-

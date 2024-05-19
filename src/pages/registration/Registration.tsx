@@ -5,13 +5,12 @@ import Input from '../../components/Input/Input.tsx';
 import Button from '../../components/button/Button.tsx';
 import { RegistrationForm } from '../../interface/registrationForm.ts';
 import { customerService } from '../../services/customer.service.ts';
+import { dateValidation } from '../../validators/date-validation.ts';
 import { loginValidation } from '../../validators/login-validation.ts';
 import { nameValidation } from '../../validators/name-validation.ts';
 import { passwordValidation } from '../../validators/password-validation.ts';
 import { repeatPasswordValidation } from '../../validators/repeat-password-validation.ts';
 import styles from './registration.module.scss';
-import { dateValidation } from '../../validators/date-validation.ts';
-
 
 const Registration: React.FC = () => {
   const navigate = useNavigate();
@@ -27,7 +26,7 @@ const Registration: React.FC = () => {
   const passwordValue = watch('registerPassword');
 
   const onSubmit: SubmitHandler<RegistrationForm> = async ({
-    email,    
+    email,
     firstName,
     lastName,
     dateOfBirth,
@@ -52,28 +51,28 @@ const Registration: React.FC = () => {
     repeatPassword,
   }) => {
     const { statusCode } = await customerService.registration({
-      email,    
-    firstName,
-    lastName,
-    dateOfBirth,
-    shippingCountry,
-    billingCountry,
-    shippingCity,
-    billingCity,
-    shippingStreet,
-    billingStreet,
-    shippingHouseNumber,
-    billingHouseNumber,
-    shippingApartment,
-    billingApartment,
-    shippingPostcode,
-    billingPostcode,
-    sameAddress,
-    defaultBilling,
-    defaultShipping,
-    newPassword,
-    currentPassword,    
-    repeatPassword,
+      email,
+      firstName,
+      lastName,
+      dateOfBirth,
+      shippingCountry,
+      billingCountry,
+      shippingCity,
+      billingCity,
+      shippingStreet,
+      billingStreet,
+      shippingHouseNumber,
+      billingHouseNumber,
+      shippingApartment,
+      billingApartment,
+      shippingPostcode,
+      billingPostcode,
+      sameAddress,
+      defaultBilling,
+      defaultShipping,
+      newPassword,
+      currentPassword,
+      repeatPassword,
       password: registerPassword,
     });
     if (statusCode === 201) {
@@ -100,11 +99,11 @@ const Registration: React.FC = () => {
           placeholder="Last Name"
           type="text"
           error={errors.lastName}
-        />        
+        />
         <Input
-          {...register('dateOfBirth', dateValidation())}          
+          {...register('dateOfBirth', dateValidation())}
           id="date-birth"
-          type="date"          
+          type="date"
           placeholder="dateOfBirth"
           error={errors.dateOfBirth}
           aria-invalid="true"
@@ -131,111 +130,81 @@ const Registration: React.FC = () => {
           error={errors.repeatPassword}
         />
 
-
         <h4>Адрес для выставления счетов</h4>
         <Input
-          {...register(
-            'billingCountry',            
-          )}
+          {...register('billingCountry')}
           placeholder="Country"
           id="country"
           error={errors.billingCountry}
         />
         <Input
-          {...register(
-            'billingCity',            
-          )}
+          {...register('billingCity')}
           placeholder="City"
           id="billingCity"
           error={errors.billingCity}
         />
         <Input
-          {...register(
-            'billingStreet',            
-          )}
+          {...register('billingStreet')}
           placeholder="Stret"
           id="billingStreet"
           error={errors.billingStreet}
         />
         <Input
-          {...register(
-            'billingHouseNumber',            
-          )}
+          {...register('billingHouseNumber')}
           placeholder="HouseNumber"
           id="billingHouseNumber"
           error={errors.billingHouseNumber}
         />
         <Input
-          {...register(
-            'billingApartment',            
-          )}
+          {...register('billingApartment')}
           placeholder="Apartment"
           id="billingApartment"
           error={errors.billingApartment}
         />
         <Input
-          {...register(
-            'billingPostcode',            
-          )}
+          {...register('billingPostcode')}
           placeholder="Postcode"
           id="billingPostcode"
           error={errors.billingPostcode}
         />
 
-
         <h4>Адрес доставки</h4>
         <Input
-          {...register(
-            'shippingCountry',            
-          )}
+          {...register('shippingCountry')}
           placeholder="Country"
           id="bilingCountry"
           error={errors.shippingCountry}
         />
         <Input
-          {...register(
-            'shippingCity',            
-          )}
+          {...register('shippingCity')}
           placeholder="City"
           id="shippingCity"
           error={errors.shippingCity}
         />
         <Input
-          {...register(
-            'shippingStreet',            
-          )}
+          {...register('shippingStreet')}
           placeholder="Stret"
           id="shippingStreet"
           error={errors.shippingStreet}
         />
         <Input
-          {...register(
-            'shippingHouseNumber',            
-          )}
+          {...register('shippingHouseNumber')}
           placeholder="HouseNumber"
           id="shippingHouseNumber"
           error={errors.shippingHouseNumber}
         />
         <Input
-          {...register(
-            'shippingApartment',            
-          )}
+          {...register('shippingApartment')}
           placeholder="Apartment"
           id="shippingApartment"
           error={errors.shippingApartment}
         />
         <Input
-          {...register(
-            'shippingPostcode',            
-          )}
+          {...register('shippingPostcode')}
           placeholder="Postcode"
           id="shippingPostcode"
           error={errors.shippingPostcode}
         />
-
-
-
-
 
         <Button className={styles.button}>Регистрация</Button>
 

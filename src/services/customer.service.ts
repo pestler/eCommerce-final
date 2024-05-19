@@ -20,28 +20,28 @@ class CustomerService {
   public registration(
     dto: Pick<
       MyCustomerDraft,
-       'email'|    
-    'firstName'|
-    'lastName'|
-    'dateOfBirth'|
-    'shippingCountry'|
-    'shippingCity'|
-    'billingCity'|
-    'shippingStreet,'|
-    'billingStreet'|
-    'shippingHouseNumber'|
-    'billingHouseNumber'|
-    'shippingApartment'|
-    'billingApartment'|
-    'shippingPostcode'|
-    'billingPostcode'|
-    'sameAddress'|
-    'defaultBilling'|
-    'defaultShipping'|
-    'newPassword'|
-    'currentPassword'|
-    'registerPassword'|
-    'password'      
+      | 'email'
+      | 'firstName'
+      | 'lastName'
+      | 'dateOfBirth'
+      | 'shippingCountry'
+      | 'shippingCity'
+      | 'billingCity'
+      | 'shippingStreet,'
+      | 'billingStreet'
+      | 'shippingHouseNumber'
+      | 'billingHouseNumber'
+      | 'shippingApartment'
+      | 'billingApartment'
+      | 'shippingPostcode'
+      | 'billingPostcode'
+      | 'sameAddress'
+      | 'defaultBilling'
+      | 'defaultShipping'
+      | 'newPassword'
+      | 'currentPassword'
+      | 'registerPassword'
+      | 'password'
     >,
   ) {
     return authClient.customers().post({ body: dto }).execute();
