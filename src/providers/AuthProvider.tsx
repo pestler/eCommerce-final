@@ -1,7 +1,6 @@
 import {
   createContext,
   ReactNode,
-  useContext,
   useEffect,
   useState,
 } from 'react';
@@ -10,9 +9,9 @@ import {
   EXPIRATION_TIME,
   REFRESH_TOKEN,
 } from '../contstants/storage-keys.constants.ts';
-import { localStorageService } from '../services/localStorage.service.ts';
+import {localStorageService} from "../services";
 
-interface IAuthContext {
+export interface IAuthContext {
   isAuthenticated: boolean;
   login: () => void;
   logout: () => void;
@@ -22,7 +21,7 @@ interface Props {
   children: ReactNode;
 }
 
-const AuthContext = createContext<IAuthContext | undefined>(undefined);
+export const AuthContext = createContext<IAuthContext | undefined>(undefined);
 
 export const AuthProvider = ({ children }: Props) => {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
@@ -50,12 +49,4 @@ export const AuthProvider = ({ children }: Props) => {
       {children}
     </AuthContext.Provider>
   );
-};
-
-export const useAuth = (): IAuthContext => {
-  const context = useContext(AuthContext);
-  if (!context) {
-    throw new Error('useAuth должен использоваться внутри AuthProvider');
-  }
-  return context;
 };

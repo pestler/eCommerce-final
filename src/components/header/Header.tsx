@@ -3,10 +3,10 @@ import { Link, NavLink, useNavigate } from 'react-router-dom';
 import login from '../../assets/images/login.svg';
 import logo from '../../assets/images/logo.svg';
 import Profile from '../../assets/svg/profile.svg';
-import { useAuth } from '../../providers/AuthProvider.tsx';
 import BasicMenu from '../menu/Menu.tsx';
 import style from './header.module.scss';
 import { listLinks } from './listLink';
+import {useAuth} from "../../hooks/useAuth.ts";
 
 const productGroup = [
   'Комнатные растения',

@@ -1,13 +1,12 @@
 import React from 'react';
-import { SubmitHandler, useForm } from 'react-hook-form';
-import { Link, useNavigate } from 'react-router-dom';
-import Input from '../../components/Input/Input.tsx';
-import Button from '../../components/button/Button.tsx';
-import { useAuth } from '../../providers/AuthProvider.tsx';
-import { customerService } from '../../services/customer.service.ts';
-import { loginValidation } from '../../validators/login-validation.ts';
-import { passwordValidation } from '../../validators/password-validation.ts';
 import styles from './login.module.scss';
+import {Link, useNavigate} from "react-router-dom";
+import {SubmitHandler, useForm} from "react-hook-form";
+import {customerService} from "../../services";
+import Button from "../../components/button/Button.tsx";
+import Input from "../../components/Input/Input.tsx";
+import {loginValidation, passwordValidation} from "../../validators";
+import {useAuth} from "../../hooks/useAuth.ts";
 
 export type LoginForm = {
   email: string;
@@ -33,6 +32,7 @@ const Login: React.FC = () => {
       navigate('/');
     }
   };
+
 
   return (
     <div className={styles.container}>

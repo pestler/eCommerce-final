@@ -3,11 +3,9 @@ import { SubmitHandler, useForm } from 'react-hook-form';
 import { Link, useNavigate } from 'react-router-dom';
 import Input from '../../components/Input/Input.tsx';
 import Button from '../../components/button/Button.tsx';
-import { customerService } from '../../services/customer.service.ts';
-import { loginValidation } from '../../validators/login-validation.ts';
-import { passwordValidation } from '../../validators/password-validation.ts';
-import { repeatPasswordValidation } from '../../validators/repeat-password-validation.ts';
 import styles from './registration.module.scss';
+import {customerService} from "../../services";
+import {loginValidation, passwordValidation, repeatPasswordValidation} from "../../validators";
 
 type RegistrationForm = {
   email: string;
