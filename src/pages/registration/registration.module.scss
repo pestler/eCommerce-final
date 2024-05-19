@@ -1,27 +1,35 @@
-/* :root {
-    --font-family: "Montserrat", sans-serif;
-    --second-family: "Lora", sans-serif;
-    --third-family: "Suisse Intl", sans-serif;
-} */
 
 .container__registration {
     display: flex;
-    align-items: center;    
-}
-
-.picbox {
-    background: url('./../../assets/image/registration.png') no-repeat;
-    background-size: cover;
-    width: 421px;
-    height: 587px;
+    align-items: center;
 }
 
 .form {
-    display: flex;
+    width: 100%;
+    padding-bottom: 30px;
+}
+
+.actions {
+    width: 100%;
     flex-direction: column;
-    width: 500px;
+    display: flex;
     align-items: center;
     gap: 10px;
+}
+
+.formContainer {
+    display: grid;
+    grid-auto-rows: 1fr;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+}
+
+.formGroup {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 27px;
 }
 
 .title {
@@ -36,8 +44,7 @@
 }
 
 .info__container{
-    background-color: #2f5533;
-    color: #fff;    
+    color: #2f5533;
     margin: 0 auto;
     padding: 10px;
 }
@@ -55,19 +62,18 @@
 }
 
 .button {
-    width: 100%;
+    width: 430px;
     margin-top: 45px;
 }
 
 
-.input{
+.input {
     width: 100%;
     padding: 12px 14px;
     background: white;
 }
 
 .submit {
-    width: 100%;
     display: flex;
     align-items: center;
     gap: 10px;

@@ -1,20 +1,21 @@
 import {
   createContext,
   ReactNode,
-  useContext,
   useEffect,
   useState,
 } from 'react';
 import {
   ACCESS_TOKEN,
   EXPIRATION_TIME,
-  REFRESH_TOKEN,
+  REFRESH_TOKEN, USER_CUSTOMER,
 } from '../contstants/storage-keys.constants.ts';
-import { localStorageService } from '../services/localStorage.service.ts';
+import {localStorageService} from "../services";
+import {Customer} from "@commercetools/platform-sdk";
 
-interface IAuthContext {
+export interface IAuthContext {
+  user: Customer | null,
   isAuthenticated: boolean;
-  login: () => void;
+  login: (user: Customer) => void;
   logout: () => void;
 }
 
@@ -22,19 +23,24 @@ interface Props {
   children: ReactNode;
 }
 
-const AuthContext = createContext<IAuthContext | undefined>(undefined);
+export const AuthContext = createContext<IAuthContext | undefined>(undefined);
 
 export const AuthProvider = ({ children }: Props) => {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
+  const [user, setUser] = useState<Customer | null>(null);
 
   useEffect(() => {
-    const token = localStorageService.get<string>(ACCESS_TOKEN);
-    if (token) {
+    const token = localStorageService.get<string | null>(ACCESS_TOKEN);
+    const user = localStorageService.get<Customer | null>(USER_CUSTOMER);
+    if (token && user) {
       setIsAuthenticated(true);
+      setUser(user);
     }
   }, []);
 
-  const login = () => {
+  const login = (user: Customer) => {
+    localStorageService.set<Customer>(USER_CUSTOMER, user);
+    setUser(user);
     setIsAuthenticated(true);
   };
 
@@ -42,20 +48,14 @@ export const AuthProvider = ({ children }: Props) => {
     localStorageService.remove(ACCESS_TOKEN);
     localStorageService.remove(REFRESH_TOKEN);
     localStorageService.remove(EXPIRATION_TIME);
+    localStorageService.remove(USER_CUSTOMER);
+    setUser(null);
     setIsAuthenticated(false);
   };
 
   return (
-    <AuthContext.Provider value={{ isAuthenticated, login, logout }}>
+    <AuthContext.Provider value={{ user, isAuthenticated, login, logout }}>
       {children}
     </AuthContext.Provider>
   );
-};
-
-export const useAuth = (): IAuthContext => {
-  const context = useContext(AuthContext);
-  if (!context) {
-    throw new Error('useAuth должен использоваться внутри AuthProvider');
-  }
-  return context;
 };

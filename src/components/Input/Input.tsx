@@ -18,27 +18,27 @@ const Input: FC<InputProps> = forwardRef(({ label, error, ...props }, ref) => {
   };
 
   return (
-    <div className={styles.formField}>
-      <label className={styles.label}>
-        {label}
-        <input
-          className={`${styles.input} ${error ? styles.errorInput : ''}`}
-          ref={ref}
-          {...props}
-          type={typeInput}
-        />
-        {props.name === 'password' && (
-          <div className={styles.eyeIcon} onClick={checkedType}>
-            {typeInput === 'password' ? (
-              <FontAwesomeIcon icon={fas.faEyeSlash} />
-            ) : (
-              <FontAwesomeIcon icon={fas.faEye} />
-            )}
-          </div>
-        )}
-      </label>
-      {error && <span className={styles.error}>{error.message}</span>}
-    </div>
+      <div className={styles.formField}>
+        <label className={styles.label}>
+          {label}
+          <input
+              className={`${styles.input} ${error ? styles.errorInput : ''}`}
+              ref={ref}
+              {...props}
+              type={typeInput}
+          />
+          {props.name === 'password' && (
+              <div className={styles.eyeIcon} onClick={checkedType}>
+                {typeInput === 'password' ? (
+                    <FontAwesomeIcon icon={fas.faEyeSlash}/>
+                ) : (
+                    <FontAwesomeIcon icon={fas.faEye}/>
+                )}
+              </div>
+          )}
+        </label>
+        {error && <span className={styles.error}>{error.message}</span>}
+      </div>
   );
 });
 

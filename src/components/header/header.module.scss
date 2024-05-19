@@ -65,6 +65,13 @@
   }
 }
 
+.user {
+  font-family: var(--font-family);
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
 .header__bottom {
   display: flex;
   justify-content: space-between;
