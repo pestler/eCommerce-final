@@ -28,21 +28,21 @@ const Registration: React.FC = () => {
 
   const onSubmit: SubmitHandler<RegistrationForm> = async ({
     email,
-    registerPassword,    
+    registerPassword,
     firstName,
     lastName,
     dateOfBirth,
     billingCountry,
     billingHouseNumber,
-    billingApartment,
-    billingStreet,
+    //billingApartment,
+    //billingStreet,
     billingCity,
-    billingPostcode,                
+    billingPostcode,
     shippingCountry,
     shippingCity,
-    shippingStreet,
+    //shippingStreet,
     shippingHouseNumber,
-    shippingApartment,
+    //shippingApartment,
     shippingPostcode,
   }) => {
     const { statusCode } = await customerService.registration({
@@ -50,20 +50,19 @@ const Registration: React.FC = () => {
       password: registerPassword,
       firstName,
       lastName,
-      dateOfBirth,     
+      dateOfBirth,
       billingAddress: {
-        country:billingCountry,
-        city:billingCity,
-        postalCode:billingPostcode,
-        streetNumber:billingHouseNumber,
+        country: billingCountry,
+        city: billingCity,
+        postalCode: billingPostcode,
+        streetNumber: billingHouseNumber,
       },
       shippingAddress: {
-        country:shippingCountry,
-        city:shippingCity,
-        postalCode:shippingPostcode,
-        streetNumber:shippingHouseNumber,
-      },      
-      
+        country: shippingCountry,
+        city: shippingCity,
+        postalCode: shippingPostcode,
+        streetNumber: shippingHouseNumber,
+      },
     });
     if (statusCode === 201) {
       navigate('/login');

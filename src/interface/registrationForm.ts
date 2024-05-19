@@ -25,12 +25,12 @@ export interface RegistrationForm {
   repeatPassword: string;
 }
 
-export interface RegistrationFormState  {
+export interface RegistrationFormState {
   email: string;
   password: string;
   firstName: string;
   lastName: string;
-  dateOfBirth: string;  
+  dateOfBirth: string;
   shippingAddress: {
     country: string;
     city: string;

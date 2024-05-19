@@ -19,7 +19,7 @@ class CustomerService {
     return authClient.customers().withId({ ID: id }).get().execute();
   }
 
-  public registration(dto: RegistrationFormState){
+  public registration(dto: RegistrationFormState) {
     return authClient.customers().post({ body: dto }).execute();
   }
 
