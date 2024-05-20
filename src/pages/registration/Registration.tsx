@@ -117,8 +117,8 @@ const Registration: React.FC = () => {
         <div className={styles.container__billing}>
           <h4 className={styles.info__title}>Адрес для выставления счетов</h4>
           <SelectCustom
-              {...register('shippingCountry', generalValidation())}
-              error={errors.shippingCountry}
+              {...register('billingCountry', generalValidation())}
+              error={errors.billingCountry}
               options={[
                 { title: 'United States' , value: 'US'},
                 { title: 'Russian Federation' , value: 'RU'},
@@ -182,22 +182,15 @@ const Registration: React.FC = () => {
         <div className={styles.container__shipping}>
           <h4 className={styles.info__title}>Адрес доставки</h4>
 
-            <Controller
-              render={({ shippingCountry }) => (
-                <ReactSelect
-                  {...shippingCountry}
-                  options={[
-                    { label: 'United States' , value: 'US'},
-                    { label: 'Russian Federation' , value: 'RU'},
-                    { label: 'Belarus' , value: 'BY'},
-
-                  ]}
-                  isClearable
-                />
-              )}
-              name="ReactSelect"
-              control={control}
-            />
+          <SelectCustom
+              {...register('shippingCountry', generalValidation())}
+              error={errors.shippingCountry}
+              options={[
+                { title: 'United States' , value: 'US'},
+                { title: 'Russian Federation' , value: 'RU'},
+                { title: 'Belarus' , value: 'BY'},
+              ]}
+          ></SelectCustom>
 
           <Input
             {...register('shippingCity', generalValidation(!sameAddress))}
