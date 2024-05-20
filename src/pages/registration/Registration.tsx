@@ -5,7 +5,8 @@ import { Link, useNavigate } from 'react-router-dom';
 import Input from '../../components/Input/Input.tsx';
 import Button from '../../components/button/Button.tsx';
 import { useAuth } from '../../hooks/useAuth.ts';
-import {IRegistrationForm} from '../../interface/registrationForm.interface.ts';
+import { IRegistrationForm } from '../../interface/registrationForm.interface.ts';
+import { registrationMapper } from '../../mappers/registration.mapper.ts';
 import { customerService } from '../../services';
 import {
   loginValidation,
@@ -16,7 +17,6 @@ import { dateValidation } from '../../validators/date-validation.ts';
 import { generalValidation } from '../../validators/general-validation.ts';
 import { nameValidation } from '../../validators/name-validation.ts';
 import styles from './registration.module.scss';
-import {registrationMapper} from "../../mappers/registration.mapper.ts";
 
 const Registration: React.FC = () => {
   const navigate = useNavigate();
@@ -36,7 +36,9 @@ const Registration: React.FC = () => {
 
   const onSubmit: SubmitHandler<IRegistrationForm> = async (data) => {
     try {
-      const { statusCode, body } = await customerService.registration(registrationMapper.toDto(data));
+      const { statusCode, body } = await customerService.registration(
+        registrationMapper.toDto(data),
+      );
       if (statusCode === 201) {
         login(body.customer);
         enqueueSnackbar(
