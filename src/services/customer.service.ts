@@ -1,6 +1,6 @@
 import { MyCustomerSignin } from '@commercetools/platform-sdk';
 import { authClient, passwordClient } from '../api';
-import { RegistrationDto } from '../interface/registration.dto.ts';
+import {RegistrationDto} from "../mappers/dto/registration.dto.ts";
 
 class CustomerService {
   public getByEmail(email: string) {
@@ -30,10 +30,6 @@ class CustomerService {
       .login()
       .post({ body: { email, password } })
       .execute();
-  }
-
-  public logout() {
-    // TODO - Логика по удалению токена из локального хранилища
   }
 }
 

@@ -3,7 +3,7 @@
     display: flex;
     justify-content: space-around;
     flex-wrap: wrap;
-    align-items: center;
+    align-items: flex-start;
     gap: 20px;
 
     @media (max-width: 800px) {
@@ -163,4 +163,8 @@
     flex-direction: column;
     width: 100%;
     justify-content: flex-end;
+}
+
+.checkbox {
+    margin: 0;
 }

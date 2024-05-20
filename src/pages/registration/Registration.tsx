@@ -1,7 +1,7 @@
 import { useSnackbar } from 'notistack';
 import React from 'react';
-import { SubmitHandler, useForm } from 'react-hook-form';
-import { Link, useNavigate } from 'react-router-dom';
+import {Controller, SubmitHandler, useForm} from 'react-hook-form';
+import {Link, useNavigate} from 'react-router-dom';
 import Input from '../../components/Input/Input.tsx';
 import Button from '../../components/button/Button.tsx';
 import { useAuth } from '../../hooks/useAuth.ts';
@@ -17,6 +17,7 @@ import { dateValidation } from '../../validators/date-validation.ts';
 import { generalValidation } from '../../validators/general-validation.ts';
 import { nameValidation } from '../../validators/name-validation.ts';
 import styles from './registration.module.scss';
+import {Checkbox, FormControlLabel} from "@mui/material";
 
 const Registration: React.FC = () => {
   const navigate = useNavigate();
@@ -28,11 +29,16 @@ const Registration: React.FC = () => {
     handleSubmit,
     formState: { errors },
     watch,
+    control,
   } = useForm<IRegistrationForm>({
     mode: 'onChange',
+    defaultValues: {
+      sameAddress: false
+    }
   });
 
   const passwordValue = watch('registerPassword');
+  const sameAddress = watch('sameAddress');
 
   const onSubmit: SubmitHandler<IRegistrationForm> = async (data) => {
     try {
@@ -47,8 +53,9 @@ const Registration: React.FC = () => {
         );
         navigate('/');
       }
-    } catch (e) {
-      enqueueSnackbar(`Ошибка регистрации`, { variant: 'error' });
+    } catch (e: unknown) {
+      // const error = e as ErrorResponse;
+      // enqueueSnackbar(`${error.errors?[0].message}`, { variant: 'error' });
     }
   };
 
@@ -143,45 +150,85 @@ const Registration: React.FC = () => {
             id="billingPostcode"
             error={errors.billingPostcode}
           />
+          <Controller
+              name="defaultShipping"
+              control={control}
+              defaultValue={true}
+              render={({ field }) => (
+                  <FormControlLabel
+                      control={<Checkbox {...field} color="success" />}
+                      label="Установить в качестве платежного адреса по умолчанию"
+                  />
+              )}
+          />
+          <Controller
+              name="sameAddress"
+              control={control}
+              defaultValue={true}
+              render={({ field }) => (
+                  <FormControlLabel
+                      control={<Checkbox {...field} color="success" />}
+                      label="Используйте один и тот же адрес как для выставления счета, так и для доставки"
+                  />
+              )}
+          />
         </div>
 
         <div className={styles.container__shipping}>
           <h4 className={styles.info__title}>Адрес доставки</h4>
           <Input
-            {...register('shippingCountry', generalValidation())}
+            {...register('shippingCountry', generalValidation(!sameAddress))}
             placeholder="Страна"
             id="bilingCountry"
             error={errors.shippingCountry}
+            disabled={sameAddress}
           />
           <Input
-            {...register('shippingCity', generalValidation())}
+            {...register('shippingCity', generalValidation(!sameAddress))}
             placeholder="Город"
             id="shippingCity"
             error={errors.shippingCity}
+            disabled={sameAddress}
           />
           <Input
-            {...register('shippingStreet', generalValidation())}
+            {...register('shippingStreet', generalValidation(!sameAddress))}
             placeholder="Улица"
             id="shippingStreet"
             error={errors.shippingStreet}
+            disabled={sameAddress}
           />
           <Input
-            {...register('shippingHouseNumber', generalValidation())}
+            {...register('shippingHouseNumber', generalValidation(!sameAddress))}
             placeholder="Дом"
             id="shippingHouseNumber"
             error={errors.shippingHouseNumber}
+            disabled={sameAddress}
           />
           <Input
-            {...register('shippingApartment', generalValidation())}
+            {...register('shippingApartment', generalValidation(!sameAddress))}
             placeholder="Квартира"
             id="shippingApartment"
             error={errors.shippingApartment}
+            disabled={sameAddress}
           />
           <Input
-            {...register('shippingPostcode', generalValidation())}
+            {...register('shippingPostcode', generalValidation(!sameAddress))}
             placeholder="Индекс"
             id="shippingPostcode"
             error={errors.shippingPostcode}
+            disabled={sameAddress}
+          />
+          <Controller
+              name="defaultBilling"
+              control={control}
+              defaultValue={true}
+              disabled={sameAddress}
+              render={({ field }) => (
+                  <FormControlLabel
+                      control={<Checkbox {...field} color="success" />}
+                      label="Установить адрес доставки по умолчанию"
+                  />
+              )}
           />
         </div>
       </div>
