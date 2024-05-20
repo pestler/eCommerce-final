@@ -4,7 +4,9 @@ import NodeModulesPolyfillPlugin from "@esbuild-plugins/node-modules-polyfill";
 import NodeGlobalsPolyfillPlugin from "@esbuild-plugins/node-globals-polyfill";
 
 export default defineConfig({
-  define: {},
+  define: {
+    "global": {},
+  },
   plugins: [
     react(),
   ],
