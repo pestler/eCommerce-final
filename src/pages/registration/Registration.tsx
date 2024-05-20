@@ -57,7 +57,7 @@ const Registration: React.FC = () => {
       }
     } catch (e: unknown) {
       // const error = e as ErrorResponse;
-      // enqueueSnackbar(`${error.errors?[0].message}`, { variant: 'error' });
+      // enqueueSnackbar(`${error.errors[0].message}`, { variant: 'error' });
     }
   };
 
