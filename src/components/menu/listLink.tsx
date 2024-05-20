@@ -17,4 +17,16 @@ export const listLinks = [
     textLink: 'Отзывы',
     testid: 'feedback-link',
   },
+  {
+    id: 4,
+    to: 'login',
+    textLink: 'Войти',
+    testid: 'feedback-link',
+  },
+  {
+    id: 5,
+    to: 'registration',
+    textLink: 'Зарегистрироваться',
+    testid: 'feedback-link',
+  },
 ];

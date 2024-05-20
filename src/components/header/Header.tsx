@@ -5,7 +5,10 @@ import MainMenu from '../menu/MainMenu.tsx';
 import style from './header.module.scss';
 
 const Header: React.FC = () => {
-  const [isMenuOpen, toggleMenu] = useState(false);
+  const [isMenuOpen, setToggleMenu] = useState(false);
+
+  const body = document.querySelector('body');
+  body!.style.overflow = isMenuOpen ? 'hidden' : 'auto';
 
   return (
     <div className="container">
@@ -13,11 +16,12 @@ const Header: React.FC = () => {
         <img src={logo} className={style.logo} />
         <MainMenu
           isMenuOpen={isMenuOpen}
-          clickHandler={() => toggleMenu(false)}
+          clickHandler={() => setToggleMenu(false)}
         />
         <BurgerButton
+            className={style.burger}
           isMenuOpen={isMenuOpen}
-          clickHandler={() => toggleMenu(!isMenuOpen)}
+          clickHandler={() => setToggleMenu(!isMenuOpen)}
         />
       </div>
     </div>

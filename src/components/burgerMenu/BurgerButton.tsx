@@ -1,6 +1,7 @@
 import style from './burgerButton.module.scss';
+import React from "react";
 
-type PropsBurger = {
+type PropsBurger = React.HTMLProps<HTMLInputElement> &  {
   isMenuOpen: boolean;
   clickHandler: () => void;
 };

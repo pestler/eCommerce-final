@@ -34,7 +34,7 @@ export default function MainMenu({ isMenuOpen, clickHandler }: PropsMainMenu) {
       case 'Войти':
         navigate('/login');
         break;
-      case 'Зарегистриваться':
+      case 'Зарегистрироваться':
         navigate('/registration');
         break;
       case 'Выйти':
@@ -55,7 +55,9 @@ export default function MainMenu({ isMenuOpen, clickHandler }: PropsMainMenu) {
     >
       <div className={style.header__menu}>
         <nav className={style.navbar}>
-          {listLinks.map((link) => (
+          {listLinks
+              .filter((link) => isMenuOpen ? link : link.to !== 'login' && link.to !== 'registration')
+              .map((link) => (
             <NavLink
               key={link.id}
               to={link.to}
@@ -67,15 +69,15 @@ export default function MainMenu({ isMenuOpen, clickHandler }: PropsMainMenu) {
             </NavLink>
           ))}
         </nav>
-        <BasicMenu
-          buttonContent={
-            isAuthenticated ? <img src={Profile} /> : <img src={login} />
-          }
-          menuItems={eventsMenu.filter((item: string) =>
-            isAuthenticated ? item === 'Выйти' : item !== 'Выйти',
-          )}
-          menuEvent={menuEvent}
-        />
+        { !isMenuOpen &&  <BasicMenu
+            buttonContent={
+              isAuthenticated ? <img src={Profile} /> : <img src={login} />
+            }
+            menuItems={eventsMenu.filter((item: string) =>
+                isAuthenticated ? item === 'Выйти' : item !== 'Выйти',
+            )}
+            menuEvent={menuEvent}
+        />}
       </div>
       <div className={style.header__bottom}>
         <div className={style.header__group}>
