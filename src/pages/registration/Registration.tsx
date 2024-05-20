@@ -1,21 +1,26 @@
+import { Checkbox, FormControlLabel } from '@mui/material';
 import { useSnackbar } from 'notistack';
 import React from 'react';
-import { SubmitHandler, useForm } from 'react-hook-form';
+import { Controller, SubmitHandler, useForm } from 'react-hook-form';
 import { Link, useNavigate } from 'react-router-dom';
 import Input from '../../components/Input/Input.tsx';
 import Button from '../../components/button/Button.tsx';
+import SelectCustom from '../../components/select/SelectCustom.tsx';
 import { useAuth } from '../../hooks/useAuth.ts';
-import { RegistrationForm } from '../../interface/registrationForm.ts';
+import { IRegistrationForm } from '../../interface/registrationForm.interface.ts';
+import { registrationMapper } from '../../mappers/registration.mapper.ts';
 import { customerService } from '../../services';
 import {
   loginValidation,
-  passwordValidation,
+  passwordValidation, postalCodeValidation,
   repeatPasswordValidation,
 } from '../../validators';
 import { dateValidation } from '../../validators/date-validation.ts';
 import { generalValidation } from '../../validators/general-validation.ts';
 import { nameValidation } from '../../validators/name-validation.ts';
 import styles from './registration.module.scss';
+import {BadRequest} from "../../interface/responseError.interface.ts";
+import {countries} from "../../contstants/countries.constants.ts";
 
 const Registration: React.FC = () => {
   const navigate = useNavigate();
@@ -27,18 +32,25 @@ const Registration: React.FC = () => {
     handleSubmit,
     formState: { errors },
     watch,
-  } = useForm<RegistrationForm>({
+    control,
+      setError,
+  } = useForm<IRegistrationForm>({
     mode: 'onChange',
+    defaultValues: {
+      sameAddress: false,
+    },
   });
 
   const passwordValue = watch('registerPassword');
+  const sameAddress = watch('sameAddress');
+  const billingCountry = watch('billingCountry');
+  const shippingCountry = watch('shippingCountry');
 
-  const onSubmit: SubmitHandler<RegistrationForm> = async (dto) => {
+  const onSubmit: SubmitHandler<IRegistrationForm> = async (data) => {
     try {
-      const { statusCode, body } = await customerService.registration({
-        ...dto,
-        password: dto.registerPassword,
-      });
+      const { statusCode, body } = await customerService.registration(
+        registrationMapper.toDto(data),
+      );
       if (statusCode === 201) {
         login(body.customer);
         enqueueSnackbar(
@@ -47,156 +59,17 @@ const Registration: React.FC = () => {
         );
         navigate('/');
       }
-    } catch (e) {
-      enqueueSnackbar(`Ошибка регистрации`, { variant: 'error' });
+    } catch (e: unknown) {
+      const error = e as BadRequest;
+      enqueueSnackbar(`${error.message}`, { variant: 'error' });
+      error.body.errors.forEach((err ) => {
+        const key = err.field as keyof IRegistrationForm;
+        setError(key,  { message: err.message })
+      })
     }
   };
 
   return (
-    // <div className={styles.container__registration}>
-    //   <form className={styles.form} onSubmit={handleSubmit(onSubmit)}>
-    //     <h3 className={styles.title}>Регистрация на сайте</h3>
-    //     <div className={styles.formContainer}>
-    //       <div className={styles.formGroup}>
-    //         <h4 className={styles.info__container}>Личная информация</h4>
-    //         <Input
-    //           {...register('firstName', nameValidation())}
-    //           placeholder="Имя"
-    //           type="text"
-    //           error={errors.firstName}
-    //         />
-    //         <Input
-    //           {...register('lastName', nameValidation())}
-    //           id="last-name"
-    //           placeholder="Фамилия"
-    //           type="text"
-    //           error={errors.lastName}
-    //         />
-    //         <Input
-    //           {...register('dateOfBirth', dateValidation())}
-    //           id="date-birth"
-    //           type="date"
-    //           placeholder="Дата рождения"
-    //           error={errors.dateOfBirth}
-    //           aria-invalid="true"
-    //         />
-    //         <Input
-    //           {...register('email', loginValidation())}
-    //           placeholder="Электронная почта"
-    //           type="text"
-    //           error={errors.email}
-    //         />
-    //         <Input
-    //           {...register('registerPassword', passwordValidation())}
-    //           placeholder="Пароль"
-    //           type="password"
-    //           error={errors.registerPassword}
-    //         />
-    //         <Input
-    //           {...register(
-    //             'repeatPassword',
-    //             repeatPasswordValidation(passwordValue),
-    //           )}
-    //           placeholder="Повторите пароль"
-    //           type="password"
-    //           error={errors.repeatPassword}
-    //         />
-    //       </div>
-    //
-    //       <div className={styles.formGroup}>
-    //         <h4 className={styles.info__container}>
-    //           Адрес для выставления счетов
-    //         </h4>
-    //         <Input
-    //           {...register('billingCountry')}
-    //           placeholder="Страна"
-    //           id="country"
-    //           error={errors.billingCountry}
-    //         />
-    //         <Input
-    //           {...register('billingCity')}
-    //           placeholder="Город"
-    //           id="billingCity"
-    //           error={errors.billingCity}
-    //         />
-    //         <Input
-    //           {...register('billingStreet')}
-    //           placeholder="Улица"
-    //           id="billingStreet"
-    //           error={errors.billingStreet}
-    //         />
-    //         <Input
-    //           {...register('billingHouseNumber')}
-    //           placeholder="Дом"
-    //           id="billingHouseNumber"
-    //           error={errors.billingHouseNumber}
-    //         />
-    //         <Input
-    //           {...register('billingApartment')}
-    //           placeholder="Квартира"
-    //           id="billingApartment"
-    //           error={errors.billingApartment}
-    //         />
-    //         <Input
-    //           {...register('billingPostcode')}
-    //           placeholder="Индекс"
-    //           id="billingPostcode"
-    //           error={errors.billingPostcode}
-    //         />
-    //       </div>
-    //
-    //       <div className={styles.formGroup}>
-    //         <h4 className={styles.info__container}>Адрес доставки</h4>
-    //         <Input
-    //           {...register('shippingCountry')}
-    //           placeholder="Страна"
-    //           id="bilingCountry"
-    //           error={errors.shippingCountry}
-    //         />
-    //         <Input
-    //           {...register('shippingCity')}
-    //           placeholder="Город"
-    //           id="shippingCity"
-    //           error={errors.shippingCity}
-    //         />
-    //         <Input
-    //           {...register('shippingStreet')}
-    //           placeholder="Улица"
-    //           id="shippingStreet"
-    //           error={errors.shippingStreet}
-    //         />
-    //         <Input
-    //           {...register('shippingHouseNumber')}
-    //           placeholder="Дом"
-    //           id="shippingHouseNumber"
-    //           error={errors.shippingHouseNumber}
-    //         />
-    //         <Input
-    //           {...register('shippingApartment')}
-    //           placeholder="Квартира"
-    //           id="shippingApartment"
-    //           error={errors.shippingApartment}
-    //         />
-    //         <Input
-    //           {...register('shippingPostcode')}
-    //           placeholder="Индекс"
-    //           id="shippingPostcode"
-    //           error={errors.shippingPostcode}
-    //         />
-    //       </div>
-    //     </div>
-    //     <div className={styles.actions}>
-    //       <Button className={styles.button}>Регистрация</Button>
-    //       <div className={styles.submit}>
-    //         <div className={styles.accaunt}>Уже есть аккаунт?</div>
-    //         <Link className={styles.login} to="/login">
-    //           Войдите
-    //         </Link>
-    //       </div>
-    //     </div>
-    //   </form>
-    // </div>
-
     <form className={styles.form} onSubmit={handleSubmit(onSubmit)}>
       <h3 className={styles.title}>Регистрация на сайте</h3>
 
@@ -206,14 +79,14 @@ const Registration: React.FC = () => {
 
           <Input
             {...register('firstName', nameValidation())}
-            placeholder="First Name"
+            placeholder="Имя"
             type="text"
             error={errors.firstName}
           />
           <Input
             {...register('lastName', nameValidation())}
             id="last-name"
-            placeholder="Last Name"
+            placeholder="Фамилия"
             type="text"
             error={errors.lastName}
           />
@@ -221,20 +94,20 @@ const Registration: React.FC = () => {
             {...register('dateOfBirth', dateValidation())}
             id="date-birth"
             type="date"
-            placeholder="dateOfBirth"
+            placeholder="Дата рождения"
             error={errors.dateOfBirth}
             aria-invalid="true"
           />
 
           <Input
             {...register('email', loginValidation())}
-            placeholder="Enter email"
+            placeholder="Электронная почта"
             type="text"
             error={errors.email}
           />
           <Input
             {...register('registerPassword', passwordValidation())}
-            placeholder="Enter password"
+            placeholder="Пароль"
             type="password"
             error={errors.registerPassword}
           />
@@ -243,7 +116,7 @@ const Registration: React.FC = () => {
               'repeatPassword',
               repeatPasswordValidation(passwordValue),
             )}
-            placeholder="Repeat password"
+            placeholder="Повторите пароль"
             type="password"
             error={errors.repeatPassword}
           />
@@ -251,92 +124,138 @@ const Registration: React.FC = () => {
 
         <div className={styles.container__billing}>
           <h4 className={styles.info__title}>Адрес для выставления счетов</h4>
-          <Input
+          <SelectCustom
             {...register('billingCountry', generalValidation())}
-            placeholder="Country"
-            id="country"
             error={errors.billingCountry}
-          />
+            options={countries}
+          ></SelectCustom>
           <Input
             {...register('billingCity', generalValidation())}
-            placeholder="City"
+            placeholder="Город"
             id="billingCity"
             error={errors.billingCity}
           />
           <Input
             {...register('billingStreet', generalValidation())}
-            placeholder="Stret"
+            placeholder="Улица"
             id="billingStreet"
             error={errors.billingStreet}
           />
           <Input
             {...register('billingHouseNumber', generalValidation())}
-            placeholder="HouseNumber"
+            placeholder="Дом"
             id="billingHouseNumber"
             error={errors.billingHouseNumber}
           />
           <Input
             {...register('billingApartment', generalValidation())}
-            placeholder="Apartment"
+            placeholder="Квартира"
             id="billingApartment"
             error={errors.billingApartment}
           />
           <Input
-            {...register('billingPostcode', generalValidation())}
-            placeholder="Postcode"
+            {...register('billingPostcode', postalCodeValidation(
+                billingCountry ? countries.find((item) => billingCountry === item.code)!.postalPattern! : /^\b\d{5}\b(?:[- ]{1}\d{4})?$/
+            ))}
+            placeholder="Индекс"
             id="billingPostcode"
             error={errors.billingPostcode}
+          />
+          <Controller
+            name="defaultShipping"
+            control={control}
+            defaultValue={true}
+            render={({ field }) => (
+              <FormControlLabel
+                control={<Checkbox {...field} color="success" />}
+                label="Установить в качестве платежного адреса по умолчанию"
+              />
+            )}
+          />
+          <Controller
+            name="sameAddress"
+            control={control}
+            defaultValue={true}
+            render={({ field }) => (
+              <FormControlLabel
+                control={<Checkbox {...field} color="success" />}
+                label="Используйте один и тот же адрес как для выставления счета, так и для доставки"
+              />
+            )}
           />
         </div>
 
         <div className={styles.container__shipping}>
           <h4 className={styles.info__title}>Адрес доставки</h4>
-          <Input
+
+          <SelectCustom
             {...register('shippingCountry', generalValidation())}
-            placeholder="Country"
-            id="bilingCountry"
             error={errors.shippingCountry}
-          />
+            options={countries}
+          ></SelectCustom>
+
           <Input
-            {...register('shippingCity', generalValidation())}
-            placeholder="City"
+            {...register('shippingCity', generalValidation(!sameAddress))}
+            placeholder="Город"
             id="shippingCity"
             error={errors.shippingCity}
+            disabled={sameAddress}
           />
           <Input
-            {...register('shippingStreet', generalValidation())}
-            placeholder="Stret"
+            {...register('shippingStreet', generalValidation(!sameAddress))}
+            placeholder="Улица"
             id="shippingStreet"
             error={errors.shippingStreet}
+            disabled={sameAddress}
           />
           <Input
-            {...register('shippingHouseNumber', generalValidation())}
-            placeholder="HouseNumber"
+            {...register(
+              'shippingHouseNumber',
+              generalValidation(!sameAddress),
+            )}
+            placeholder="Дом"
             id="shippingHouseNumber"
             error={errors.shippingHouseNumber}
+            disabled={sameAddress}
           />
           <Input
-            {...register('shippingApartment', generalValidation())}
-            placeholder="Apartment"
+            {...register('shippingApartment', generalValidation(!sameAddress))}
+            placeholder="Квартира"
             id="shippingApartment"
             error={errors.shippingApartment}
+            disabled={sameAddress}
           />
           <Input
-            {...register('shippingPostcode', generalValidation())}
-            placeholder="Postcode"
+            {...register('shippingPostcode', postalCodeValidation(
+                shippingCountry ? countries.find((item) => shippingCountry === item.code)!.postalPattern! : /^\b\d{5}\b(?:[- ]{1}\d{4})?$/
+            ))}
+            placeholder="Индекс"
             id="shippingPostcode"
             error={errors.shippingPostcode}
+            disabled={sameAddress}
+          />
+          <Controller
+            name="defaultBilling"
+            control={control}
+            defaultValue={true}
+            disabled={sameAddress}
+            render={({ field }) => (
+              <FormControlLabel
+                control={<Checkbox {...field} color="success" />}
+                label="Установить адрес доставки по умолчанию"
+              />
+            )}
           />
         </div>
       </div>
-
-      <Button className={styles.button}>Регистрация</Button>
-
-      <div className={styles.submit}>
-        <div className={styles.accaunt}>Уже есть аккаунт?</div>
-        <Link className={styles.login} to="/login">
-          Войдите
-        </Link>
+      <div className={styles.actions}>
+        <Button className={styles.button}>Регистрация</Button>
+        <div className={styles.submit}>
+          <div className={styles.accaunt}>Уже есть аккаунт?</div>
+          <Link className={styles.login} to="/login">
+            Войдите
+          </Link>
+        </div>
       </div>
     </form>
   );

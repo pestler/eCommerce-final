@@ -1,6 +1,8 @@
-export const generalValidation = () => ({
-  required: {
-    value: true,
-    message: 'Поле обязательно для заполнения!',
-  },
-});
+export const generalValidation = (value: boolean = true) => {
+  return {
+    required: {
+      value: value,
+      message: 'Поле обязательно для заполнения!',
+    },
+  };
+};

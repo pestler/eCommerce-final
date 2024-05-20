@@ -27,7 +27,7 @@ const eventsMenu: ('Войти' | 'Зарегистрироваться' | 'Вы
 
 export default function MainMenu({ isMenuOpen, clickHandler }: PropsMainMenu) {
   const navigate = useNavigate();
-  const { isAuthenticated, logout } = useAuth();
+  const { isAuthenticated, logout, user } = useAuth();
 
   const menuEvent = (event: string) => {
     switch (event) {
@@ -73,6 +73,7 @@ export default function MainMenu({ isMenuOpen, clickHandler }: PropsMainMenu) {
               </NavLink>
             ))}
         </nav>
+        {user && <span className={style.user}>Привет, {user.firstName ? user.firstName : user.email}</span>}
         {!isMenuOpen && (
           <BasicMenu
             buttonContent={
