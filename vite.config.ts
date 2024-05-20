@@ -6,11 +6,6 @@ import rollupNodePolyFill from 'rollup-plugin-node-polyfills';
 
 export default defineConfig({
   plugins: [react()],
-  resolve: {
-    alias: {
-      stream: 'stream-browserify',
-    },
-  },
   optimizeDeps: {
     esbuildOptions: {
       define: {
@@ -26,6 +21,7 @@ export default defineConfig({
     },
   },
   build: {
+    sourcemap: false,
     rollupOptions: {
       plugins: [
           rollupNodePolyFill()
