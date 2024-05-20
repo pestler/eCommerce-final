@@ -4,7 +4,6 @@ import BurgerButton from '../burgerMenu/BurgerButton.tsx';
 import MainMenu from '../menu/MainMenu.tsx';
 import style from './header.module.scss';
 
-
 const Header: React.FC = () => {
   const [isMenuOpen, setToggleMenu] = useState(false);
 
@@ -20,7 +19,7 @@ const Header: React.FC = () => {
           clickHandler={() => setToggleMenu(false)}
         />
         <BurgerButton
-            className={style.burger}
+          className={style.burger}
           isMenuOpen={isMenuOpen}
           clickHandler={() => setToggleMenu(!isMenuOpen)}
         />

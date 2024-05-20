@@ -1,5 +1,3 @@
-
-
 export interface RegistrationForm {
   email: string;
   password: string;
@@ -26,6 +24,3 @@ export interface RegistrationForm {
   registerPassword: string;
   repeatPassword: string;
 }
-
-
-

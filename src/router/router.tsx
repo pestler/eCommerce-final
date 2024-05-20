@@ -1,9 +1,9 @@
 import { ReactNode } from 'react';
+import Login from '../pages/login/Login.tsx';
+import Main from '../pages/main/Main.tsx';
 import NotFoundPage from '../pages/notFoundPage/NotFoundPage.tsx';
+import Registration from '../pages/registration/Registration.tsx';
 import AuthGuard from './guards/auth.guard.tsx';
-import Main from "../pages/main/Main.tsx";
-import Login from "../pages/login/Login.tsx";
-import Registration from "../pages/registration/Registration.tsx";
 
 interface Route {
   path: string;

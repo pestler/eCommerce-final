@@ -1,7 +1,18 @@
-import {CustomerDraft} from "@commercetools/platform-sdk";
+import { CustomerDraft } from '@commercetools/platform-sdk';
 
-export type RegistrationDto = Pick<CustomerDraft, 'firstName' | 'lastName' | 'dateOfBirth' | 'email' | 'password' | 'addresses' | 'billingAddresses' | 'shippingAddresses' | 'defaultShippingAddress' | 'defaultBillingAddress'>;
-
+export type RegistrationDto = Pick<
+  CustomerDraft,
+  | 'firstName'
+  | 'lastName'
+  | 'dateOfBirth'
+  | 'email'
+  | 'password'
+  | 'addresses'
+  | 'billingAddresses'
+  | 'shippingAddresses'
+  | 'defaultShippingAddress'
+  | 'defaultBillingAddress'
+>;
 
 /**
  * Для отправки данных на eCommerce у тебя должен быть следующий объект,

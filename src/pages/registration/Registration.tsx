@@ -13,9 +13,9 @@ import {
   repeatPasswordValidation,
 } from '../../validators';
 import { dateValidation } from '../../validators/date-validation.ts';
+import { generalValidation } from '../../validators/general-validation.ts';
 import { nameValidation } from '../../validators/name-validation.ts';
 import styles from './registration.module.scss';
-import {generalValidation} from "../../validators/general-validation.ts";
 
 const Registration: React.FC = () => {
   const navigate = useNavigate();
@@ -53,7 +53,6 @@ const Registration: React.FC = () => {
   };
 
   return (
-
     // <div className={styles.container__registration}>
     //   <form className={styles.form} onSubmit={handleSubmit(onSubmit)}>
     //     <h3 className={styles.title}>Регистрация на сайте</h3>
