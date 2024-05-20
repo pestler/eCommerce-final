@@ -28,9 +28,17 @@ class RegistrationMapper {
       dateOfBirth: data.dateOfBirth,
       addresses,
       shippingAddresses: data.sameAddress ? [0] : [1],
-      defaultShippingAddress:  data.sameAddress ? 0 : (data.defaultShipping ? 1 : undefined),
+      defaultShippingAddress: data.sameAddress
+        ? 0
+        : data.defaultShipping
+          ? 1
+          : undefined,
       billingAddresses: [0],
-      defaultBillingAddress:data.sameAddress ? 0 : (data.defaultBilling ? 0 : undefined),
+      defaultBillingAddress: data.sameAddress
+        ? 0
+        : data.defaultBilling
+          ? 0
+          : undefined,
     };
   }
 }

@@ -1,9 +1,11 @@
+import { Checkbox, FormControlLabel } from '@mui/material';
 import { useSnackbar } from 'notistack';
 import React from 'react';
-import {Controller, SubmitHandler, useForm} from 'react-hook-form';
-import {Link, useNavigate} from 'react-router-dom';
+import { Controller, SubmitHandler, useForm } from 'react-hook-form';
+import { Link, useNavigate } from 'react-router-dom';
 import Input from '../../components/Input/Input.tsx';
 import Button from '../../components/button/Button.tsx';
+import SelectCustom from '../../components/select/SelectCustom.tsx';
 import { useAuth } from '../../hooks/useAuth.ts';
 import { IRegistrationForm } from '../../interface/registrationForm.interface.ts';
 import { registrationMapper } from '../../mappers/registration.mapper.ts';
@@ -17,9 +19,6 @@ import { dateValidation } from '../../validators/date-validation.ts';
 import { generalValidation } from '../../validators/general-validation.ts';
 import { nameValidation } from '../../validators/name-validation.ts';
 import styles from './registration.module.scss';
-import {Checkbox, FormControlLabel} from "@mui/material";
-import ReactSelect from 'react-select';
-import SelectCustom from "../../components/select/SelectCustom.tsx";
 
 const Registration: React.FC = () => {
   const navigate = useNavigate();
@@ -35,8 +34,8 @@ const Registration: React.FC = () => {
   } = useForm<IRegistrationForm>({
     mode: 'onChange',
     defaultValues: {
-      sameAddress: false
-    }
+      sameAddress: false,
+    },
   });
 
   const passwordValue = watch('registerPassword');
@@ -117,13 +116,13 @@ const Registration: React.FC = () => {
         <div className={styles.container__billing}>
           <h4 className={styles.info__title}>Адрес для выставления счетов</h4>
           <SelectCustom
-              {...register('shippingCountry', generalValidation())}
-              error={errors.shippingCountry}
-              options={[
-                { title: 'United States' , value: 'US'},
-                { title: 'Russian Federation' , value: 'RU'},
-                { title: 'Belarus' , value: 'BY'},
-              ]}
+            {...register('billingCountry', generalValidation())}
+            error={errors.billingCountry}
+            options={[
+              { title: 'United States', value: 'US' },
+              { title: 'Russian Federation', value: 'RU' },
+              { title: 'Belarus', value: 'BY' },
+            ]}
           ></SelectCustom>
           <Input
             {...register('billingCity', generalValidation())}
@@ -156,48 +155,41 @@ const Registration: React.FC = () => {
             error={errors.billingPostcode}
           />
           <Controller
-              name="defaultShipping"
-              control={control}
-              defaultValue={true}
-              render={({ field }) => (
-                  <FormControlLabel
-                      control={<Checkbox {...field} color="success" />}
-                      label="Установить в качестве платежного адреса по умолчанию"
-                  />
-              )}
+            name="defaultShipping"
+            control={control}
+            defaultValue={true}
+            render={({ field }) => (
+              <FormControlLabel
+                control={<Checkbox {...field} color="success" />}
+                label="Установить в качестве платежного адреса по умолчанию"
+              />
+            )}
           />
           <Controller
-              name="sameAddress"
-              control={control}
-              defaultValue={true}
-              render={({ field }) => (
-                  <FormControlLabel
-                      control={<Checkbox {...field} color="success" />}
-                      label="Используйте один и тот же адрес как для выставления счета, так и для доставки"
-                  />
-              )}
+            name="sameAddress"
+            control={control}
+            defaultValue={true}
+            render={({ field }) => (
+              <FormControlLabel
+                control={<Checkbox {...field} color="success" />}
+                label="Используйте один и тот же адрес как для выставления счета, так и для доставки"
+              />
+            )}
           />
         </div>
 
         <div className={styles.container__shipping}>
           <h4 className={styles.info__title}>Адрес доставки</h4>
 
-            <Controller
-              render={({ shippingCountry }) => (
-                <ReactSelect
-                  {...shippingCountry}
-                  options={[
-                    { label: 'United States' , value: 'US'},
-                    { label: 'Russian Federation' , value: 'RU'},
-                    { label: 'Belarus' , value: 'BY'},
-
-                  ]}
-                  isClearable
-                />
-              )}
-              name="ReactSelect"
-              control={control}
-            />
+          <SelectCustom
+            {...register('shippingCountry', generalValidation())}
+            error={errors.shippingCountry}
+            options={[
+              { title: 'United States', value: 'US' },
+              { title: 'Russian Federation', value: 'RU' },
+              { title: 'Belarus', value: 'BY' },
+            ]}
+          ></SelectCustom>
 
           <Input
             {...register('shippingCity', generalValidation(!sameAddress))}
@@ -214,7 +206,10 @@ const Registration: React.FC = () => {
             disabled={sameAddress}
           />
           <Input
-            {...register('shippingHouseNumber', generalValidation(!sameAddress))}
+            {...register(
+              'shippingHouseNumber',
+              generalValidation(!sameAddress),
+            )}
             placeholder="Дом"
             id="shippingHouseNumber"
             error={errors.shippingHouseNumber}
@@ -235,16 +230,16 @@ const Registration: React.FC = () => {
             disabled={sameAddress}
           />
           <Controller
-              name="defaultBilling"
-              control={control}
-              defaultValue={true}
-              disabled={sameAddress}
-              render={({ field }) => (
-                  <FormControlLabel
-                      control={<Checkbox {...field} color="success" />}
-                      label="Установить адрес доставки по умолчанию"
-                  />
-              )}
+            name="defaultBilling"
+            control={control}
+            defaultValue={true}
+            disabled={sameAddress}
+            render={({ field }) => (
+              <FormControlLabel
+                control={<Checkbox {...field} color="success" />}
+                label="Установить адрес доставки по умолчанию"
+              />
+            )}
           />
         </div>
       </div>

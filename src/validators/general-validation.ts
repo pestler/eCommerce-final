@@ -4,5 +4,5 @@ export const generalValidation = (value: boolean = true) => {
       value: value,
       message: 'Поле обязательно для заполнения!',
     },
-  }
-}
+  };
+};
