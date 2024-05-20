@@ -18,6 +18,7 @@ import { generalValidation } from '../../validators/general-validation.ts';
 import { nameValidation } from '../../validators/name-validation.ts';
 import styles from './registration.module.scss';
 import {Checkbox, FormControlLabel} from "@mui/material";
+import ReactSelect from 'react-select';
 
 const Registration: React.FC = () => {
   const navigate = useNavigate();
@@ -114,12 +115,28 @@ const Registration: React.FC = () => {
 
         <div className={styles.container__billing}>
           <h4 className={styles.info__title}>Адрес для выставления счетов</h4>
-          <Input
+        {/*   <Input
             {...register('billingCountry', generalValidation())}
             placeholder="Страна"
             id="country"
             error={errors.billingCountry}
-          />
+          /> */}
+              <Controller
+              render={({ billingCountry }) => (
+                <ReactSelect
+                  {...billingCountry}
+                  options={[                    
+                    { label: 'United States' , value: 'US'},
+                    { label: 'Russian Federation' , value: 'RU'},
+                    { label: 'Belarus' , value: 'BY'},
+                    
+                  ]}
+                  isClearable
+                />
+              )}
+              name="ReactSelect"
+              control={control}
+            />
           <Input
             {...register('billingCity', generalValidation())}
             placeholder="Город"
@@ -176,13 +193,31 @@ const Registration: React.FC = () => {
 
         <div className={styles.container__shipping}>
           <h4 className={styles.info__title}>Адрес доставки</h4>
-          <Input
+          {/* <Input
             {...register('shippingCountry', generalValidation(!sameAddress))}
             placeholder="Страна"
             id="bilingCountry"
             error={errors.shippingCountry}
             disabled={sameAddress}
-          />
+          /> */}
+          
+            <Controller
+              render={({ shippingCountry }) => (
+                <ReactSelect
+                  {...shippingCountry}
+                  options={[                    
+                    { label: 'United States' , value: 'US'},
+                    { label: 'Russian Federation' , value: 'RU'},
+                    { label: 'Belarus' , value: 'BY'},
+                    
+                  ]}
+                  isClearable
+                />
+              )}
+              name="ReactSelect"
+              control={control}
+            />
+          
           <Input
             {...register('shippingCity', generalValidation(!sameAddress))}
             placeholder="Город"
