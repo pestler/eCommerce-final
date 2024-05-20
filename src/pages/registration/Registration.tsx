@@ -5,7 +5,7 @@ import { Link, useNavigate } from 'react-router-dom';
 import Input from '../../components/Input/Input.tsx';
 import Button from '../../components/button/Button.tsx';
 import { useAuth } from '../../hooks/useAuth.ts';
-import { RegistrationForm } from '../../interface/registrationForm.ts';
+import {IRegistrationForm} from '../../interface/registrationForm.interface.ts';
 import { customerService } from '../../services';
 import {
   loginValidation,
@@ -16,6 +16,7 @@ import { dateValidation } from '../../validators/date-validation.ts';
 import { generalValidation } from '../../validators/general-validation.ts';
 import { nameValidation } from '../../validators/name-validation.ts';
 import styles from './registration.module.scss';
+import {registrationMapper} from "../../mappers/registration.mapper.ts";
 
 const Registration: React.FC = () => {
   const navigate = useNavigate();
@@ -27,18 +28,15 @@ const Registration: React.FC = () => {
     handleSubmit,
     formState: { errors },
     watch,
-  } = useForm<RegistrationForm>({
+  } = useForm<IRegistrationForm>({
     mode: 'onChange',
   });
 
   const passwordValue = watch('registerPassword');
 
-  const onSubmit: SubmitHandler<RegistrationForm> = async (dto) => {
+  const onSubmit: SubmitHandler<IRegistrationForm> = async (data) => {
     try {
-      const { statusCode, body } = await customerService.registration({
-        ...dto,
-        password: dto.registerPassword,
-      });
+      const { statusCode, body } = await customerService.registration(registrationMapper.toDto(data));
       if (statusCode === 201) {
         login(body.customer);
         enqueueSnackbar(
@@ -185,12 +183,14 @@ const Registration: React.FC = () => {
           />
         </div>
       </div>
-      <Button className={styles.button}>Регистрация</Button>
-      <div className={styles.submit}>
-        <div className={styles.accaunt}>Уже есть аккаунт?</div>
-        <Link className={styles.login} to="/login">
-          Войдите
-        </Link>
+      <div className={styles.actions}>
+        <Button className={styles.button}>Регистрация</Button>
+        <div className={styles.submit}>
+          <div className={styles.accaunt}>Уже есть аккаунт?</div>
+          <Link className={styles.login} to="/login">
+            Войдите
+          </Link>
+        </div>
       </div>
     </form>
   );

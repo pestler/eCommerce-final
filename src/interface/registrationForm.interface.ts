@@ -1,4 +1,4 @@
-export interface RegistrationForm {
+export interface IRegistrationForm {
   email: string;
   password: string;
   firstName: string;
@@ -23,28 +23,4 @@ export interface RegistrationForm {
   currentPassword: string;
   registerPassword: string;
   repeatPassword: string;
-}
-
-export interface RegistrationFormState {
-  email: string;
-  password: string;
-  firstName: string;
-  lastName: string;
-  dateOfBirth: string;
-  shippingAddress: {
-    country: string;
-    city: string;
-    postalCode: string;
-    streetNumber: string;
-  };
-  billingAddress: {
-    country: string;
-    city: string;
-    postalCode: string;
-    streetNumber: string;
-  };
-  /* shippingAsBilling: boolean;
-  billingAsShipping: boolean;
-  shippingAsDefault: boolean;
-  billingAsDefault: boolean; */
 }
