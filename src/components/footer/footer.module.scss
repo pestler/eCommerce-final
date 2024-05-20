@@ -17,9 +17,6 @@
     display: flex;
     justify-content: space-between;
 
-    @media (max-width: 1500px) {
-        padding: 50px;
-    }
 
     @media (max-width: 900px) {
         padding: 20px;

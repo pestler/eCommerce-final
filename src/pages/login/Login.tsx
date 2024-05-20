@@ -74,10 +74,6 @@ const Login: React.FC = () => {
           </Link>
         </div>
       </form>
-      <div className={styles.picbox}>
-        <div className={styles.big}></div>
-        <div className={styles.small}></div>
-      </div>
     </div>
   );
 };

@@ -13,3 +13,9 @@
     background-color: #2f5533;
   }
 }
+
+@media screen and (max-width: 430px) {
+  .btn {
+    width: 100%!important;
+  }
+}

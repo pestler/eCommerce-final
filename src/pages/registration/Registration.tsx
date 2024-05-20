@@ -19,6 +19,7 @@ import { dateValidation } from '../../validators/date-validation.ts';
 import { generalValidation } from '../../validators/general-validation.ts';
 import { nameValidation } from '../../validators/name-validation.ts';
 import styles from './registration.module.scss';
+import {BadRequest} from "../../interface/responseError.interface.ts";
 
 const Registration: React.FC = () => {
   const navigate = useNavigate();
@@ -31,6 +32,7 @@ const Registration: React.FC = () => {
     formState: { errors },
     watch,
     control,
+      setError,
   } = useForm<IRegistrationForm>({
     mode: 'onChange',
     defaultValues: {
@@ -55,8 +57,12 @@ const Registration: React.FC = () => {
         navigate('/');
       }
     } catch (e: unknown) {
-      // const error = e as ErrorResponse;
-      // enqueueSnackbar(`${error.errors[0].message}`, { variant: 'error' });
+      const error = e as BadRequest;
+      enqueueSnackbar(`${error.message}`, { variant: 'error' });
+      error.body.errors.forEach((err ) => {
+        const key = err.field as keyof IRegistrationForm;
+        setError(key,  { message: err.message })
+      })
     }
   };
 

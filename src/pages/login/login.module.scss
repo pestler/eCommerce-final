@@ -1,7 +1,11 @@
 .container__login {
     display: flex;
     width: 100%;
-    padding-top: 50px;
+    padding: 50px 0;
+    background-image: url(/src/assets/images/login.png);
+    background-position: 100% 112%;
+    background-size: 28%;
+    background-repeat: no-repeat;
 }
 
 .form {
@@ -10,6 +14,12 @@
     width: 430px;
     align-items: center;
     gap: 27px;
+}
+
+@media screen and (max-width: 500px) {
+    .form {
+        width: 100%;
+    }
 }
 
 .titleForm {
@@ -72,18 +82,4 @@
 .picbox {
     display: flex;
     align-items: flex-end;
-}
-
-.big {
-    background: url('../../assets/images/login.png') no-repeat;
-    background-size: cover;
-    width: 470px;
-    height: 515px;
-}
-
-.small {
-    background: url('../../assets/images/login1.png') no-repeat;
-    background-size: cover;
-    width: 261px;
-    height: 327px;
 }
