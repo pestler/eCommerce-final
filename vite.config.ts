@@ -3,17 +3,10 @@ import react from '@vitejs/plugin-react'
 import { NodeGlobalsPolyfillPlugin } from '@esbuild-plugins/node-globals-polyfill';
 import { NodeModulesPolyfillPlugin } from '@esbuild-plugins/node-modules-polyfill';
 import rollupNodePolyFill from 'rollup-plugin-node-polyfills';
-import inject from '@rollup/plugin-inject';
-
-
 
 export default defineConfig({
   plugins: [
     react(),
-    // Inject global variables into the bundle
-    inject({
-      global: 'globalThis',
-    })
   ],
   resolve: {
     alias: {
@@ -35,14 +28,8 @@ export default defineConfig({
     },
   },
   build: {
-    sourcemap: false,
     rollupOptions: {
-      plugins: [
-        rollupNodePolyFill(),
-        inject({
-          global: 'globalThis', // Use globalThis as a polyfill for global in the Rollup build
-        })
-      ],
+      plugins: [rollupNodePolyFill()],
     },
   },
   test: {
