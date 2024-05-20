@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import Logo from '../../assets/images/logo_footer.png';
-import { listLinks } from '../header/listLink';
+import { listLinks } from '../menu/listLink';
 import style from './footer.module.scss';
 
 const productGroup = [

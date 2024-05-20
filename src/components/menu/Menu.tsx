@@ -1,5 +1,6 @@
 import { Button, Menu, MenuItem } from '@mui/material';
 import React, { ReactNode, useState } from 'react';
+import style from './menu.module.scss';
 
 type PropsMenu = {
   buttonContent: ReactNode;
@@ -31,7 +32,7 @@ export default function BasicMenu({
   };
 
   return (
-    <div>
+    <div className={style.menu__basic}>
       <Button
         id="basic-button"
         aria-controls={open ? 'basic-menu' : undefined}
