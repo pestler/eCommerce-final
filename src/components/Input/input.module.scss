@@ -1,0 +1,46 @@
+.formField {
+  width: 100%;
+  position: relative;
+}
+
+.label {
+  width: 100%;
+  position: relative;
+}
+.error {
+  font-family: var(--second-family);
+  color: red;
+  position: absolute;
+  bottom: -25px;
+  left: 0;
+  height: 25px;
+  font-size: 10px;
+}
+
+.input {
+  border: 2px solid #2a592e;
+  border-radius: 3px;
+  padding: 20px 64px 20px 20px;
+  width: 100%;
+  height: 53px;
+  outline: none;
+
+  &:disabled {
+    border-color: gray;
+    background: #80808080;
+  }
+}
+
+.errorInput {
+  border-color: red;
+}
+
+.eyeIcon {
+  position: absolute;
+  right: 10px;
+  top: calc(50% - 5px);
+  cursor: pointer;
+}
+
+
+

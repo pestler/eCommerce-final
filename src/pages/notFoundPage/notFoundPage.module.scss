@@ -1,0 +1,51 @@
+.main__wrapper {
+  position: relative;
+  padding-bottom: 260px;
+  padding-top: 58px;
+  background-image: url(../../assets/images/login.png), url(../../assets/images/login1.png);
+  background-repeat: no-repeat, no-repeat;
+  background-position: bottom right 28.15%, bottom right;
+  background-size: 36%, 18%;
+  
+  .main__content {
+    width: 70%;
+  }
+
+  h2 {
+    font-family: var(--font-family);
+    font-weight: 600;
+    font-size: 80px;
+    color: #2A592E;
+    text-align: center;
+  
+    @media (max-width: 980px) {
+    font-size: 40px;
+    }
+  }
+
+  .link {
+    display: block;
+    text-align: center;
+    padding-top: 20px;
+    font-family: var(--font-family);
+    font-size: 16px;
+    color: #519057;
+  }
+
+  @media (max-width: 980px) {
+    padding-bottom: 200px;
+  }
+}
+
+.main__description {
+  font-family: var(--font-family);
+  font-weight: 600;
+  font-size: 18px;
+  color: #2A592E;
+  line-height: 25px;
+  text-align: center;
+
+  @media (max-width: 980px) {
+    font-size: 14px;
+  }
+}

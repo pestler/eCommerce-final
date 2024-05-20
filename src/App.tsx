@@ -1,11 +1,32 @@
-import './App.scss'
+import { SnackbarProvider } from 'notistack';
+import React from 'react';
+import { BrowserRouter, Route, Routes } from 'react-router-dom';
+import './App.scss';
+import Layout from './Layout.tsx';
+import { AuthProvider } from './providers';
+import { router } from './router';
 
-function App() {
+const App: React.FC = () => {
   return (
-    <>
-      <h1>eCommerce</h1>
-    </>
-  )
-}
+    <AuthProvider>
+      <BrowserRouter>
+        <SnackbarProvider
+          anchorOrigin={{
+            vertical: 'top',
+            horizontal: 'right',
+          }}
+        >
+          <Layout>
+            <Routes>
+              {router.map((route, index) => (
+                <Route key={index} path={route.path} element={route.element} />
+              ))}
+            </Routes>
+          </Layout>
+        </SnackbarProvider>
+      </BrowserRouter>
+    </AuthProvider>
+  );
+};
 
-export default App
+export default App;
