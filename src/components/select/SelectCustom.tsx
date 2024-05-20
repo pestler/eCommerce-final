@@ -4,7 +4,7 @@ import styles from './selectCustom.module.scss';
 
 type InputProps = React.HTMLProps<HTMLSelectElement> & {
   error: FieldError | undefined;
-  options: { value: string | number; title: string | number }[];
+  options: { code: string | number; value: string | number }[];
 };
 
 const SelectCustom = forwardRef<HTMLSelectElement, InputProps>(
@@ -13,8 +13,8 @@ const SelectCustom = forwardRef<HTMLSelectElement, InputProps>(
       <>
         <select className={styles.select} ref={ref} {...props}>
           {options.map((option) => (
-            <option key={option.value} value={option.value}>
-              {option.title}
+            <option key={option.code} value={option.code}>
+              {option.value}
             </option>
           ))}
         </select>

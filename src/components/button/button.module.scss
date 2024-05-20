@@ -9,6 +9,10 @@
   border: 0;
   border-radius: 5px;
   cursor: pointer;
+  &:disabled {
+    background-color: #385139;
+    cursor: not-allowed;
+  }
   &:hover {
     background-color: #2f5533;
   }

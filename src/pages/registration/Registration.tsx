@@ -12,7 +12,7 @@ import { registrationMapper } from '../../mappers/registration.mapper.ts';
 import { customerService } from '../../services';
 import {
   loginValidation,
-  passwordValidation,
+  passwordValidation, postalCodeValidation,
   repeatPasswordValidation,
 } from '../../validators';
 import { dateValidation } from '../../validators/date-validation.ts';
@@ -20,6 +20,7 @@ import { generalValidation } from '../../validators/general-validation.ts';
 import { nameValidation } from '../../validators/name-validation.ts';
 import styles from './registration.module.scss';
 import {BadRequest} from "../../interface/responseError.interface.ts";
+import {countries} from "../../contstants/countries.constants.ts";
 
 const Registration: React.FC = () => {
   const navigate = useNavigate();
@@ -42,6 +43,8 @@ const Registration: React.FC = () => {
 
   const passwordValue = watch('registerPassword');
   const sameAddress = watch('sameAddress');
+  const billingCountry = watch('billingCountry');
+  const shippingCountry = watch('shippingCountry');
 
   const onSubmit: SubmitHandler<IRegistrationForm> = async (data) => {
     try {
@@ -124,11 +127,7 @@ const Registration: React.FC = () => {
           <SelectCustom
             {...register('billingCountry', generalValidation())}
             error={errors.billingCountry}
-            options={[
-              { title: 'United States', value: 'US' },
-              { title: 'Russian Federation', value: 'RU' },
-              { title: 'Belarus', value: 'BY' },
-            ]}
+            options={countries}
           ></SelectCustom>
           <Input
             {...register('billingCity', generalValidation())}
@@ -155,7 +154,9 @@ const Registration: React.FC = () => {
             error={errors.billingApartment}
           />
           <Input
-            {...register('billingPostcode', generalValidation())}
+            {...register('billingPostcode', postalCodeValidation(
+                billingCountry ? countries.find((item) => billingCountry === item.code)!.postalPattern! : /^\b\d{5}\b(?:[- ]{1}\d{4})?$/
+            ))}
             placeholder="Индекс"
             id="billingPostcode"
             error={errors.billingPostcode}
@@ -190,11 +191,7 @@ const Registration: React.FC = () => {
           <SelectCustom
             {...register('shippingCountry', generalValidation())}
             error={errors.shippingCountry}
-            options={[
-              { title: 'United States', value: 'US' },
-              { title: 'Russian Federation', value: 'RU' },
-              { title: 'Belarus', value: 'BY' },
-            ]}
+            options={countries}
           ></SelectCustom>
 
           <Input
@@ -229,7 +226,9 @@ const Registration: React.FC = () => {
             disabled={sameAddress}
           />
           <Input
-            {...register('shippingPostcode', generalValidation(!sameAddress))}
+            {...register('shippingPostcode', postalCodeValidation(
+                shippingCountry ? countries.find((item) => shippingCountry === item.code)!.postalPattern! : /^\b\d{5}\b(?:[- ]{1}\d{4})?$/
+            ))}
             placeholder="Индекс"
             id="shippingPostcode"
             error={errors.shippingPostcode}
