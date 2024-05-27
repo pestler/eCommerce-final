@@ -21,10 +21,10 @@
     background: url('./../../assets/images/favorites-icon.png') no-repeat;
     width: 24px;
     height: 24px;
+    cursor: pointer;
 }
-
-.card__img:hover {
-    opacity: 1.2;
+.card__favorite.active{
+        background: url('./../../assets/images/favorites-icon-active.png') no-repeat;
 }
 
 .card__title {
@@ -76,7 +76,7 @@
 
 .minus {
     display: flex;
-    width: 12px;
+    width: 24px;
     height: 12px;
     background: url('./../../assets/images/minus.png') no-repeat center;
     cursor: pointer;
@@ -96,4 +96,6 @@
     font-weight: 400;
     line-height: 20.8px;
     align-items: center;
+    cursor: pointer;
+    color:  #9AA89B;
 }
