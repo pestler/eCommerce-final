@@ -4,6 +4,7 @@ import Main from '../pages/main/Main.tsx';
 import NotFoundPage from '../pages/notFoundPage/NotFoundPage.tsx';
 import Registration from '../pages/registration/Registration.tsx';
 import AuthGuard from './guards/auth.guard.tsx';
+import Catalog from '../pages/catalog/Catalog.tsx';
 
 interface Route {
   path: string;
@@ -14,6 +15,10 @@ export const router: Route[] = [
   {
     path: '/',
     element: <Main />,
+  },
+  {
+    path: '/catalog',
+    element: <Catalog />,
   },
   {
     path: '/login',

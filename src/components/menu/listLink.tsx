@@ -7,7 +7,7 @@ export const listLinks = [
   },
   {
     id: 2,
-    to: '#',
+    to: 'catalog',
     textLink: 'Каталог',
     testid: 'catalog-link',
   },
