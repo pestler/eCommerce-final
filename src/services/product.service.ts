@@ -1,8 +1,10 @@
 import { anonymousClient } from '../api';
 
 class ProductService {
-  public getAll(limit?: number) {
-    return anonymousClient.products().get({ queryArgs: { limit } }).execute();
+  public getAll() {
+    return anonymousClient.productProjections().search().get({
+          queryArgs: {
+                "filter": 'productType.id:"babf87ce-f100-4a60-bf57-ca6427a42fe7"' } }).execute();
   }
 
   public getDiscounts() {
@@ -34,11 +36,11 @@ class ProductService {
       .execute();
   }
 
-  public getAllProjections(limit: number, offset: number) {
+  public getAllProjections(limit?: number, offset?: number) {
     return anonymousClient
       .productProjections()
       .search()
-      .get({ queryArgs: { limit, offset } })
+      .get({ queryArgs: { limit, offset, 'categories.id': 1 } })
       .execute();
   }
 
@@ -52,6 +54,14 @@ class ProductService {
 
   public getByCategory(ID: string) {
     return anonymousClient.categories().withId({ ID }).get().execute();
+  }
+
+  public getCategories() {
+    return anonymousClient.categories().get().execute();
+  }
+
+  public getProductsTypes() {
+    return anonymousClient.productTypes().get().execute();
   }
 }
 
