@@ -1,17 +1,10 @@
-import { FC, forwardRef, useState } from 'react';
+import { forwardRef, useState } from 'react';
 import Button from '../button/Button';
 import { FavouriteCard } from './FavoriteCard';
 import styles from './card.module.scss';
 
-type InputProps = React.HTMLProps<HTMLInputElement>;
-
-const Card: FC<InputProps> = forwardRef(({ span }) => {
-  //const Card: FC<InputProps> = forwardRef(({ span,  ...props }, ref) => {
-  // const [typeInput, setTypeInput] = useState(props.type);
-
+const Card: React.FC = forwardRef(({ ...props }, ref) => {
   const [counter, setCounter] = useState(0);
-  //const [favorite] = useState;
-
   const handleClickPlus = () => {
     setCounter(counter + 1);
   };
@@ -24,7 +17,7 @@ const Card: FC<InputProps> = forwardRef(({ span }) => {
       <div className={styles.card__img}>
         <FavouriteCard id={'id'} />
       </div>
-      <span className={styles.card__title}>{span}</span>
+      <span className={styles.card__title}  {...props}></span>
 
       <div className={styles.price__container}>
         <div className={styles.price}>29 BYN</div>

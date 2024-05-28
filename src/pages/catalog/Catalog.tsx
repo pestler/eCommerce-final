@@ -1,13 +1,30 @@
 import React from 'react';
 import Card from '../../components/card/Card';
+import styles from './catalog.module.scss'
 
-const Catalog: React.FC = () => {
+
+const data =  [
+  {title:'Анакампсерос руфесценс Санрайз'},
+  {title:'Сансевиерия трехпучковая Муншайн'},
+  {title:'Крассула Храм Будды'} 
+]  
+
+
+  
+
+
+
+const Catalog: React.FC = () => {  
+  
   return (
-    <div>      
-      <Card
-      value={'Анакампсерос руфесценс Санрайз'}
-      />
+    <>
+    <h1>Каталог</h1>
+    <div className={styles.catalog__container}>                              
+                {data.map(card=><Card key={card.title}>{card.title}</Card>)}                              
     </div>
+      </>
+    
+    
   );
 };
 
