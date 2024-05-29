@@ -6,21 +6,22 @@ import { Link, useNavigate } from 'react-router-dom';
 import Input from '../../components/Input/Input.tsx';
 import Button from '../../components/button/Button.tsx';
 import SelectCustom from '../../components/select/SelectCustom.tsx';
+import { countries } from '../../contstants/countries.constants.ts';
 import { useAuth } from '../../hooks/useAuth.ts';
 import { IRegistrationForm } from '../../interface/registrationForm.interface.ts';
+import { BadRequest } from '../../interface/responseError.interface.ts';
 import { registrationMapper } from '../../mappers/registration.mapper.ts';
 import { customerService } from '../../services';
 import {
   loginValidation,
-  passwordValidation, postalCodeValidation,
+  passwordValidation,
+  postalCodeValidation,
   repeatPasswordValidation,
 } from '../../validators';
 import { dateValidation } from '../../validators/date-validation.ts';
 import { generalValidation } from '../../validators/general-validation.ts';
 import { nameValidation } from '../../validators/name-validation.ts';
 import styles from './registration.module.scss';
-import {BadRequest} from "../../interface/responseError.interface.ts";
-import {countries} from "../../contstants/countries.constants.ts";
 
 const Registration: React.FC = () => {
   const navigate = useNavigate();
@@ -33,7 +34,7 @@ const Registration: React.FC = () => {
     formState: { errors },
     watch,
     control,
-      setError,
+    setError,
   } = useForm<IRegistrationForm>({
     mode: 'onChange',
     defaultValues: {
@@ -62,10 +63,10 @@ const Registration: React.FC = () => {
     } catch (e: unknown) {
       const error = e as BadRequest;
       enqueueSnackbar(`${error.message}`, { variant: 'error' });
-      error.body.errors.forEach((err ) => {
+      error.body.errors.forEach((err) => {
         const key = err.field as keyof IRegistrationForm;
-        setError(key,  { message: err.message })
-      })
+        setError(key, { message: err.message });
+      });
     }
   };
 
@@ -154,9 +155,15 @@ const Registration: React.FC = () => {
             error={errors.billingApartment}
           />
           <Input
-            {...register('billingPostcode', postalCodeValidation(
-                billingCountry ? countries.find((item) => billingCountry === item.code)!.postalPattern! : /^\b\d{5}\b(?:[- ]{1}\d{4})?$/
-            ))}
+            {...register(
+              'billingPostcode',
+              postalCodeValidation(
+                billingCountry
+                  ? countries.find((item) => billingCountry === item.code)!
+                      .postalPattern!
+                  : /^\b\d{5}\b(?:[- ]{1}\d{4})?$/,
+              ),
+            )}
             placeholder="Индекс"
             id="billingPostcode"
             error={errors.billingPostcode}
@@ -226,9 +233,15 @@ const Registration: React.FC = () => {
             disabled={sameAddress}
           />
           <Input
-            {...register('shippingPostcode', postalCodeValidation(
-                shippingCountry ? countries.find((item) => shippingCountry === item.code)!.postalPattern! : /^\b\d{5}\b(?:[- ]{1}\d{4})?$/
-            ))}
+            {...register(
+              'shippingPostcode',
+              postalCodeValidation(
+                shippingCountry
+                  ? countries.find((item) => shippingCountry === item.code)!
+                      .postalPattern!
+                  : /^\b\d{5}\b(?:[- ]{1}\d{4})?$/,
+              ),
+            )}
             placeholder="Индекс"
             id="shippingPostcode"
             error={errors.shippingPostcode}
