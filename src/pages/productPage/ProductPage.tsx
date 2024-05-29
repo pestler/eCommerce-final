@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import imghumidity from '../../assets/images/humidity.png';
 import imglightning from '../../assets/images/lightning.png';
 import imgtemperature from '../../assets/images/temperature.png';
@@ -60,7 +60,7 @@ const Product: React.FC = () => {
                 <div>
                   <h3>{val.title}</h3>
                   <p className={styles.option__description}>
-                    {product[val.name]}
+
                   </p>
                 </div>
               </div>
