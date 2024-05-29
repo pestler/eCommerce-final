@@ -3,7 +3,7 @@ import Button from '../button/Button';
 import { FavouriteCard } from './FavoriteCard';
 import styles from './card.module.scss';
 
-const Card: React.FC = forwardRef(({ ...props }, ref) => {
+const Card: React.FC = forwardRef(({ ...props }) => {
   const [counter, setCounter] = useState(0);
   const handleClickPlus = () => {
     setCounter(counter + 1);

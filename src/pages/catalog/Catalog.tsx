@@ -10,9 +10,6 @@ const data =  [
 ]  
 
 
-  
-
-
 
 const Catalog: React.FC = () => {  
   
