@@ -66,7 +66,9 @@ const Login: React.FC = () => {
           type="password"
           error={errors.password}
         />
-        <Button className={styles.button} disabled={!isValid}>Войти</Button>
+        <Button className={styles.button} disabled={!isValid}>
+          Войти
+        </Button>
         <div className={styles.submit}>
           <div className={styles.noaccaunt}>Нет аккаунта?</div>
           <Link className={styles.registration} to="/registration">
