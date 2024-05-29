@@ -5,10 +5,12 @@ import NotFoundPage from '../pages/notFoundPage/NotFoundPage.tsx';
 import Registration from '../pages/registration/Registration.tsx';
 import AuthGuard from './guards/auth.guard.tsx';
 import Catalog from '../pages/catalog/Catalog.tsx';
+import ProductPage from "../pages/productPage/ProductPage.tsx";
 
 interface Route {
   path: string;
   element: ReactNode;
+  children?: Route[]
 }
 
 export const router: Route[] = [
@@ -19,6 +21,10 @@ export const router: Route[] = [
   {
     path: '/catalog',
     element: <Catalog />,
+  },
+  {
+    path: '/catalog/:id',
+    element: <ProductPage />,
   },
   {
     path: '/login',

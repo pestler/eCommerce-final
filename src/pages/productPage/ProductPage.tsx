@@ -6,6 +6,7 @@ import { ProductDto } from '../../mappers/dto/product.dto';
 import { productMapper } from '../../mappers/product.mapper';
 import { productsService } from '../../services/product.service';
 import styles from './product.module.scss';
+import {useParams} from "react-router-dom";
 
 const descriptionProduct = [
   {
@@ -25,7 +26,8 @@ const descriptionProduct = [
   },
 ];
 
-const Product: React.FC = () => {
+const ProductPage: React.FC = () => {
+  const { id } = useParams();
   const getData = async (id: string) => {
     try {
       const { statusCode, body } = await productsService.getByID(id);
@@ -41,11 +43,11 @@ const Product: React.FC = () => {
 
   useEffect(() => {
     const fetchData = async () => {
-      const product = await getData('0336d8f9-3243-49c7-a6fb-879f1f1e0609');
+      const product = await getData(id!);
       setProduct(product);
     };
     fetchData();
-  }, []);
+  }, [id]);
 
   return (
     <div className={styles.main__wrapper}>
@@ -55,7 +57,7 @@ const Product: React.FC = () => {
         <div className={styles.product__description}>
           {descriptionProduct.map((val) => {
             return (
-              <div className={styles.product__option}>
+              <div className={styles.product__option} key={val.name}>
                 <img src={val.src} />
                 <div>
                   <h3>{val.title}</h3>
@@ -78,4 +80,4 @@ const Product: React.FC = () => {
   );
 };
 
-export default Product;
+export default ProductPage;

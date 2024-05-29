@@ -39,7 +39,8 @@
         width: 291px;
         height: 291px;
         background-color: gainsboro;
-        background: url('./../../assets/images/anakamperos-flower.png') no-repeat;
+        background-position: center;
+        background-repeat: no-repeat;
         background-size: cover;
         position: relative;
         transition: scale 1s ease-in-out;

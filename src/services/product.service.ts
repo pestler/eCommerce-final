@@ -1,16 +1,24 @@
 import { anonymousClient } from '../api';
 import {SubcategoryType} from "../interface/productCategory.type.ts";
+import {ISort} from "../interface/sort.interface.ts";
 
 class ProductService {
-  public getAllSearch(filters: SubcategoryType[]) {
+  public getAllSearch(filters: SubcategoryType[], pagination: {limit: number, offset: number}, sort: ISort) {
     const stringFilter = filters.map((item) => `subtree("${item.id}")`).join(',');
 
     const queryArgs = filters.length
         ? { filter: `categories.id: ${stringFilter}` }
         : {};
 
+    const args = {
+      ...queryArgs,
+      limit: pagination.limit,
+      offset: pagination.offset,
+      sort: `${sort.name} ${sort.value}`,
+    }
+
     return anonymousClient.productProjections().search().get({
-      queryArgs
+      queryArgs: args
     }).execute();
   }
 

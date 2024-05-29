@@ -10,6 +10,13 @@ import {ProductCategory, SubcategoryType} from "../../interface/productCategory.
 import {updateArrayUtil} from "../../utils";
 import {useNavigate, useSearchParams} from "react-router-dom";
 import {queryParamMapper} from "../../mappers/queryParam.mapper.ts";
+import {productProjectionMapper} from "../../mappers/productProjection.mapper.ts";
+import {ProductProjectionInterface} from "../../interface/productProjection.interface.ts";
+import Card from "../../components/card/Card.tsx";
+import {ISort, ISortMenuItem} from "../../interface/sort.interface.ts";
+import {SORTS} from "../../contstants/sorts.constants.ts";
+
+const ITEMS_PER_PAGE = 6;
 
 const Catalog: React.FC = () => {
     const navigate = useNavigate();
@@ -17,8 +24,28 @@ const Catalog: React.FC = () => {
     const param = searchParams.get('categories');
     const decodedParam = param ? decodeURIComponent(param) : null;
 
+    const offset = searchParams.get('offset');
+    const decodedParamOffset = offset ? decodeURIComponent(offset) : null;
+
+    const sortName = searchParams.get('sort_name');
+    const decodedParamSortName = sortName ? decodeURIComponent(sortName) : null;
+
+    const sortValue = searchParams.get('sort_value');
+    const decodedParamSortValue = sortValue ? decodeURIComponent(sortValue) : null;
+
     const [categories, setCategories] = useState<ProductCategory[]>([]);
     const [filters, setFilters] = useState<SubcategoryType[]>([]);
+    const [products, setProducts] = useState<ProductProjectionInterface[]>([]);
+    const [currentPage, setCurrentPage] = useState(1);
+    const [totalItems, setTotalItems] = useState<number>(1);
+    const [pagination, setPagination] = useState<{limit: number, offset: number}>({ limit: ITEMS_PER_PAGE, offset: decodedParamOffset ? +decodedParamOffset : 0 });
+    const [sort, setSort] = useState<ISort>({ name: decodedParamSortName ?? 'name.ru-by', value: decodedParamSortValue ?? 'asc' });
+
+    const handlePageChange = (_event: React.ChangeEvent<unknown>, page: number) => {
+        setCurrentPage(page);
+        setPagination({...pagination, offset: (page - 1) * ITEMS_PER_PAGE})
+        setPaginationParam({limit: ITEMS_PER_PAGE, offset: (page - 1) * ITEMS_PER_PAGE})
+    };
 
     const getCategories = useCallback(async () => {
         const { body } = await productsService.getCategories();
@@ -30,28 +57,52 @@ const Catalog: React.FC = () => {
         setCategories(categories);
     }, [decodedParam]);
 
+    const getProducts = useCallback(async (filters: SubcategoryType[], pagination: {limit: number, offset: number}, sort: ISort) => {
+        const { body } = await productsService.getAllSearch(filters, pagination, sort);
+        const products = body.results.map((product) => productProjectionMapper.fromDto(product));
+        setTotalItems(body.total ?? 1);
+        setProducts(products);
+    }, [])
+
+    useEffect(() => {
+        setCurrentPage(Math.floor(pagination.offset / ITEMS_PER_PAGE) + 1);
+        getProducts(filters, pagination, sort)
+    }, [filters, getProducts, pagination, sort]);
+
     useEffect(() => {
         getCategories();
     }, [getCategories]);
 
-    useEffect(() => {
-        productsService.getAllSearch(filters)
-            .then((r) => console.log(r))
-    }, [filters]);
-
     const setQueryParam = (filters: string) => {
-        const params = new URLSearchParams();
-        filters ? params.set('categories', filters) : params.delete('categories')
+        const params = new URLSearchParams(window.location.search);
+        filters ? params.set('categories', filters) : params.delete('categories');
         navigate(`?${params}`);
     };
 
-    const sortEvent = (event: string) => {
-        console.log(event)
+    const setSortParam = (sort: ISort) => {
+        const params = new URLSearchParams(window.location.search);
+        sort && params.set('sort_name', sort.name);
+        sort && params.set('sort_value', sort.value);
+        navigate(`?${params}`);
+    };
+
+    const setPaginationParam = (pagination: {limit: number, offset: number}) => {
+        const params = new URLSearchParams(window.location.search);
+        pagination.limit ? params.set('limit', pagination.limit.toString()) : params.delete('limit');
+        pagination.offset ? params.set('offset', pagination.offset.toString()) : params.delete('offset');
+        navigate(`?${params}`);
+    };
+
+    const sortEvent = ({name, value}: ISortMenuItem) => {
+        setSort({name, value})
+        setSortParam({name, value})
     }
 
     const checkFilters = (payload: SubcategoryType) => {
         const updateFilters = updateArrayUtil<SubcategoryType>(filters, payload, 'id');
         const queryParamString = updateFilters.map((cat) => cat.name).join(',');
+        setPagination({limit: ITEMS_PER_PAGE, offset: 0})
+        setPaginationParam({limit: ITEMS_PER_PAGE, offset: 0});
         setQueryParam(queryParamString);
         setFilters(updateFilters);
     }
@@ -75,7 +126,7 @@ const Catalog: React.FC = () => {
                     <div>
                         <BasicMenu
                             buttonContent="Сортировать"
-                            menuItems={['От А до Я', 'От Я до А', 'По возрастанию цены', 'По убыванию цены']}
+                            menuItems={SORTS}
                             menuEvent={sortEvent}
                         />
                     </div>
@@ -95,11 +146,20 @@ const Catalog: React.FC = () => {
                 {/*<Filter type="diameter" />*/}
             </div>
             <div className={styles.catalogList}>
-
+                {products && products.map((product) =>
+                    <Card product={product} key={product.id} />
+                )}
             </div>
         </div>
         <div className={styles.pagination}>
-            <Pagination count={10} color="standard" />
+        {Math.ceil(totalItems / ITEMS_PER_PAGE) > 1 &&
+                <Pagination
+                    count={Math.ceil(totalItems / ITEMS_PER_PAGE)}
+                    color="standard"
+                    page={currentPage}
+                    onChange={handlePageChange}
+                />
+        }
         </div>
     </div>
   );

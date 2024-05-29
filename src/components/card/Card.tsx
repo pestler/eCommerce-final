@@ -1,9 +1,15 @@
-import React, { forwardRef, useState } from 'react';
+import React, { useState } from 'react';
 import Button from '../button/Button';
 import { FavouriteCard } from './FavoriteCard';
 import styles from './card.module.scss';
+import {ProductProjectionInterface} from "../../interface/productProjection.interface.ts";
+import { Link } from 'react-router-dom';
 
-const Card: React.FC = forwardRef(({ ...props }) => {
+type Props = React.HTMLProps<HTMLInputElement> & {
+    product: ProductProjectionInterface,
+}
+
+const Card: React.FC<Props> = ({ product }) => {
   const [counter, setCounter] = useState(0);
   const handleClickPlus = () => {
     setCounter(counter + 1);
@@ -16,10 +22,12 @@ const Card: React.FC = forwardRef(({ ...props }) => {
     <div className={styles.card__container}>
       <div className={styles.card__img__container}>
         <FavouriteCard id={'id'} />
-      <div className={styles.card__img}>
+      <div className={styles.card__img}
+           style={{backgroundImage: `url("${product.images[0]?.url ?? ''}")`}}
+      >
       </div>
       </div>
-      <span className={styles.card__title}  {...props}>геоео</span>
+      <span className={styles.card__title}>{product.name}</span>
 
       <div className={styles.price__container}>
         <div className={styles.price}>29 BYN</div>
@@ -32,10 +40,12 @@ const Card: React.FC = forwardRef(({ ...props }) => {
           <div className={styles.input}>{counter}</div>
           <button className={styles.plus} onClick={handleClickPlus}></button>
         </div>
-        <div className={styles.detailed}>...Подробнее</div>
+          <Link className={styles.detailed} to={`/catalog/${product.id}`}>
+              ...Подробнее
+          </Link>
       </div>
     </div>
   );
-});
+};
 
 export default Card;

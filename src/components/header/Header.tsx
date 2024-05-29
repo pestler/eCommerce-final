@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import logo from '../../assets/images/logo.svg';
+import Logo from '../../assets/images/logo.svg';
 import BurgerButton from '../burgerMenu/BurgerButton.tsx';
 import MainMenu from '../menu/MainMenu.tsx';
 import style from './header.module.scss';
@@ -13,7 +13,7 @@ const Header: React.FC = () => {
   return (
     <div className="container">
       <div className={style.header}>
-        <img src={logo} className={style.logo} />
+        <Logo/>
         <MainMenu
           isMenuOpen={isMenuOpen}
           clickHandler={() => setToggleMenu(false)}

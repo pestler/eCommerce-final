@@ -1,6 +1,6 @@
 import { Link, NavLink, useNavigate } from 'react-router-dom';
-import login from '../../assets/images/login.svg';
-import Profile from '../../assets/svg/profile.svg';
+import LoginSvg from '../../assets/images/login.svg';
+import ProfileSvg from '../../assets/svg/profile.svg';
 import { useAuth } from '../../hooks/useAuth.ts';
 import InputSearch from '../inputSearch/InputSearch';
 import BasicMenu from './Menu';
@@ -77,7 +77,7 @@ export default function MainMenu({ isMenuOpen, clickHandler }: PropsMainMenu) {
         {!isMenuOpen && (
           <BasicMenu
             buttonContent={
-              isAuthenticated ? <img src={Profile} /> : <img src={login} />
+              isAuthenticated ? <LoginSvg/> : <ProfileSvg/>
             }
             menuItems={eventsMenu.filter((item: string) =>
               isAuthenticated ? item === 'Выйти' : item !== 'Выйти',

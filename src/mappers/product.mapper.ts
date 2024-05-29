@@ -1,4 +1,4 @@
-import { Attribute, Image, ProductData } from '@commercetools/platform-sdk';
+import {Attribute, Image, ProductData} from '@commercetools/platform-sdk';
 import { ProductDto } from './dto/product.dto';
 
 class ProductMapper {
