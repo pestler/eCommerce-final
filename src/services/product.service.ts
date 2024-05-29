@@ -1,11 +1,22 @@
 import { anonymousClient } from '../api';
+import {SubcategoryType} from "../interface/productCategory.type.ts";
 
 class ProductService {
-  public getAll() {
+  public getAllSearch(filters: SubcategoryType[]) {
+    const stringFilter = filters.map((item) => `subtree("${item.id}")`).join(',');
+
+    const queryArgs = filters.length
+        ? { filter: `categories.id: ${stringFilter}` }
+        : {};
+
     return anonymousClient.productProjections().search().get({
-          queryArgs: {
-                "filter": 'productType.id:"babf87ce-f100-4a60-bf57-ca6427a42fe7"' } }).execute();
+      queryArgs
+    }).execute();
   }
+
+  public getAll() {
+      return anonymousClient.productProjections().get().execute();
+    }
 
   public getDiscounts() {
     return anonymousClient.productDiscounts().get().execute();
