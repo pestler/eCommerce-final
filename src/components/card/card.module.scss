@@ -5,16 +5,6 @@
     flex-direction: column;
     gap: 15px;    
     transition: box-shadow 1s ease-in-out;
-    .card__title {
-        font-family: Montserrat;
-        font-size: 20px;
-        font-weight: 400;
-        line-height: 26px;
-        text-align: left;
-        height: 52px;
-        transition: background-color 1s ease-in-out;
-    }
-
 }
 
 @media (hover: hover) {
@@ -55,6 +45,15 @@
         cursor: pointer;
     }
 
+    .card__title {
+        font-family: Montserrat;
+        font-size: 20px;
+        font-weight: 400;
+        line-height: 26px;
+        text-align: left;
+        height: 52px;
+        transition: background-color 1s ease-in-out;
+    }
 
     .card__favorite,
     .card__favorite__active {
