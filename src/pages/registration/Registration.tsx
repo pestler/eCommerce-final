@@ -17,7 +17,7 @@ import {
 } from '../../validators';
 import { dateValidation } from '../../validators/date-validation.ts';
 import { generalValidation } from '../../validators/general-validation.ts';
-import { nameValidation } from '../../validators/name-validation.ts';
+import { nameValidation, surnameValidation } from '../../validators/name-surname-validation.ts';
 import styles from './registration.module.scss';
 import {BadRequest} from "../../interface/responseError.interface.ts";
 import {countries} from "../../contstants/countries.constants.ts";
@@ -84,7 +84,7 @@ const Registration: React.FC = () => {
             error={errors.firstName}
           />
           <Input
-            {...register('lastName', nameValidation())}
+            {...register('lastName', surnameValidation())}
             id="last-name"
             placeholder="Фамилия"
             type="text"
