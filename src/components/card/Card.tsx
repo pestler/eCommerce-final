@@ -14,9 +14,11 @@ const Card: React.FC = forwardRef(({ ...props }) => {
 
   return (
     <div className={styles.card__container}>
-      <div className={styles.card__img}>
+      <div className={styles.card__img__container}>
         <FavouriteCard id={'id'} />
+      <div className={styles.card__img}>
       </div>
+      </div>      
       <span className={styles.card__title}  {...props}></span>
 
       <div className={styles.price__container}>
