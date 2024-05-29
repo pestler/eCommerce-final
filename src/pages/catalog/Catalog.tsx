@@ -1,5 +1,4 @@
 import React, {useCallback, useEffect, useState} from 'react';
-import Card from '../../components/card/Card';
 import styles from './catalog.module.scss';
 import Filter from "../../components/filter/Filter.tsx";
 import {productsService} from "../../services";
@@ -96,13 +95,7 @@ const Catalog: React.FC = () => {
                 {/*<Filter type="diameter" />*/}
             </div>
             <div className={styles.catalogList}>
-                <Card></Card>
-                <Card></Card>
-                <Card></Card>
-                <Card></Card>
-                <Card></Card>
-                <Card></Card>
-                <Card></Card>
+
             </div>
         </div>
         <div className={styles.pagination}>
