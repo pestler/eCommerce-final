@@ -21,6 +21,7 @@ import { nameValidation, surnameValidation } from '../../validators/name-surname
 import styles from './registration.module.scss';
 import {BadRequest} from "../../interface/responseError.interface.ts";
 import {countries} from "../../contstants/countries.constants.ts";
+import { cityValidation, streetValidation } from '../../validators/city-validation.ts';
 
 const Registration: React.FC = () => {
   const navigate = useNavigate();
@@ -130,13 +131,13 @@ const Registration: React.FC = () => {
             options={countries}
           ></SelectCustom>
           <Input
-            {...register('billingCity', generalValidation())}
+            {...register('billingCity', cityValidation())}
             placeholder="Город"
             id="billingCity"
             error={errors.billingCity}
           />
           <Input
-            {...register('billingStreet', generalValidation())}
+            {...register('billingStreet', streetValidation())}
             placeholder="Улица"
             id="billingStreet"
             error={errors.billingStreet}
@@ -195,14 +196,14 @@ const Registration: React.FC = () => {
           ></SelectCustom>
 
           <Input
-            {...register('shippingCity', generalValidation(!sameAddress))}
+            {...register('shippingCity', cityValidation(!sameAddress))}
             placeholder="Город"
             id="shippingCity"
             error={errors.shippingCity}
             disabled={sameAddress}
           />
           <Input
-            {...register('shippingStreet', generalValidation(!sameAddress))}
+            {...register('shippingStreet', streetValidation(!sameAddress))}
             placeholder="Улица"
             id="shippingStreet"
             error={errors.shippingStreet}
