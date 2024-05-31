@@ -1,13 +1,13 @@
 import React, { useEffect, useState } from 'react';
+import { useParams } from 'react-router-dom';
 import imghumidity from '../../assets/images/humidity.png';
 import imglightning from '../../assets/images/lightning.png';
 import imgtemperature from '../../assets/images/temperature.png';
+import Button from '../../components/button/Button';
 import { ProductDto } from '../../mappers/dto/product.dto';
 import { productMapper } from '../../mappers/product.mapper';
 import { productsService } from '../../services/product.service';
 import styles from './product.module.scss';
-import {useParams} from "react-router-dom";
-import Button from '../../components/button/Button';
 
 const descriptionProduct = [
   {
@@ -63,35 +63,43 @@ const ProductPage: React.FC = () => {
             return product[val.name] ? (
               <div className={styles.product__option} key={val.name}>
                 <div className={styles.option__img}>
-                    <img src={val.src}/>
+                  <img src={val.src} />
                 </div>
                 <div>
                   <h3>{val.title}</h3>
                   <p className={styles.option__description}>
-                    { product[val.name] }
+                    {product[val.name]}
                   </p>
                 </div>
               </div>
-            ) : '';
+            ) : (
+              ''
+            );
           })}
           <div className={styles.description__bottom}>
             <div className={styles.bottom__left}>
-              { product.height ? 
-                (
-                  <p className={styles.product__size}>
-                  Высота: <span className={styles.size__value}>{product.height} см</span>
-                  </p>) : ''
-              }
-              {
-                product.diameter ?
+              {product.height ? (
                 <p className={styles.product__size}>
-                Диаметр (горшка): <span className={styles.size__value}>{product.diameter} см</span>
-                </p> : ''
-              }
+                  Высота:{' '}
+                  <span className={styles.size__value}>
+                    {product.height} см
+                  </span>
+                </p>
+              ) : (
+                ''
+              )}
+              {product.diameter ? (
+                <p className={styles.product__size}>
+                  Диаметр (горшка):{' '}
+                  <span className={styles.size__value}>
+                    {product.diameter} см
+                  </span>
+                </p>
+              ) : (
+                ''
+              )}
             </div>
-            <div className={styles.price}>
-                29 BYN
-            </div>
+            <div className={styles.price}>29 BYN</div>
           </div>
           <div className={styles.buttons}>
             <Button className={styles.btn}>В избранное</Button>
