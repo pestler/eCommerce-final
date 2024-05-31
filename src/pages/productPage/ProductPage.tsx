@@ -7,6 +7,7 @@ import { productMapper } from '../../mappers/product.mapper';
 import { productsService } from '../../services/product.service';
 import styles from './product.module.scss';
 import {useParams} from "react-router-dom";
+import Button from '../../components/button/Button';
 
 const descriptionProduct = [
   {
@@ -32,6 +33,7 @@ const ProductPage: React.FC = () => {
     try {
       const { statusCode, body } = await productsService.getByID(id);
       if (statusCode === 200) {
+        console.log(body);
         return productMapper.fromDto(body.masterData.staged);
       }
     } catch (e) {
@@ -49,34 +51,57 @@ const ProductPage: React.FC = () => {
     fetchData();
   }, [id]);
 
-  return (
+  return product ? (
     <div className={styles.main__wrapper}>
-      <h2>{product?.name}</h2>
+      <h2>{product.name}</h2>
       <div className={styles.product__content}>
-        <img src={product?.images[0].url} className={styles.main__imgcenter} />
+        <div className={styles.product__carusel}>
+          <img src={product.images[0].url} className={styles.product__img} />
+        </div>
         <div className={styles.product__description}>
           {descriptionProduct.map((val) => {
-            return (
+            return product[val.name] ? (
               <div className={styles.product__option} key={val.name}>
-                <img src={val.src} />
+                <div className={styles.option__img}>
+                    <img src={val.src}/>
+                </div>
                 <div>
                   <h3>{val.title}</h3>
                   <p className={styles.option__description}>
-
+                    { product[val.name] }
                   </p>
                 </div>
               </div>
-            );
+            ) : '';
           })}
-          <p className={styles.product__size}>
-            Высота: <span>{product?.height} см</span>
-          </p>
-          <p className={styles.product__size}>
-            Диаметр (горшка): <span>{product?.diameter} см</span>
-          </p>
+          <div className={styles.description__bottom}>
+            <div className={styles.bottom__left}>
+              { product.height ? 
+                (
+                  <p className={styles.product__size}>
+                  Высота: <span className={styles.size__value}>{product.height} см</span>
+                  </p>) : ''
+              }
+              {
+                product.diameter ?
+                <p className={styles.product__size}>
+                Диаметр (горшка): <span className={styles.size__value}>{product.diameter} см</span>
+                </p> : ''
+              }
+            </div>
+            <div className={styles.price}>
+                29 BYN
+            </div>
+          </div>
+          <div className={styles.buttons}>
+            <Button className={styles.btn}>В избранное</Button>
+            <Button className={styles.btn}>В корзину</Button>
+          </div>
         </div>
       </div>
     </div>
+  ) : (
+    <div className={styles.main__wrapper}>Описание продукта отсутсвует</div>
   );
 };
 
