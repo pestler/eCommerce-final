@@ -8,6 +8,7 @@ import { ProductDto } from '../../mappers/dto/product.dto';
 import { productMapper } from '../../mappers/product.mapper';
 import { productsService } from '../../services/product.service';
 import styles from './product.module.scss';
+import SliderSimple from '../../components/slider/Slider';
 
 const descriptionProduct = [
   {
@@ -56,7 +57,8 @@ const ProductPage: React.FC = () => {
       <h2>{product.name}</h2>
       <div className={styles.product__content}>
         <div className={styles.product__carusel}>
-          <img src={product.images[0].url} className={styles.product__img} />
+          {/* <img src={product.images[0].url} className={styles.product__img} /> */}
+          <SliderSimple images={product.images}></SliderSimple>
         </div>
         <div className={styles.product__description}>
           {descriptionProduct.map((val) => {
