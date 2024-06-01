@@ -13,7 +13,7 @@ import {queryParamMapper} from "../../mappers/queryParam.mapper.ts";
 import {productProjectionMapper} from "../../mappers/productProjection.mapper.ts";
 import {ProductProjectionInterface} from "../../interface/productProjection.interface.ts";
 import Card from "../../components/card/Card.tsx";
-import {ISort, ISortMenuItem} from "../../interface/sort.interface.ts";
+import {ISort} from "../../interface/sort.interface.ts";
 import {SORTS} from "../../contstants/sorts.constants.ts";
 
 const ITEMS_PER_PAGE = 6;
@@ -93,7 +93,8 @@ const Catalog: React.FC = () => {
         navigate(`?${params}`);
     };
 
-    const sortEvent = ({name, value}: ISortMenuItem) => {
+    const sortEvent = (valueEvent: string) => {
+        const { name, value } = SORTS.find((item) => item.title === valueEvent)!;
         setSort({name, value})
         setSortParam({name, value})
     }
@@ -126,7 +127,7 @@ const Catalog: React.FC = () => {
                     <div>
                         <BasicMenu
                             buttonContent="Сортировать"
-                            menuItems={SORTS}
+                            menuItems={SORTS.map((item) => item.title)}
                             menuEvent={sortEvent}
                         />
                     </div>

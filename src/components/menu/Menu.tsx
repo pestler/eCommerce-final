@@ -1,12 +1,11 @@
 import { Button, Menu, MenuItem } from '@mui/material';
 import React, { ReactNode, useState } from 'react';
 import style from './menu.module.scss';
-import {ISortMenuItem} from "../../interface/sort.interface.ts";
 
 type PropsMenu = {
   buttonContent: ReactNode;
-  menuItems: ISortMenuItem[];
-  menuEvent: (event: ISortMenuItem) => void;
+  menuItems: string[];
+  menuEvent: (event: string) => void;
 };
 
 export default function BasicMenu({
@@ -27,7 +26,7 @@ export default function BasicMenu({
     setAnchorEl(null);
   };
 
-  const handleMenuItemClick = (menuItem: ISortMenuItem) => {
+  const handleMenuItemClick = (menuItem: string) => {
     setAnchorEl(null);
     menuEvent(menuItem);
   };
@@ -53,9 +52,9 @@ export default function BasicMenu({
           'aria-labelledby': 'basic-button',
         }}
       >
-        {menuItems.map((menuItem: ISortMenuItem, index: number) => (
+        {menuItems.map((menuItem: string, index: number) => (
           <MenuItem key={index} onClick={() => handleMenuItemClick(menuItem)}>
-            {menuItem.title}
+            {menuItem}
           </MenuItem>
         ))}
       </Menu>
