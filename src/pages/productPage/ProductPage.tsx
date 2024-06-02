@@ -42,7 +42,6 @@ const ProductPage: React.FC = () => {
   };
 
   const [product, setProduct] = useState<ProductDto>();
-  console.log(product?.images);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -104,7 +103,13 @@ const ProductPage: React.FC = () => {
                 ''
               )}
             </div>
-            <div className={styles.price}>29 BYN</div>
+            {product.price.centAmount ? (
+              <div
+                className={styles.price}
+              >{`${product.price.centAmount} ${product.price.currency}`}</div>
+            ) : (
+              ''
+            )}
           </div>
           <div className={styles.buttons}>
             <Button className={styles.btn}>В избранное</Button>

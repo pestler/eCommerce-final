@@ -8,4 +8,10 @@ export type ProductDto = {
   height?: number;
   diameter?: number;
   images: Image[];
+  price: IPrice;
 };
+
+export interface IPrice {
+  centAmount: number | null;
+  currency: string | null;
+}

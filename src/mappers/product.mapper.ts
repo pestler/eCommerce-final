@@ -23,7 +23,18 @@ class ProductMapper {
       images: data.masterVariant.images?.length
         ? data.masterVariant.images
         : [],
+      price: {
+        currency: null,
+        centAmount: null,
+      },
     };
+    const priceProduct = data.masterVariant.prices;
+
+    if (priceProduct && priceProduct[0]) {
+      product.price.currency = priceProduct[0].value.currencyCode;
+      const price = priceProduct[0].value.centAmount.toString();
+      product.price.centAmount = +price.slice(0, -2);
+    }
     return product;
   }
 }
