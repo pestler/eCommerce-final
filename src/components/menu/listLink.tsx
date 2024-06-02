@@ -12,12 +12,6 @@ export const listLinks = [
     testid: 'catalog-link',
   },
   {
-    id: 3,
-    to: '#',
-    textLink: 'Отзывы',
-    testid: 'feedback-link',
-  },
-  {
     id: 4,
     to: 'login',
     textLink: 'Войти',

@@ -7,6 +7,16 @@ export class ProductProjectionMapper {
             id: data.id,
             name: data.name['ru-BY'],
             images: data.masterVariant.images?.length ? data.masterVariant.images : [],
+            price: {
+                currency: null,
+                count: null,
+            },
+        }
+        const priceCount = data.masterVariant.prices;
+        if (priceCount && priceCount[0]) {
+            model.price.currency = priceCount[0].value.currencyCode;
+            const price= priceCount[0].value.centAmount.toString();
+            model.price.count = +price.slice(0, -2);
         }
         data.masterVariant.attributes?.forEach((attr) => {
             model[attr.name] = attr.value
