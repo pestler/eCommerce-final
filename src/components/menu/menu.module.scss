@@ -1,3 +1,11 @@
+.loaderContainer {
+  position: sticky;
+  top: 0;
+  height: 5px;
+  background-color: transparent;
+  z-index: 20000;
+}
+
 .header__container{
   width: 85%;
 
@@ -55,6 +63,7 @@
   flex-wrap: wrap;
   padding-top: 15px;
   gap: 10px;
+  position: relative;
 
   @media (max-width: 768px) {
     align-self: center;
@@ -62,6 +71,7 @@
     gap: 0;
   }
 }
+
 
 .header__group {
   display: flex;

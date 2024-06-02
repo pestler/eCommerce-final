@@ -24,3 +24,5 @@ export interface IRegistrationForm {
   registerPassword: string;
   repeatPassword: string;
 }
+
+export type UpdateUserInfo = Pick<IRegistrationForm, 'email' | 'lastName' | 'firstName' | 'dateOfBirth'>

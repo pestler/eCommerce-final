@@ -12,10 +12,11 @@ type PropsMainMenu = {
   clickHandler: () => void;
 };
 
-const eventsMenu: ('Войти' | 'Зарегистрироваться' | 'Выйти')[] = [
+const eventsMenu: ('Войти' | 'Зарегистрироваться' | 'Выйти' | 'Профиль')[] = [
   'Войти',
   'Зарегистрироваться',
   'Выйти',
+  'Профиль'
 ];
 
 export default function MainMenu({ isMenuOpen, clickHandler }: PropsMainMenu) {
@@ -24,6 +25,9 @@ export default function MainMenu({ isMenuOpen, clickHandler }: PropsMainMenu) {
 
   const menuEvent = (event: string) => {
     switch (event) {
+      case 'Профиль':
+        navigate('/profile');
+        break;
       case 'Войти':
         navigate('/login');
         break;
@@ -73,7 +77,7 @@ export default function MainMenu({ isMenuOpen, clickHandler }: PropsMainMenu) {
               isAuthenticated ? <LoginSvg/> : <ProfileSvg/>
             }
             menuItems={eventsMenu.filter((item: string) =>
-              isAuthenticated ? item === 'Выйти' : item !== 'Выйти',
+              isAuthenticated ? (item === 'Выйти' || item === 'Профиль') : (item !== 'Выйти' && item !== 'Профиль'),
             )}
             menuEvent={menuEvent}
           />

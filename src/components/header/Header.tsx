@@ -5,6 +5,7 @@ import MainMenu from '../menu/MainMenu.tsx';
 import style from './header.module.scss';
 
 const Header: React.FC = () => {
+
   const [isMenuOpen, setToggleMenu] = useState(false);
 
   const body = document.querySelector('body');

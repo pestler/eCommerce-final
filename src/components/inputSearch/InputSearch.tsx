@@ -6,21 +6,26 @@ import {productsService} from "../../services";
 import {productProjectionMapper} from "../../mappers/productProjection.mapper.ts";
 import {debounce} from "../../utils";
 import {Link} from "react-router-dom";
+import {useLoader} from "../../hooks/useLoader.ts";
 
 const InputSearch: FC<React.HTMLProps<HTMLInputElement>> = () => {
+    const {showLoader, hideLoader} = useLoader();
     const [inputValue, setInputValue] = useState<string>('');
     const [inputFocus, setInputFocus] = useState<boolean>(false);
     const [inputMouseEnter, setInputMouseEnter] = useState<boolean>(false);
     const [resultSearch, setResultSearch] = useState<ProductProjectionInterface[]>();
 
     const fetchSearchResults = async (query: string) => {
+        showLoader();
         try {
             const { body } = await productsService.searchProjections(query);
             const products = body.results.map((product) => productProjectionMapper.fromDto(product));
             setResultSearch(products);
+            hideLoader();
         } catch (error) {
             console.error('Error fetching search results:', error);
             setResultSearch([]);
+            hideLoader();
         }
     };
 

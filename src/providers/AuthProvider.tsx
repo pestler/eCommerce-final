@@ -1,6 +1,6 @@
 import { Customer } from '@commercetools/platform-sdk';
 import { useSnackbar } from 'notistack';
-import { createContext, ReactNode, useEffect, useState } from 'react';
+import { createContext, ReactNode, useState } from 'react';
 import {
   ACCESS_TOKEN,
   EXPIRATION_TIME,
@@ -23,18 +23,11 @@ interface Props {
 export const AuthContext = createContext<IAuthContext | undefined>(undefined);
 
 export const AuthProvider = ({ children }: Props) => {
-  const [isAuthenticated, setIsAuthenticated] = useState(false);
-  const [user, setUser] = useState<Customer | null>(null);
+  const token = localStorageService.get<string | null>(ACCESS_TOKEN);
+  const customer = localStorageService.get<Customer | null>(USER_CUSTOMER);
+  const [isAuthenticated, setIsAuthenticated] = useState(!!token);
+  const [user, setUser] = useState<Customer | null>(customer);
   const { enqueueSnackbar } = useSnackbar();
-
-  useEffect(() => {
-    const token = localStorageService.get<string | null>(ACCESS_TOKEN);
-    const user = localStorageService.get<Customer | null>(USER_CUSTOMER);
-    if (token && user) {
-      setIsAuthenticated(true);
-      setUser(user);
-    }
-  }, []);
 
   const login = (user: Customer) => {
     localStorageService.set<Customer>(USER_CUSTOMER, user);

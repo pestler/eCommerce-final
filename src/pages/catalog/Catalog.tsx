@@ -16,10 +16,15 @@ import Card from "../../components/card/Card.tsx";
 import {ISort} from "../../interface/sort.interface.ts";
 import {SORTS} from "../../contstants/sorts.constants.ts";
 import {Filters} from "../../interface/filters.type.ts";
+import {useLoader} from "../../hooks/useLoader.ts";
+import {useSnackbar} from "notistack";
+import {BadRequest} from "../../interface/responseError.interface.ts";
 
 const ITEMS_PER_PAGE = 6;
 
 const Catalog: React.FC = () => {
+    const {showLoader, hideLoader} = useLoader();
+    const { enqueueSnackbar } = useSnackbar();
     const navigate = useNavigate();
     const [searchParams] = useSearchParams();
     const param = searchParams.get('categories');
@@ -64,10 +69,21 @@ const Catalog: React.FC = () => {
     }, [decodedParam]);
 
     const getProducts = useCallback(async (filters: Filters, pagination: {limit: number, offset: number}, sort: ISort) => {
-        const { body } = await productsService.getAllSearch(filters, pagination, sort);
-        const products = body.results.map((product) => productProjectionMapper.fromDto(product));
-        setTotalItems(body.total ?? 1);
-        setProducts(products);
+        showLoader();
+        try {
+            const { body } = await productsService.getAllSearch(filters, pagination, sort);
+            const products = body.results.map((product) => productProjectionMapper.fromDto(product));
+            setTotalItems(body.total ?? 1);
+            setProducts(products);
+            hideLoader();
+        } catch(e: unknown) {
+            const { message } = e as BadRequest;
+            enqueueSnackbar(
+                `Ошибка при загрузке данных каталога: ${message}`,
+                { variant: 'error' },
+            );
+            hideLoader();
+        }
     }, [])
 
 

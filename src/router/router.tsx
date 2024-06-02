@@ -6,6 +6,8 @@ import Registration from '../pages/registration/Registration.tsx';
 import AuthGuard from './guards/auth.guard.tsx';
 import Catalog from '../pages/catalog/Catalog.tsx';
 import ProductPage from "../pages/productPage/ProductPage.tsx";
+import Profile from "../pages/profile/Profile.tsx";
+import NonAuthGuard from "./guards/non-auth.guard.tsx";
 
 interface Route {
   path: string;
@@ -21,6 +23,10 @@ export const router: Route[] = [
   {
     path: '/catalog',
     element: <Catalog />,
+  },
+  {
+    path: '/profile',
+    element: <NonAuthGuard element={<Profile/>}/>,
   },
   {
     path: '/catalog/:id',
