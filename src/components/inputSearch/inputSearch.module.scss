@@ -5,7 +5,6 @@
 }
 
 .searchList {
-  z-index: 999;
   width: 400px;
   position: absolute;
   top: 42px;
@@ -14,6 +13,8 @@
   -webkit-box-shadow: 2px 4px 22px -1px rgba(171,152,171,1);
   -moz-box-shadow: 2px 4px 22px -1px rgba(171,152,171,1);
   box-shadow: 2px 4px 22px -1px rgba(171,152,171,1);
+  z-index: 99999;
+  background-color: #fff;
 }
 
 .searchListItem {
@@ -25,6 +26,8 @@
   font-weight: 400;
   font-size: 16px;
   cursor: pointer;
+  text-decoration: none;
+  color: black;
   &:first-child {
     border-top-left-radius: 5px;
     border-top-right-radius: 5px;

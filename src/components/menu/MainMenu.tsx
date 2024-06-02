@@ -1,4 +1,4 @@
-import { Link, NavLink, useNavigate } from 'react-router-dom';
+import { NavLink, useNavigate } from 'react-router-dom';
 import LoginSvg from '../../assets/images/login.svg';
 import ProfileSvg from '../../assets/svg/profile.svg';
 import { useAuth } from '../../hooks/useAuth.ts';
@@ -11,13 +11,6 @@ type PropsMainMenu = {
   isMenuOpen: boolean;
   clickHandler: () => void;
 };
-
-const productGroup = [
-  'Комнатные растения',
-  'Флорариумы',
-  'Сухоцветы',
-  'Кашпо и горшки',
-];
 
 const eventsMenu: ('Войти' | 'Зарегистрироваться' | 'Выйти')[] = [
   'Войти',
@@ -87,15 +80,6 @@ export default function MainMenu({ isMenuOpen, clickHandler }: PropsMainMenu) {
         )}
       </div>
       <div className={style.header__bottom}>
-        <div className={style.header__group}>
-          {productGroup.map((group) => {
-            return (
-              <Link to="#" className={style.link} key={group}>
-                {group}
-              </Link>
-            );
-          })}
-        </div>
         <InputSearch placeholder="Поиск" />
       </div>
     </div>
