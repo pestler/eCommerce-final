@@ -24,7 +24,6 @@ const InputSearch: FC<React.HTMLProps<HTMLInputElement>> = () => {
         }
     };
 
-    // eslint-disable-next-line react-hooks/exhaustive-deps
     const debouncedFetchSearchResults = useCallback(debounce(fetchSearchResults, 100), []);
 
     useEffect(() => {

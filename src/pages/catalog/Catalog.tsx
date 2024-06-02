@@ -61,7 +61,7 @@ const Catalog: React.FC = () => {
             setFilters({...filters, categories: filtersQuery});
         }
         setCategories(categories);
-    }, [decodedParam, filters]);
+    }, [decodedParam]);
 
     const getProducts = useCallback(async (filters: Filters, pagination: {limit: number, offset: number}, sort: ISort) => {
         const { body } = await productsService.getAllSearch(filters, pagination, sort);
