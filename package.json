@@ -37,6 +37,7 @@
     "react-hook-form": "^7.51.3",
     "react-router-dom": "^6.23.0",
     "react-select": "^5.8.0",
+    "react-slick": "^0.30.2",
     "react-use-localstorage": "^3.5.3"
   },
   "devDependencies": {

@@ -17,3 +17,67 @@
   position: relative;
   padding: 0 10px;
 }
+
+.slick-slider {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  max-width: 100%;
+
+  @media (max-width: 940px) {
+    justify-content: space-around;
+  }
+
+}
+
+.slick-track {
+  max-width: 400px;
+  width: 66svh;
+  display: flex;
+  align-items: center;
+
+  @media (max-width: 1150px) {
+    max-width: 300px;
+  }
+
+  @media (max-width: 940px) {
+    max-width: 200px;
+  }
+}
+
+.slick-list {
+  overflow: hidden;
+}
+
+.slick-arrow {
+  width: 40px;
+  height: 40px;
+  border-radius: 100px;
+  cursor: pointer;
+  background-color: #456F49;
+  border: none;
+  font-size: 0;
+
+  &:hover {
+    background-color: #2f5533;;
+  }
+}
+
+.slick-disabled {
+  background-color: #648F64;
+
+  &:hover {
+  background-color: #648F64;
+  cursor: auto;
+  }
+}
+
+.slick-prev {
+  background-image: url(../assets/images/prev.png);
+  background-repeat: no-repeat;
+}
+
+.slick-next {
+  background-image: url(../assets/images/next.png);
+  background-repeat: no-repeat;
+}

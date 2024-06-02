@@ -4,11 +4,11 @@ import imghumidity from '../../assets/images/humidity.png';
 import imglightning from '../../assets/images/lightning.png';
 import imgtemperature from '../../assets/images/temperature.png';
 import Button from '../../components/button/Button';
+import SliderSimple from '../../components/slider/Slider';
 import { ProductDto } from '../../mappers/dto/product.dto';
 import { productMapper } from '../../mappers/product.mapper';
 import { productsService } from '../../services/product.service';
 import styles from './product.module.scss';
-import SliderSimple from '../../components/slider/Slider';
 
 const descriptionProduct = [
   {
@@ -34,7 +34,6 @@ const ProductPage: React.FC = () => {
     try {
       const { statusCode, body } = await productsService.getByID(id);
       if (statusCode === 200) {
-        console.log(body);
         return productMapper.fromDto(body.masterData.staged);
       }
     } catch (e) {
@@ -43,6 +42,7 @@ const ProductPage: React.FC = () => {
   };
 
   const [product, setProduct] = useState<ProductDto>();
+  console.log(product?.images);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -56,10 +56,13 @@ const ProductPage: React.FC = () => {
     <div className={styles.main__wrapper}>
       <h2>{product.name}</h2>
       <div className={styles.product__content}>
-        <div className={styles.product__carusel}>
-          {/* <img src={product.images[0].url} className={styles.product__img} /> */}
-          <SliderSimple images={product.images}></SliderSimple>
-        </div>
+        {product.images.length > 0 ? (
+          <div className={styles.product__carusel}>
+            <SliderSimple images={product.images} />
+          </div>
+        ) : (
+          ''
+        )}
         <div className={styles.product__description}>
           {descriptionProduct.map((val) => {
             return product[val.name] ? (
