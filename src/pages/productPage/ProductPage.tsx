@@ -34,6 +34,7 @@ const ProductPage: React.FC = () => {
     try {
       const { statusCode, body } = await productsService.getByID(id);
       if (statusCode === 200) {
+        console.log(body);
         return productMapper.fromDto(body.masterData.staged);
       }
     } catch (e) {
@@ -72,7 +73,7 @@ const ProductPage: React.FC = () => {
                 <div>
                   <h3>{val.title}</h3>
                   <p className={styles.option__description}>
-                    {product[val.name] as string}
+                    {`${product[val.name]}`}
                   </p>
                 </div>
               </div>
