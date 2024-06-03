@@ -12,8 +12,3 @@ export const countryValidation = () => ({
 
 
 
-export const countries = [
-  { code: 'US', pattern: /^\b\d{5}\b(?:[- ]{1}\d{4})?$/},
-  { code: 'RU',  pattern: /^\d{6}$/ },
-  { code: 'BY',  pattern: /^\d{6}$/ },
-];

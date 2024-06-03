@@ -4,5 +4,5 @@ export const countries = [
         postalPattern: /^\b\d{5}\b(?:[- ]{1}\d{4})?$/
     },
     { code: 'RU', value: 'Russian Federation', phone: '7', postalPattern: /^\d{6}$/ },
-    { code: 'BY', value: 'Belarus', phone: '375', postalPattern: /^\d{4}$/ },
+    { code: 'BY', value: 'Belarus', phone: '375', postalPattern: /^\d{6}$/ },
 ];

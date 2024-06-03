@@ -4,7 +4,6 @@ import {customerService} from "../../services";
 import {SubmitHandler, useForm} from "react-hook-form";
 import {UpdateUserInfo} from "../../interface/registrationForm.interface.ts";
 import Input from "../../components/Input/Input.tsx";
-import {nameValidation} from "../../validators/name-validation.ts";
 import {dateValidation} from "../../validators/date-validation.ts";
 import {loginValidation, passwordValidation} from "../../validators";
 import Button from "../../components/button/Button.tsx";
