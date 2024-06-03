@@ -4,7 +4,6 @@ import {customerService} from "../../services";
 import {SubmitHandler, useForm} from "react-hook-form";
 import {UpdateUserInfo} from "../../interface/registrationForm.interface.ts";
 import Input from "../../components/Input/Input.tsx";
-import {nameValidation} from "../../validators/name-validation.ts";
 import {dateValidation} from "../../validators/date-validation.ts";
 import {loginValidation, passwordValidation} from "../../validators";
 import Button from "../../components/button/Button.tsx";
@@ -14,6 +13,7 @@ import {useAuth} from "../../hooks/useAuth.ts";
 import {useLoader} from "../../hooks/useLoader.ts";
 import {IChangePasswordForm} from "../../interface/changePasswordForm.interface.ts";
 import {generalValidation} from "../../validators/general-validation.ts";
+import { surnameValidation } from '../../validators/name-surname-validation.ts';
 
 const Profile: React.FC = () => {
     const {showLoader, hideLoader} = useLoader();
@@ -116,13 +116,13 @@ const Profile: React.FC = () => {
                         <h2>Личная информация</h2>
                         <form className={styles.form} onSubmit={handleSubmit(onSubmit)}>
                             <Input
-                                {...register('firstName', nameValidation())}
+                                {...register('firstName', surnameValidation())}
                                 placeholder="Имя"
                                 type="text"
                                 error={errors.firstName}
                             />
                             <Input
-                                {...register('lastName', nameValidation())}
+                                {...register('lastName', surnameValidation())}
                                 id="last-name"
                                 placeholder="Фамилия"
                                 type="text"
