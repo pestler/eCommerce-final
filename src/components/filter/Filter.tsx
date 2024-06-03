@@ -59,8 +59,8 @@ const Filter: React.FC<PropsFilter> = ({category, type, emitValue, emitValueAttr
             <div onClick={() => setOpen(!open)}
                  className={`${styles.catalogFilterHead} ${open ? styles.openHead : ''}`}>
                 <span className="title">{title()}</span>
-                {open && <span className="svg"><ArrowTop/></span>}
-                {!open && <span className="svg"><ArrowBottom/></span>}
+                {!open && <span className="svg"><ArrowTop/></span>}
+                {open && <span className="svg"><ArrowBottom/></span>}
             </div>
             {category && <div className={`${styles.catalogFilterBody} ${open ? styles.open : ''} `}>
                 {category.subcategories.map((subCategory) =>
