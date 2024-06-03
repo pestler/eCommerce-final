@@ -4,19 +4,10 @@ import { NodeGlobalsPolyfillPlugin } from '@esbuild-plugins/node-globals-polyfil
 import { NodeModulesPolyfillPlugin } from '@esbuild-plugins/node-modules-polyfill';
 import rollupNodePolyFill from 'rollup-plugin-node-polyfills';
 import svgr from "vite-plugin-svgr";
-import { viteStaticCopy } from 'vite-plugin-static-copy'
 
 export default defineConfig({
   define: {
     "global": {},
-  },
-  resolve: {
-    alias: [
-      {
-        find: 'stream',
-        replacement: `stream-browserify`,
-      },
-    ],
   },
   plugins: [
       react(),
@@ -25,14 +16,6 @@ export default defineConfig({
     svgrOptions: { exportType: "default", ref: true, svgo: false, titleProp: true },
     include: "**/*.svg",
   }),
-    viteStaticCopy({
-      targets: [
-        {
-          src: 'netlify.toml',
-          dest: ''
-        }
-      ]
-    }),
   ],
   optimizeDeps: {
     include: [
