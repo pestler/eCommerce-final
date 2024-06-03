@@ -27,6 +27,9 @@ export default defineConfig({
     }),
   ],
   optimizeDeps: {
+    include: [
+      "@mui/material"
+    ],
     esbuildOptions: {
       define: {
         global: 'globalThis',
