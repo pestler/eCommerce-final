@@ -10,6 +10,14 @@ export default defineConfig({
   define: {
     "global": {},
   },
+  resolve: {
+    alias: [
+      {
+        find: 'stream',
+        replacement: `stream-browserify`,
+      },
+    ],
+  },
   plugins: [
       react(),
     svgr({
