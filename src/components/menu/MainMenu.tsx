@@ -74,7 +74,7 @@ export default function MainMenu({ isMenuOpen, clickHandler }: PropsMainMenu) {
         {!isMenuOpen && (
           <BasicMenu
             buttonContent={
-              isAuthenticated ? <LoginSvg/> : <ProfileSvg/>
+              !isAuthenticated ? <LoginSvg/> : <ProfileSvg/>
             }
             menuItems={eventsMenu.filter((item: string) =>
               isAuthenticated ? (item === 'Выйти' || item === 'Профиль') : (item !== 'Выйти' && item !== 'Профиль'),
