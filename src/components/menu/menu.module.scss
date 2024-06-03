@@ -5,7 +5,6 @@
   background-color: transparent;
   z-index: 20000;
 }
-
 .header__container{
   width: 85%;
 
@@ -47,6 +46,7 @@
 .navbar {
   display: flex;
   gap: 30px;
+  align-items: center;
 
   @media (max-width: 980px) {
     gap: 15px;
@@ -63,7 +63,6 @@
   flex-wrap: wrap;
   padding-top: 15px;
   gap: 10px;
-  position: relative;
 
   @media (max-width: 768px) {
     align-self: center;
@@ -71,7 +70,6 @@
     gap: 0;
   }
 }
-
 
 .header__group {
   display: flex;
@@ -101,18 +99,14 @@
 }
 
 .link {
-    font-family: var(--font-family);
-    text-decoration: none;
-    color: #202B21;
-    font-size: 16px;
+  font-family: var(--font-family);
+  text-decoration: none;
+  color: #202B21;
+  font-size: 16px;
 
-    @media (max-width: 980px) {
-      font-size: 14px;
-    }
-
-    @media (max-width: 768px) {
-      font-size: 12px;
-    }
+  @media (max-width: 980px) {
+    font-size: 14px;
+  }
 }
 
 .menu__basic {
@@ -123,4 +117,16 @@
 
 .user {
   font-family: var(--font-family);
+  width: 100%;
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  @media (max-width: 768px) {
+    justify-content: center;
+  }
+}
+
+.btn {
+  color: black!important;
+  fill: black!important;
 }
