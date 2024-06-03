@@ -34,7 +34,6 @@ const ProductPage: React.FC = () => {
     try {
       const { statusCode, body } = await productsService.getByID(id);
       if (statusCode === 200) {
-        console.log(body);
         return productMapper.fromDto(body.masterData.staged);
       }
     } catch (e) {
