@@ -10,11 +10,22 @@ export default defineConfig({
   define: {
     "global": {},
   },
-  plugins: [react(), svgr({
+  plugins: [
+      react(),
+    svgr({
     // svgr options: https://react-svgr.com/docs/options/
     svgrOptions: { exportType: "default", ref: true, svgo: false, titleProp: true },
     include: "**/*.svg",
-  })],
+  }),
+    viteStaticCopy({
+      targets: [
+        {
+          src: 'netlify.toml',
+          dest: ''
+        }
+      ]
+    }),
+  ],
   optimizeDeps: {
     esbuildOptions: {
       define: {
@@ -26,14 +37,6 @@ export default defineConfig({
           buffer: true,
         }),
         NodeModulesPolyfillPlugin(),
-        viteStaticCopy({
-          targets: [
-            {
-              src: './netlify.toml',
-              dest: './dist'
-            }
-          ]
-        }),
       ],
     },
   },

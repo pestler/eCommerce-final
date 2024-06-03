@@ -25,7 +25,7 @@ const Header: React.FC = () => {
   const {isAuthenticated, logout, user} = useAuth();
   const navigate = useNavigate();
 
-  const menuEvent = (event: EventsMenuType) => {
+  const menuEvent = (event: string) => {
     switch (event) {
       case 'Профиль':
         navigate('/profile');

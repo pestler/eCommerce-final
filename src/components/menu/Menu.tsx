@@ -1,12 +1,11 @@
 import { Button, Menu, MenuItem } from '@mui/material';
 import React, {forwardRef, ReactNode, useState} from 'react';
 import style from './menu.module.scss';
-import {EventsMenuType} from "../header/Header.tsx";
 
 type PropsMenu = React.HTMLProps<HTMLButtonElement> & {
   buttonContent: ReactNode;
   menuItems: string[];
-  menuEvent: (event: EventsMenuType) => void;
+  menuEvent: (event: string) => void;
 };
 
 export const BasicMenu: React.FC<PropsMenu> = forwardRef(({buttonContent, menuItems, menuEvent}, ref) => {

@@ -39,7 +39,8 @@
     "react-router-dom": "^6.23.0",
     "react-select": "^5.8.0",
     "react-slick": "^0.30.2",
-    "react-use-localstorage": "^3.5.3"
+    "react-use-localstorage": "^3.5.3",
+    "vite-plugin-static-copy": "^1.0.5"
   },
   "devDependencies": {
     "@testing-library/jest-dom": "^6.4.5",
@@ -54,6 +55,7 @@
     "@vitest/coverage-v8": "^1.6.0",
     "@vitest/ui": "^1.6.0",
     "c8": "^9.1.0",
+    "cpy-cli": "^5.0.0",
     "eslint": "^8.57.0",
     "eslint-plugin-react-hooks": "^4.6.0",
     "eslint-plugin-react-refresh": "^0.4.6",
@@ -71,6 +73,7 @@
     "ts-node": "^10.9.2",
     "typescript": "^5.2.2",
     "vite": "^5.2.0",
+    "vite-plugin-copy": "^0.1.6",
     "vite-plugin-env-compatible": "^2.0.1",
     "vite-plugin-svgr": "^4.2.0",
     "vitest": "^1.6.0"
