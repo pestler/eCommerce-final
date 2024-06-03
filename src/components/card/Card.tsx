@@ -22,10 +22,12 @@ const Card: React.FC<Props> = ({ product }) => {
     <div className={styles.card__container}>
       <div className={styles.card__img__container}>
         <FavouriteCard id={'id'} />
+        <Link className={styles.detailed} to={`/catalog/${product.id}`}>
       <div className={styles.card__img}
-           style={{backgroundImage: `url("${product.images[0]?.url ?? ''}")`}}
+          style={{backgroundImage: `url("${product.images[0]?.url ?? ''}")`}}
       >
       </div>
+      </Link>
       </div>
       <span className={styles.card__title}>{product.name}</span>
 
