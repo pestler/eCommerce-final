@@ -11,6 +11,11 @@ export default defineConfig({
   plugins: [
       react(),
   ],
+  resolve: {
+    alias: {
+      stream: 'stream-browserify',
+    },
+  },
   optimizeDeps: {
     include: [
       "@mui/material"
