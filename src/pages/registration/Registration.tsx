@@ -20,7 +20,7 @@ import {
 } from '../../validators';
 import { dateValidation } from '../../validators/date-validation.ts';
 import { generalValidation } from '../../validators/general-validation.ts';
-import { nameValidation, surnameValidation } from '../../validators/name-surname-validation.ts';
+import { surnameValidation } from '../../validators/name-surname-validation.ts';
 import styles from './registration.module.scss';
 import { cityValidation, streetValidation } from '../../validators/city-validation.ts';
 
@@ -80,7 +80,7 @@ const Registration: React.FC = () => {
           <h4 className={styles.info__title}>Личная информация</h4>
 
           <Input
-            {...register('firstName', nameValidation())}
+            {...register('firstName', surnameValidation())}
             placeholder="Имя"
             type="text"
             error={errors.firstName}
