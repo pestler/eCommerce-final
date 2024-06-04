@@ -1,13 +1,7 @@
 
-// .slider__item {
-//     width: 100%;
-//     position: relative;
-// }
-
 .slider__image {
     cursor: pointer;
     max-width: 400px;
-    width: 66svh;
 
     @media (max-width: 1150px) {
       max-width: 300px;

@@ -7,7 +7,7 @@ import Button from '../../components/button/Button';
 import SliderSimple from '../../components/slider/Slider';
 import { ProductDto } from '../../mappers/dto/product.dto';
 import { productMapper } from '../../mappers/product.mapper';
-import { productsService } from '../../services/product.service';
+import { productsService } from '../../services';
 import styles from './product.module.scss';
 
 const descriptionProduct = [
@@ -34,6 +34,7 @@ const ProductPage: React.FC = () => {
     try {
       const { statusCode, body } = await productsService.getByID(id);
       if (statusCode === 200) {
+        console.log(body);
         return productMapper.fromDto(body.masterData.staged);
       }
     } catch (e) {
@@ -72,7 +73,7 @@ const ProductPage: React.FC = () => {
                 <div>
                   <h3>{val.title}</h3>
                   <p className={styles.option__description}>
-                    {product[val.name]}
+                    {`${product[val.name]}`}
                   </p>
                 </div>
               </div>

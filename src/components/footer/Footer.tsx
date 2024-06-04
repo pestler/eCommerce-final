@@ -4,14 +4,6 @@ import Logo from '../../assets/images/logo_footer.png';
 import { listLinks } from '../menu/listLink';
 import style from './footer.module.scss';
 
-const productGroup = [
-  'Кактусы',
-  'Суккуленты',
-  'Бонсаи',
-  'Комнатные растения',
-  'Флорариумы',
-];
-
 const team = [
   {
     name: 'Ivan Haurylenka',
@@ -40,16 +32,6 @@ const Footer: React.FC = () => {
                 {link.textLink}
               </Link>
             ))}
-          </div>
-          <div className={style.footer__group}>
-            <h3>КАТЕГОРИИ</h3>
-            {productGroup.map((group) => {
-              return (
-                <Link to="#" className={style.link} key={group}>
-                  {group}
-                </Link>
-              );
-            })}
           </div>
           <div className={style.footer__team}>
             <h3>Разработчики</h3>

@@ -6,12 +6,26 @@ import rollupNodePolyFill from 'rollup-plugin-node-polyfills';
 import svgr from "vite-plugin-svgr";
 
 export default defineConfig({
-  plugins: [react(), svgr({
-    // svgr options: https://react-svgr.com/docs/options/
-    svgrOptions: { exportType: "default", ref: true, svgo: false, titleProp: true },
-    include: "**/*.svg",
-  })],
+  define: {
+    "global": {},
+  },
+  plugins: [
+      react(),
+      svgr({
+      // svgr options: https://react-svgr.com/docs/options/
+      svgrOptions: { exportType: "default", ref: true, svgo: false, titleProp: true },
+      include: "**/*.svg",
+    })
+  ],
+  resolve: {
+    alias: {
+      stream: 'stream-browserify',
+    },
+  },
   optimizeDeps: {
+    include: [
+      "@mui/material"
+    ],
     esbuildOptions: {
       define: {
         global: 'globalThis',
