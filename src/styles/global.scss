@@ -84,3 +84,48 @@ body {
   background-image: url(../assets/images/next.png);
   background-repeat: no-repeat;
 }
+
+
+.modal__overlay {
+  position: fixed;
+  overflow: hidden;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(#665F55, 0.8);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 500;
+
+  img {
+    max-width: 500px;
+    cursor: auto;
+
+    @media (max-width: 940px) {
+      max-width: 400px;
+    }
+
+    @media (max-width: 550px) {
+      max-width: 250px;
+    }
+  }
+
+  .slick-track {
+    max-width: 500px;
+
+    @media (max-width: 940px) {
+      max-width: 400px;
+    }
+
+    @media (max-width: 550px) {
+      max-width: 250px;
+    }
+
+  }
+
+  .slick-slider {
+    gap: 10px;
+  }
+}

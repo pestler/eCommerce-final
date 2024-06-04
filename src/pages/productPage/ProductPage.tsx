@@ -42,6 +42,8 @@ const ProductPage: React.FC = () => {
   };
 
   const [product, setProduct] = useState<ProductDto>();
+  const [currentSlide, setCurrentSlide] = useState(0);
+  const [isOpenModal, setIsOpenModal] = useState(false);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -51,13 +53,39 @@ const ProductPage: React.FC = () => {
     fetchData();
   }, [id]);
 
+  const handleOpenModal = (e: React.MouseEvent<HTMLElement, MouseEvent>) => {
+    const target = e.target as HTMLElement;
+    const indexCurrent = target.closest(".slick-slide")?.getAttribute("data-index");
+    indexCurrent ? setCurrentSlide(+indexCurrent) : setCurrentSlide(0);
+    setIsOpenModal(true);
+  };
+
+  const handleCloseModal = (e: React.MouseEvent<HTMLElement, MouseEvent>) => {
+    const target = e.target as HTMLElement;
+    e.stopPropagation;
+    if (target.id === 'modalOverlay') {
+      setIsOpenModal(false);
+    }
+  };
+
   return product ? (
+
     <div className={styles.main__wrapper}>
+
+      {isOpenModal ? (
+        <div className="modal__overlay" id="modalOverlay" onClick={handleCloseModal} >
+          <div className="modal__container">
+            <div className="modal__carusel">
+              <SliderSimple images={product.images} currentSlide={currentSlide} handleOpenModal={(e: React.MouseEvent<HTMLElement>) => handleOpenModal(e)}/>
+            </div>
+          </div>
+        </div>
+      ) : ''}
       <h2>{product.name}</h2>
       <div className={styles.product__content}>
         {product.images.length > 0 ? (
           <div className={styles.product__carusel}>
-            <SliderSimple images={product.images} />
+            <SliderSimple images={product.images} currentSlide={0} handleOpenModal={handleOpenModal}/>
           </div>
         ) : (
           ''
