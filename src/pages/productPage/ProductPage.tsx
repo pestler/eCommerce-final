@@ -34,7 +34,6 @@ const ProductPage: React.FC = () => {
     try {
       const { statusCode, body } = await productsService.getByID(id);
       if (statusCode === 200) {
-        console.log(body);
         return productMapper.fromDto(body.masterData.staged);
       }
     } catch (e) {
@@ -56,14 +55,13 @@ const ProductPage: React.FC = () => {
 
   const handleOpenModal = (e: React.MouseEvent<HTMLElement, MouseEvent>) => {
     const target = e.target as HTMLElement;
-    console.log(target.id);
-    setCurrentSlide(0);
+    const indexCurrent = target.closest(".slick-slide")?.getAttribute("data-index");
+    indexCurrent ? setCurrentSlide(+indexCurrent) : setCurrentSlide(0);
     setIsOpenModal(true);
   };
 
   const handleCloseModal = (e: React.MouseEvent<HTMLElement, MouseEvent>) => {
     const target = e.target as HTMLElement;
-    console.log(target.id);
     e.stopPropagation;
     if (target.id === 'modalOverlay') {
       setIsOpenModal(false);
