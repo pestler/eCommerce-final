@@ -1,0 +1,172 @@
+
+.container__registration {
+    display: flex;
+    justify-content: space-around;
+    flex-wrap: wrap;
+    align-items: flex-start;
+    gap: 20px;
+
+    @media (max-width: 800px) {
+        flex-wrap: nowrap;
+        flex-direction: column;
+        justify-content: center;
+    }
+}
+
+.container__general {
+    display: flex;
+    flex-direction: column;
+    width: 30%;
+    gap: 25px;
+
+    @media (max-width: 800px) {
+        width: 100%;
+    }
+}
+
+.container__billing {
+    display: flex;
+    flex-direction: column;
+    width: 33%;
+    gap: 25px;
+
+    @media (max-width: 800px) {
+        width: 100%;
+    }
+}
+
+.container__shipping {
+    display: flex;
+    flex-direction: column;
+    width: 30%;
+    gap: 25px;
+
+    @media (max-width: 800px) {
+        width: 100%;
+    }
+}
+
+.picbox {
+    background: url('./../../assets/image/registration.png') no-repeat;
+    background-size: cover;
+    width: 421px;
+    height: 587px;
+}
+
+.form {
+    width: 100%;
+    padding-bottom: 30px;
+}
+
+.actions {
+    width: 100%;
+    flex-direction: column;
+    display: flex;
+    //width: 500px;
+    width: 100%;
+    align-items: center;
+    gap: 10px;
+}
+
+.formContainer {
+    display: grid;
+    grid-auto-rows: 1fr;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+}
+
+.formGroup {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 27px;
+}
+
+.title {
+    text-align: center;
+    font-family: var(--second-family);
+    font-weight: 400;
+    font-size: 36px;
+    line-height: 46px;
+    color: #202b21;
+    text-transform: none;
+    margin-bottom: 35px;
+}
+
+.info__container {
+    color: #2f5533;
+}
+.info__title {
+    background-color: #2f5533;
+    color: #fff;
+    margin: 0 auto;
+    padding: 10px;
+    width: 100%;
+    border-radius: 3px;
+}
+
+.fieldset {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    gap: 10px;
+
+}
+
+.btnWrapper {
+    width: 100%;
+}
+
+.button {
+    width: 430px;
+    margin-top: 45px;
+}
+
+
+.input {
+    width: 100%;
+    padding: 12px 14px;
+    background: white;
+}
+
+.submit {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.login {
+    font-family: var(--font-family);
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 130%;
+    color: #519057;
+    cursor: pointer;
+}
+
+.accaunt {
+    font-family: var(--font-family);
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 130%;
+    color: #2c2c2c;
+    display: flex;
+}
+
+.options {
+    width: 150px;
+}
+
+.action {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    justify-content: flex-end;
+}
+
+.checkbox {
+    margin: 0;
+}
+
+

@@ -1,0 +1,132 @@
+.loaderContainer {
+  position: sticky;
+  top: 0;
+  height: 5px;
+  background-color: transparent;
+  z-index: 20000;
+}
+.header__container{
+  width: 85%;
+
+  @media (max-width: 980px) {
+    width: 75%;
+  }
+
+  @media (max-width: 768px) {
+    padding-top: 40px;
+    position: fixed;
+    top: 0;
+    display: flex;
+    flex-flow: column;
+    height: 100%;
+    width: 100%;
+    right: -100%;
+    text-align: center;
+    transition: 1s;
+  }
+}
+
+.header__menu {
+  display: flex;
+  justify-content: space-between;
+  border-bottom: 1px solid #C5C5C5;
+  padding-bottom: 10px;
+
+  .link {
+    font-weight: 600;
+  }
+
+  @media (max-width: 768px) {
+    flex-direction: column-reverse;
+    gap: 30px;
+    padding-bottom: 20px;
+  }
+}
+
+.navbar {
+  display: flex;
+  gap: 30px;
+  align-items: center;
+
+  @media (max-width: 980px) {
+    gap: 15px;
+  }
+
+  @media (max-width: 768px) {
+    flex-direction: column;
+  }
+}
+
+.header__bottom {
+  display: flex;
+  justify-content: flex-end;
+  flex-wrap: wrap;
+  padding-top: 15px;
+  gap: 10px;
+
+  @media (max-width: 768px) {
+    align-self: center;
+    padding-bottom: 20px;
+    gap: 0;
+  }
+}
+
+.header__group {
+  display: flex;
+  gap: 50px;
+
+  @media (max-width: 980px) {
+    gap: 20px;
+  }
+
+  @media (max-width: 768px) {
+    flex-direction: column;
+    padding-top: 15px;
+    gap: 15px;
+  }
+}
+
+.menu__img {
+  display: flex;
+  gap: 5px;
+}
+
+.menu_open {
+  right: 0;
+  transition: 1s;
+  background-color: #648F64;
+  z-index: 300;
+}
+
+.link {
+  font-family: var(--font-family);
+  text-decoration: none;
+  color: #202B21;
+  font-size: 16px;
+
+  @media (max-width: 980px) {
+    font-size: 14px;
+  }
+}
+
+.menu__basic {
+  @media (max-width: 768px) {
+    text-align: left;
+  }
+}
+
+.user {
+  font-family: var(--font-family);
+  width: 100%;
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  @media (max-width: 768px) {
+    justify-content: center;
+  }
+}
+
+.btn {
+  color: black!important;
+  fill: black!important;
+}
