@@ -17,7 +17,8 @@ class ProductMapper {
 
     if (priceProduct && priceProduct[0]) {
       product.price.currency = priceProduct[0].value.currencyCode;
-      const price = priceProduct[0].value.centAmount.toString();
+      //const price = priceProduct[0].value.centAmount.toString();
+      const price = priceProduct[0].discounted!.value.centAmount.toString()
       product.price.centAmount = +price.slice(0, -2);
     }
 

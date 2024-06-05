@@ -32,11 +32,16 @@ const Card: React.FC<Props> = ({ product }) => {
       <span className={styles.card__title}>{product.name}</span>
 
       <div className={styles.price__container}>
-        <div className={styles.price}>
+      <div className={styles.price}>
             {product.price.count && product.price.currency &&
-                <span>{product.price.count + ' ' + product.price.currency}</span>
+                <span>{product.price.countDiscount + ' ' + product.price.currency}</span>
             }
             </div>
+        <div className={styles.price}>
+            {product.price.count && product.price.currency &&
+                <span className={styles.price__discount}>{product.price.count + ' ' + product.price.currency}</span>
+            }
+            </div>       
         <Button className={styles.btn}>В корзину</Button>
       </div>
       <div className={styles.line}></div>

@@ -13,6 +13,6 @@ export interface ProductDto {
 }
 
 export interface IPrice {
-  centAmount: number | null;
+  centAmount: number | null;  
   currency: string | null;
 }

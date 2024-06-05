@@ -28,12 +28,14 @@ const descriptionProduct = [
   },
 ];
 
+
 const ProductPage: React.FC = () => {
   const { id } = useParams();
   const getData = async (id: string) => {
     try {
       const { statusCode, body } = await productsService.getByID(id);
       if (statusCode === 200) {
+        console.log(productMapper.fromDto(body.masterData.staged));
         return productMapper.fromDto(body.masterData.staged);
       }
     } catch (e) {
