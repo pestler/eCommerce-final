@@ -9,7 +9,7 @@
   column-gap: 30px;
   row-gap: 30px;
   min-height: 100vh;
-  justify-items: center; 
+  justify-items: center;
 
   @media (max-width: 1385px) {
     grid-template-columns: 250px 1fr;
@@ -26,6 +26,7 @@
 .headerCatalog {
   grid-column: 2/2;
   grid-row: 1/2;
+  width: 100%;
 
   @media (max-width: 1385px) {
     grid-column: 1/2;

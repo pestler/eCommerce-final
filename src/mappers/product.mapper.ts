@@ -10,6 +10,7 @@ class ProductMapper {
         : [],
       price: {
         currency: null,
+        discounted: null,
         centAmount: null,
       },
     };
@@ -17,9 +18,13 @@ class ProductMapper {
 
     if (priceProduct && priceProduct[0]) {
       product.price.currency = priceProduct[0].value.currencyCode;
-      //const price = priceProduct[0].value.centAmount.toString();
-      const price = priceProduct[0].discounted!.value.centAmount.toString()
+      const price = priceProduct[0].value.centAmount.toString()
       product.price.centAmount = +price.slice(0, -2);
+
+      const priceDiscount = priceProduct[0].discounted!.value.centAmount.toString();
+      if (priceDiscount) {
+        product.price.discounted = +priceDiscount.slice(0, -2);
+      }
     }
 
     data.masterVariant.attributes?.forEach((attr) => {

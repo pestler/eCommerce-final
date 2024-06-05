@@ -9,10 +9,11 @@ export interface ProductDto {
   height?: number,
   diameter?: number,
   images: Image[],
-  price: IPrice
+  price: IPrice,
 }
 
 export interface IPrice {
-  centAmount: number | null;  
+  centAmount: number | null;
+  discounted: number | null;
   currency: string | null;
 }

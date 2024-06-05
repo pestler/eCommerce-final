@@ -35,7 +35,6 @@ const ProductPage: React.FC = () => {
     try {
       const { statusCode, body } = await productsService.getByID(id);
       if (statusCode === 200) {
-        console.log(productMapper.fromDto(body.masterData.staged));
         return productMapper.fromDto(body.masterData.staged);
       }
     } catch (e) {
@@ -133,12 +132,12 @@ const ProductPage: React.FC = () => {
                 ''
               )}
             </div>
-            {product.price.centAmount ? (
+            {product.price.discounted ? (
               <div
                 className={styles.price}
-              >{`${product.price.centAmount} ${product.price.currency}`}</div>
+              >{`${product.price.discounted} ${product.price.currency}`} <span>{`${product.price.centAmount} ${product.price.currency}`}</span></div>
             ) : (
-              ''
+              `${product.price.centAmount} ${product.price.currency}`
             )}
           </div>
           <div className={styles.buttons}>

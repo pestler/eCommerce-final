@@ -9,17 +9,17 @@
         font-size: 36px;
         line-height: 42px;
         color: #000;
-    
+
         @media (max-width: 980px) {
           font-size: 26px;
         }
-    }    
-    
+    }
+
     @media (max-width: 1300px) {
       padding-left: 50px;
       padding-right: 50px;
     }
-  
+
     @media (max-width: 900px) {
       padding: 20px 20px 10px 20px;
       background-position: bottom right 65%, bottom right;
@@ -39,7 +39,7 @@
 
 .product__carusel {
   width: 49%;
-  
+
   @media (max-width: 767px) {
     margin: 0 auto;
     width: 100%;
@@ -123,6 +123,10 @@
     line-height: 130%;
     font-weight: 600;
     color: #313131;
+    span {
+        font-size: 15px;
+        text-decoration: line-through;
+    }
 
     @media (max-width: 767px) {
         font-size: 20px;
