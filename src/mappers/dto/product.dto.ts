@@ -14,6 +14,6 @@ export interface ProductDto {
 
 export interface IPrice {
   centAmount: number | null;
-  discounted: number | null;
+  discounted?: number | null;
   currency: string | null;
 }

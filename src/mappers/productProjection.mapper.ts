@@ -8,9 +8,9 @@ export class ProductProjectionMapper {
             name: data.name['ru-BY'],
             images: data.masterVariant.images?.length ? data.masterVariant.images : [],
             price: {
-                currency: null,
                 count: null,
                 countDiscount: null,
+                currency: null,
             },
         }
         const priceCount = data.masterVariant.prices;
