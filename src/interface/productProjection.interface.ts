@@ -14,7 +14,7 @@ export interface ProductProjectionInterface {
 }
 
 export interface IPrice {
+    currency: string | null
     count: number | null,
     countDiscount?: number | null,
-    currency: string | null
 }
