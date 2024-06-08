@@ -33,17 +33,17 @@ const Card: React.FC<Props> = ({ product }) => {
 
       <div className={styles.price__container}>
       <div className={styles.price}>
-            {product.price.countDiscount && product.price.currency && 
+            {product.price.countDiscount && product.price.currency &&
                 <span>{product.price.countDiscount + ' ' + product.price.currency}</span>
             }
             </div>
         <div className={styles.price}>
             {product.price.count && product.price.currency &&
-            product.price.countDiscount && product.price.currency 
+            product.price.countDiscount && product.price.currency
                 ? <span className={styles.price__discount}>{product.price.count + ' ' + product.price.currency}</span>
                 : <span>{product.price.count + ' ' + product.price.currency}</span>
             }
-            </div>       
+            </div>
         <Button className={styles.btn}>В корзину</Button>
       </div>
       <div className={styles.line}></div>
