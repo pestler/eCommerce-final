@@ -5,11 +5,12 @@ import './App.scss';
 import Layout from './Layout.tsx';
 import {AuthProvider, LoaderProvider} from './providers';
 import { router } from './router';
+import {cartService} from "./services";
 
 const App: React.FC = () => {
 
     useEffect(() => {
-
+        cartService.createCart();
     }, []);
 
   return (

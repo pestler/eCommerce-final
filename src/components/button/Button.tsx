@@ -1,4 +1,4 @@
-import React, { ButtonHTMLAttributes, DetailedHTMLProps } from 'react';
+import React, {ButtonHTMLAttributes, DetailedHTMLProps, useState} from 'react';
 import styles from './button.module.scss';
 
 type BtnProps = DetailedHTMLProps<
@@ -9,12 +9,16 @@ type BtnProps = DetailedHTMLProps<
 };
 
 const Button: React.FC<BtnProps> = ({ children, className, ...props }) => {
+  const [isHovered, setIsHovered] = useState(false);
+
   return (
     <button
-      className={`${styles.btn} ${className ? className : ''}`}
+      className={`${styles.btn} ${styles[className!]}`}
       {...props}
+      onMouseEnter={() => setIsHovered(true)}
+      onMouseLeave={() => setIsHovered(false)}
     >
-      {children}
+      {isHovered && className === 'outline' ? 'Удалить' : children}
     </button>
   );
 };

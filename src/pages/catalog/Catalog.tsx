@@ -1,7 +1,7 @@
 import React, {useCallback, useEffect, useState} from 'react';
 import styles from './catalog.module.scss';
 import Filter from "../../components/filter/Filter.tsx";
-import {productsService} from "../../services";
+import {cartService, productsService} from "../../services";
 import {CircularProgress, Pagination} from "@mui/material";
 import CatalogAppliedFilter from "../../components/catalogAppliedFilter/CatalogAppliedFilter.tsx";
 import BasicMenu from "../../components/menu/Menu.tsx";
@@ -19,6 +19,7 @@ import {Filters} from "../../interface/filters.type.ts";
 import {useLoader} from "../../hooks/useLoader.ts";
 import {useSnackbar} from "notistack";
 import {BadRequest} from "../../interface/responseError.interface.ts";
+import {cartMapper} from "../../mappers/cart.mapper.ts";
 
 const ITEMS_PER_PAGE = 6;
 
@@ -73,8 +74,26 @@ const Catalog: React.FC = () => {
         try {
             const { body } = await productsService.getAllSearch(filters, pagination, sort);
             const products = body.results.map((product) => productProjectionMapper.fromDto(product));
+            const cart = await cartService.getCart();
+            if (cart) {
+                const data = products.map((product) => {
+                    const cartProduct = cart.body.lineItems.find((cartProduct) => cartProduct.productId === product.id);
+                    if (cartProduct) {
+                        return {
+                            ...product,
+                            cart: true,
+                            cartCount: cartProduct.quantity,
+                            lineCartId: cartProduct.id,
+                        }
+                    }
+                    return product;
+                })
+                setProducts(data);
+            } else {
+                setProducts(products);
+            }
+
             setTotalItems(body.total ?? 1);
-            setProducts(products);
             hideLoader();
         } catch(e: unknown) {
             const { message } = e as BadRequest;
@@ -85,7 +104,6 @@ const Catalog: React.FC = () => {
             hideLoader();
         }
     }, [])
-
 
     useEffect(() => {
         setCurrentPage(Math.floor(pagination.offset / ITEMS_PER_PAGE) + 1);
@@ -185,9 +203,115 @@ const Catalog: React.FC = () => {
         }
     };
 
+    const addToCart = async (product: ProductProjectionInterface, count: number) => {
+        showLoader()
+        try {
+            const version = cartService.versionCart;
+            if (!version) return;
+            const res = await cartService.addProductToCart(cartMapper.toAddToCartDto(product, count, +version));
+            if (res) {
+                cartService.versionCart = res.body.version.toString();
+                enqueueSnackbar(
+                    `Товар добавлен в корзину`,
+                    { variant: 'success' },
+                );
+                const lineCartId = res.body.lineItems.find((productCart) => productCart.productId === product.id)?.id;
+                const newProducts = products.map((tempProduct) => {
+                    if (tempProduct.id === product.id) {
+                        return {
+                            ...product,
+                            cart: true,
+                            cartCount: count,
+                            lineCartId: lineCartId!,
+                        }
+                    }
+                    return tempProduct;
+                })
+                setProducts(newProducts);
+            }
+            hideLoader();
+        } catch (e: unknown) {
+            const { message } = e as BadRequest;
+            enqueueSnackbar(
+                `Ошибка при добавлении товара в корзину: ${message}`,
+                { variant: 'error' },
+            );
+            hideLoader();
+        }
+    }
+
+    const removeFromCart = async (product: ProductProjectionInterface) => {
+        showLoader()
+        try {
+            const version = cartService.versionCart;
+            if (!version) return;
+            const res = await cartService.removeProductCart(cartMapper.toRemoveItemCartDto(product.lineCartId!, +version));
+            if (res) {
+                cartService.versionCart = res.body.version.toString();
+                enqueueSnackbar(
+                    `Товар удален из корзины`,
+                    { variant: 'success' },
+                );
+                const newProducts = products.map((tempProduct) => {
+                    if (tempProduct.id === product.id) {
+                        return {
+                            ...tempProduct,
+                            cart: false,
+                            cartCount: 1,
+                        }
+                    }
+                    return tempProduct;
+                })
+                setProducts(newProducts);
+            }
+            hideLoader();
+        } catch (e: unknown) {
+            const { message } = e as BadRequest;
+            enqueueSnackbar(
+                `Ошибка при удалении товара из корзины: ${message}`,
+                { variant: 'error' },
+            );
+            hideLoader();
+        }
+    }
+
+    const changeCount = async (product: ProductProjectionInterface, count: number) => {
+        showLoader()
+        try {
+            const version = cartService.versionCart;
+            if (!version) return;
+            const res = await cartService.changeCount(cartMapper.changeCountItemCartDto(product.lineCartId!, +version, count));
+            if (res) {
+                cartService.versionCart = res.body.version.toString();
+                enqueueSnackbar(
+                    `Количество товара изменено`,
+                    { variant: 'success' },
+                );
+                const newProducts = products.map((tempProduct) => {
+                    if (tempProduct.id === product.id) {
+                        return {
+                            ...product,
+                            cart: true,
+                            cartCount: count,
+                        }
+                    }
+                    return tempProduct;
+                })
+                setProducts(newProducts);
+            }
+            hideLoader();
+        } catch (e: unknown) {
+            const { message } = e as BadRequest;
+            enqueueSnackbar(
+                `Ошибка при изменении количества товара в корзине: ${message}`,
+                { variant: 'error' },
+            );
+            hideLoader();
+        }
+    }
+
   return (
     <div className={styles.container}>
-        {/*<div className={styles.breadcrumb}>breadcramb</div>*/}
         <div className={styles.catalog}>
             <div className={styles.headerCatalog}>
                 <div className={styles.title}>Каталог</div>
@@ -231,7 +355,13 @@ const Catalog: React.FC = () => {
             </div>
             <div className={styles.catalogList}>
                 {products && products.map((product) =>
-                    <Card product={product} key={product.id} />
+                    <Card
+                        product={product}
+                        key={product.id}
+                        addToCart={addToCart}
+                        removeFromCart={removeFromCart}
+                        changeCount={changeCount}
+                    />
                 )}
                 {!products && <CircularProgress color="success" />}
             </div>

@@ -12,9 +12,13 @@ export class ProductProjectionMapper {
                 countDiscount: null,
                 currency: null,
             },
+            variantId: data.masterVariant.id,
+            cart: false,
+            cartCount: 1,
+            lineCartId: null,
         }
         const priceCount = data.masterVariant.prices;
-        
+
         if (priceCount && priceCount[0]) {
             model.price.currency = priceCount[0].value.currencyCode;
             const price= priceCount[0].value.centAmount.toString();
@@ -22,7 +26,7 @@ export class ProductProjectionMapper {
             if (priceCount[0].discounted) {
             const priceDiscount = priceCount[0].discounted!.value.centAmount.toString()
             model.price.countDiscount = +priceDiscount.slice(0, -2);
-        } 
+        }
         }
         data.masterVariant.attributes?.forEach((attr) => {
             model[attr.name] = attr.value

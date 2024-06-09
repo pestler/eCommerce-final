@@ -1,0 +1,26 @@
+.counter {
+  display: flex;
+  align-items: center;
+  gap: 17px;
+}
+
+.counterInput {
+  height: 28px;
+  width: 41px;
+  outline: none;
+  border: 1px solid #456F49;
+  border-radius: 4px;
+  text-align: center;
+  font-family: "Montserrat", sans-serif;
+  font-weight: 400;
+  font-size: 18px;
+}
+
+.btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: none;
+  border: none;
+  cursor: pointer;
+}

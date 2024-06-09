@@ -75,6 +75,16 @@ body {
   }
 }
 
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+input[type="number"] {
+  -moz-appearance: textfield;
+}
+
 .slick-prev {
   background-image: url('../assets/images/favorites-icon-active.png');
   background-repeat: no-repeat;

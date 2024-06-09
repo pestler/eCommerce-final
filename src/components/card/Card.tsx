@@ -1,27 +1,35 @@
-import React, { useState } from 'react';
+import React, {useEffect, useState} from 'react';
 import Button from '../button/Button';
-import { FavouriteCard } from './FavoriteCard';
 import styles from './card.module.scss';
 import {ProductProjectionInterface} from "../../interface/productProjection.interface.ts";
 import { Link } from 'react-router-dom';
+import Counter from "../counter/Counter.tsx";
+import Dotted from '../../assets/svg/dotted.svg';
 
 type Props = React.HTMLProps<HTMLInputElement> & {
     product: ProductProjectionInterface,
+    addToCart: (payload: ProductProjectionInterface, count: number) => void;
+    removeFromCart: (payload: ProductProjectionInterface) => void;
+    changeCount: (payload: ProductProjectionInterface, count: number) => void;
 }
 
-const Card: React.FC<Props> = ({ product }) => {
-  const [counter, setCounter] = useState(0);
-  const handleClickPlus = () => {
-    setCounter(counter + 1);
-  };
-  const handleClickMinus = () => {
-    counter > 0 && setCounter(counter - 1);
-  };
+const Card: React.FC<Props> = ({product, addToCart, removeFromCart, changeCount}) => {
+    const [counter, setCounter] = useState(product.cartCount);
+
+    useEffect(() => {
+        setCounter(product.cartCount)
+    }, [product]);
+
+    const changeCounter = (count: number) => {
+        setCounter(count);
+        if (product.cart) {
+            changeCount(product, count);
+        }
+    }
 
   return (
     <div className={styles.card__container}>
       <div className={styles.card__img__container}>
-        <FavouriteCard id={'id'} />
         <Link className={styles.detailed} to={`/catalog/${product.id}`}>
       <div className={styles.card__img}
           style={{backgroundImage: `url("${product.images[0]?.url ?? ''}")`}}
@@ -32,29 +40,36 @@ const Card: React.FC<Props> = ({ product }) => {
       <span className={styles.card__title}>{product.name}</span>
 
       <div className={styles.price__container}>
-      <div className={styles.price}>
+          <div className={`${styles.price}`}>
             {product.price.countDiscount && product.price.currency &&
                 <span>{product.price.countDiscount + ' ' + product.price.currency}</span>
             }
             </div>
-        <div className={styles.price}>
+          <div className={`${styles.price} ${product.price.countDiscount ? styles.discount : ''}`}>
             {product.price.count && product.price.currency &&
             product.price.countDiscount && product.price.currency
-                ? <span className={styles.price__discount}>{product.price.count + ' ' + product.price.currency}</span>
+                ? <span>{product.price.count + ' ' + product.price.currency}</span>
                 : <span>{product.price.count + ' ' + product.price.currency}</span>
             }
             </div>
-        <Button className={styles.btn}>В корзину</Button>
+          {product.cart ?
+              <Button className={'outline'}
+                      onClick={() => removeFromCart(product)}
+              >В корзине</Button>
+              :
+              <Button className={styles.btn}
+                      onClick={() => addToCart(product, counter)}
+              >В корзину</Button>
+          }
       </div>
       <div className={styles.line}></div>
       <div className={styles.quantity__container}>
-        <div className={styles.stepper}>
-          <button className={styles.minus} onClick={handleClickMinus}></button>
-          <div className={styles.input}>{counter}</div>
-          <button className={styles.plus} onClick={handleClickPlus}></button>
-        </div>
+          <Counter
+              count={product.cartCount}
+              changeCounter={changeCounter}
+          ></Counter>
           <Link className={styles.detailed} to={`/catalog/${product.id}`}>
-              ...Подробнее
+              <Dotted></Dotted> Подробнее
           </Link>
       </div>
     </div>

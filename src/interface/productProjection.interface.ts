@@ -1,7 +1,7 @@
 import {Image} from "@commercetools/platform-sdk";
 
 export interface ProductProjectionInterface {
-    [key: string]: string | number | Image[] | undefined | IPrice | null;
+    [key: string]: string | number | Image[] | undefined | IPrice | null | boolean;
     id: string,
     name: string;
     lightning?: string;
@@ -11,6 +11,10 @@ export interface ProductProjectionInterface {
     diameter?: number;
     images: Image[];
     price: IPrice;
+    variantId: number;
+    cart: boolean;
+    cartCount: number;
+    lineCartId: string | null;
 }
 
 export interface IPrice {
