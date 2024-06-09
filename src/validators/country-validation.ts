@@ -9,6 +9,3 @@ export const countryValidation = () => ({
     message: 'Поле обязательно для заполнения!',
   },
 });
-
-
-

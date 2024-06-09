@@ -1,18 +1,18 @@
 import { ReactNode } from 'react';
+import Catalog from '../pages/catalog/Catalog.tsx';
 import Login from '../pages/login/Login.tsx';
 import Main from '../pages/main/Main.tsx';
 import NotFoundPage from '../pages/notFoundPage/NotFoundPage.tsx';
+import ProductPage from '../pages/productPage/ProductPage.tsx';
+import Profile from '../pages/profile/Profile.tsx';
 import Registration from '../pages/registration/Registration.tsx';
 import AuthGuard from './guards/auth.guard.tsx';
-import Catalog from '../pages/catalog/Catalog.tsx';
-import ProductPage from "../pages/productPage/ProductPage.tsx";
-import Profile from "../pages/profile/Profile.tsx";
-import NonAuthGuard from "./guards/non-auth.guard.tsx";
+import NonAuthGuard from './guards/non-auth.guard.tsx';
 
 interface Route {
   path: string;
   element: ReactNode;
-  children?: Route[]
+  children?: Route[];
 }
 
 export const router: Route[] = [
@@ -26,7 +26,7 @@ export const router: Route[] = [
   },
   {
     path: '/profile',
-    element: <NonAuthGuard element={<Profile/>}/>,
+    element: <NonAuthGuard element={<Profile />} />,
   },
   {
     path: '/catalog/:id',

@@ -1,13 +1,13 @@
-import {CartActions} from "../../interface/cartActions.enum.ts";
+import { CartActions } from '../../interface/cartActions.enum.ts';
 
 export type AddProductToCartDto = {
-    version: number,
-    actions: ProductCartAction[]
-}
+  version: number;
+  actions: ProductCartAction[];
+};
 
 export type ProductCartAction = {
-    action: CartActions,
-    productId: string,
-    variantId: number,
-    quantity: number
-}
+  action: CartActions;
+  productId: string;
+  variantId: number;
+  quantity: number;
+};

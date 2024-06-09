@@ -8,7 +8,11 @@ type PropsSlider = React.HTMLProps<HTMLElement> & {
   handleOpenModal(e: React.MouseEvent<HTMLElement>): void;
 };
 
-const SliderSimple = ({ images, currentSlide, handleOpenModal }: PropsSlider) => {
+const SliderSimple = ({
+  images,
+  currentSlide,
+  handleOpenModal,
+}: PropsSlider) => {
   const settings = {
     dots: false,
     infinite: false,
@@ -22,7 +26,11 @@ const SliderSimple = ({ images, currentSlide, handleOpenModal }: PropsSlider) =>
       {images.map((val, index) => {
         return (
           <div className={styles.slider__item} key={`slider-img-${index}`}>
-            <img src={val.url} className={styles.slider__image} onClick={handleOpenModal}/>
+            <img
+              src={val.url}
+              className={styles.slider__image}
+              onClick={handleOpenModal}
+            />
           </div>
         );
       })}

@@ -1,4 +1,4 @@
-import {config} from "../contstants/metadata.constants.ts";
+import { config } from '../contstants/metadata.constants.ts';
 
 class ConfigService {
   public get(key: string): string {

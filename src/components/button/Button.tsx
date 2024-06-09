@@ -1,4 +1,8 @@
-import React, {ButtonHTMLAttributes, DetailedHTMLProps, useState} from 'react';
+import React, {
+  ButtonHTMLAttributes,
+  DetailedHTMLProps,
+  useState,
+} from 'react';
 import styles from './button.module.scss';
 
 type BtnProps = DetailedHTMLProps<

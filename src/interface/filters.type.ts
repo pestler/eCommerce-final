@@ -1,13 +1,13 @@
-import {SubcategoryType} from "./productCategory.type.ts";
+import { SubcategoryType } from './productCategory.type.ts';
 
 export type Filters = {
-    categories: SubcategoryType[],
-    attributes: FilterByAttributes,
-}
+  categories: SubcategoryType[];
+  attributes: FilterByAttributes;
+};
 
 export type FilterByAttributes = {
-    heightTo?: number,
-    heightFrom?: number,
-    diameterTo?: number,
-    diameterFrom?: number,
-}
+  heightTo?: number;
+  heightFrom?: number;
+  diameterTo?: number;
+  diameterFrom?: number;
+};

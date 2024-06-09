@@ -18,11 +18,14 @@ import {
   postalCodeValidation,
   repeatPasswordValidation,
 } from '../../validators';
+import {
+  cityValidation,
+  streetValidation,
+} from '../../validators/city-validation.ts';
 import { dateValidation } from '../../validators/date-validation.ts';
 import { generalValidation } from '../../validators/general-validation.ts';
 import { surnameValidation } from '../../validators/name-surname-validation.ts';
 import styles from './registration.module.scss';
-import { cityValidation, streetValidation } from '../../validators/city-validation.ts';
 
 const Registration: React.FC = () => {
   const navigate = useNavigate();

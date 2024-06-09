@@ -1,11 +1,16 @@
 import { anonymousClient } from '../api';
-import {ISort} from "../interface/sort.interface.ts";
-import {Filters} from "../interface/filters.type.ts";
+import { Filters } from '../interface/filters.type.ts';
+import { ISort } from '../interface/sort.interface.ts';
 
 class ProductService {
-  public getAllSearch({ categories, attributes }: Filters, pagination: {limit: number, offset: number}, sort: ISort) {
-
-    const stringFilter = categories.map((item) => `subtree("${item.id}")`).join(',');
+  public getAllSearch(
+    { categories, attributes }: Filters,
+    pagination: { limit: number; offset: number },
+    sort: ISort,
+  ) {
+    const stringFilter = categories
+      .map((item) => `subtree("${item.id}")`)
+      .join(',');
 
     let rangeFilterHeight = 'variants.attributes.height:range(';
     if (attributes && attributes.heightFrom !== undefined) {
@@ -34,7 +39,7 @@ class ProductService {
     }
 
     const queryArgs: { filter: string[] | string | undefined } = {
-      filter: undefined
+      filter: undefined,
     };
 
     if (categories.length) {
@@ -68,16 +73,20 @@ class ProductService {
       limit: pagination.limit,
       offset: pagination.offset,
       sort: `${sort.name} ${sort.value}`,
-    }
+    };
 
-    return anonymousClient.productProjections().search().get({
-      queryArgs: args
-    }).execute();
+    return anonymousClient
+      .productProjections()
+      .search()
+      .get({
+        queryArgs: args,
+      })
+      .execute();
   }
 
   public getAll() {
-      return anonymousClient.productProjections().get().execute();
-    }
+    return anonymousClient.productProjections().get().execute();
+  }
 
   public getDiscounts() {
     return anonymousClient.productDiscounts().get().execute();

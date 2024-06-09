@@ -16,7 +16,7 @@ const eventsMenu: ('Войти' | 'Зарегистрироваться' | 'Вы
   'Войти',
   'Зарегистрироваться',
   'Выйти',
-  'Профиль'
+  'Профиль',
 ];
 
 export default function MainMenu({ isMenuOpen, clickHandler }: PropsMainMenu) {
@@ -70,14 +70,18 @@ export default function MainMenu({ isMenuOpen, clickHandler }: PropsMainMenu) {
               </NavLink>
             ))}
         </nav>
-        {user && <span className={style.user}>Привет, {user.firstName ? user.firstName : user.email}</span>}
+        {user && (
+          <span className={style.user}>
+            Привет, {user.firstName ? user.firstName : user.email}
+          </span>
+        )}
         {!isMenuOpen && (
           <BasicMenu
-            buttonContent={
-              !isAuthenticated ? <LoginSvg/> : <ProfileSvg/>
-            }
+            buttonContent={!isAuthenticated ? <LoginSvg /> : <ProfileSvg />}
             menuItems={eventsMenu.filter((item: string) =>
-              isAuthenticated ? (item === 'Выйти' || item === 'Профиль') : (item !== 'Выйти' && item !== 'Профиль'),
+              isAuthenticated
+                ? item === 'Выйти' || item === 'Профиль'
+                : item !== 'Выйти' && item !== 'Профиль',
             )}
             menuEvent={menuEvent}
           />

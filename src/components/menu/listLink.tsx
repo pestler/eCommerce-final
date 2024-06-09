@@ -10,5 +10,5 @@ export const listLinks = [
     to: 'catalog',
     textLink: 'Каталог',
     testid: 'catalog-link',
-  }
+  },
 ];

@@ -4,13 +4,13 @@ import imghumidity from '../../assets/images/humidity.png';
 import imglightning from '../../assets/images/lightning.png';
 import imgtemperature from '../../assets/images/temperature.png';
 import Button from '../../components/button/Button';
+import Counter from '../../components/counter/Counter.tsx';
 import SliderSimple from '../../components/slider/Slider';
+import { useCart } from '../../hooks/useCart.ts';
 import { ProductDto } from '../../mappers/dto/product.dto';
 import { productMapper } from '../../mappers/product.mapper';
 import { productsService } from '../../services';
 import styles from './product.module.scss';
-import {useCart} from "../../hooks/useCart.ts";
-import Counter from "../../components/counter/Counter.tsx";
 
 const descriptionProduct = [
   {
@@ -30,10 +30,14 @@ const descriptionProduct = [
   },
 ];
 
-
 const ProductPage: React.FC = () => {
   const { id } = useParams();
-  const { cart, getProductById, removeFromCart, addToCart, changeCount } = useCart();
+  const { cart, getProductById, removeFromCart, addToCart, changeCount } =
+    useCart();
+  const [product, setProduct] = useState<ProductDto>();
+  const [counter, setCounter] = useState<number>(1);
+  const [currentSlide, setCurrentSlide] = useState(0);
+  const [isOpenModal, setIsOpenModal] = useState(false);
 
   const getData = async (id: string) => {
     try {
@@ -46,17 +50,17 @@ const ProductPage: React.FC = () => {
     }
   };
 
-  const [product, setProduct] = useState<ProductDto>();
-  const [counter, setCounter] = useState<number>(1);
-  const [currentSlide, setCurrentSlide] = useState(0);
-  const [isOpenModal, setIsOpenModal] = useState(false);
-
   useEffect(() => {
     const fetchData = async () => {
       const product = await getData(id!);
       const productCart = getProductById(id!);
       if (productCart && product) {
-        const newProduct: ProductDto = {...product, cart: true, cartCount: productCart.quantity, lineCartId: productCart.id};
+        const newProduct: ProductDto = {
+          ...product,
+          cart: true,
+          cartCount: productCart.quantity,
+          lineCartId: productCart.id,
+        };
         setProduct(newProduct);
         setCounter(newProduct.cartCount ?? 1);
       } else {
@@ -69,7 +73,9 @@ const ProductPage: React.FC = () => {
 
   const handleOpenModal = (e: React.MouseEvent<HTMLElement, MouseEvent>) => {
     const target = e.target as HTMLElement;
-    const indexCurrent = target.closest(".slick-slide")?.getAttribute("data-index");
+    const indexCurrent = target
+      .closest('.slick-slide')
+      ?.getAttribute('data-index');
     indexCurrent ? setCurrentSlide(+indexCurrent) : setCurrentSlide(0);
     setIsOpenModal(true);
   };
@@ -87,30 +93,45 @@ const ProductPage: React.FC = () => {
     if (product && product.lineCartId) {
       changeCount(product.lineCartId, count);
     }
-  }
+  };
 
   const addToCartHandler = () => {
     if (!product) return;
     addToCart(product.id, product.variantId, counter);
-  }
+  };
 
   return product ? (
-
     <div className={styles.main__wrapper}>
       {isOpenModal ? (
-        <div className="modal__overlay" id="modalOverlay" onClick={handleCloseModal} >
+        <div
+          className="modal__overlay"
+          id="modalOverlay"
+          onClick={handleCloseModal}
+        >
           <div className="modal__container">
             <div className="modal__carusel">
-              <SliderSimple images={product.images} currentSlide={currentSlide} handleOpenModal={(e: React.MouseEvent<HTMLElement>) => handleOpenModal(e)}/>
+              <SliderSimple
+                images={product.images}
+                currentSlide={currentSlide}
+                handleOpenModal={(e: React.MouseEvent<HTMLElement>) =>
+                  handleOpenModal(e)
+                }
+              />
             </div>
           </div>
         </div>
-      ) : ''}
+      ) : (
+        ''
+      )}
       <h2>{product.name}</h2>
       <div className={styles.product__content}>
         {product.images.length > 0 ? (
           <div className={styles.product__carusel}>
-            <SliderSimple images={product.images} currentSlide={0} handleOpenModal={handleOpenModal}/>
+            <SliderSimple
+              images={product.images}
+              currentSlide={0}
+              handleOpenModal={handleOpenModal}
+            />
           </div>
         ) : (
           ''
@@ -155,29 +176,32 @@ const ProductPage: React.FC = () => {
               ) : (
                 ''
               )}
-              <Counter
-                  count={counter}
-                  changeCounter={changeCounter}
-              ></Counter>
+              <Counter count={counter} changeCounter={changeCounter}></Counter>
             </div>
             {product.price.discounted ? (
-              <div
-                className={styles.price}
-              >{`${product.price.discounted} ${product.price.currency}`} <span>{`${product.price.centAmount} ${product.price.currency}`}</span></div>
+              <div className={styles.price}>
+                {`${product.price.discounted} ${product.price.currency}`}{' '}
+                <span>{`${product.price.centAmount} ${product.price.currency}`}</span>
+              </div>
             ) : (
-              <div className={styles.price}>{product.price.centAmount} {product.price.currency}</div>
+              <div className={styles.price}>
+                {product.price.centAmount} {product.price.currency}
+              </div>
             )}
           </div>
           <div className={styles.buttons}>
-            {product.cart ?
-                <Button className={'outline'}
-                        onClick={() => removeFromCart(product!.lineCartId!)}
-                >В корзине</Button>
-                :
-                <Button className={styles.btn}
-                        onClick={() => addToCartHandler()}
-                >В корзину</Button>
-            }
+            {product.cart ? (
+              <Button
+                className={'outline'}
+                onClick={() => removeFromCart(product!.lineCartId!)}
+              >
+                В корзине
+              </Button>
+            ) : (
+              <Button className={styles.btn} onClick={() => addToCartHandler()}>
+                В корзину
+              </Button>
+            )}
           </div>
         </div>
       </div>
