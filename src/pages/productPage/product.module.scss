@@ -115,13 +115,20 @@
 .description__bottom {
     display: flex;
     justify-content: space-between;
+    align-items: flex-end;
+}
+
+.bottom__left {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
 }
 
 .price {
     font-family: "Montserrat", sans-serif;
-    font-size: 36px;
+    font-size: 40px;
     line-height: 130%;
-    font-weight: 600;
+    font-weight: 700;
     color: #313131;
     span {
         font-size: 15px;
@@ -135,12 +142,11 @@
 
 .buttons {
     display: flex;
-    justify-content: space-between;
+    justify-content: flex-end;
     padding: 20px 0;
 
     @media (max-width: 860px) {
         flex-direction: column;
-        gap: 10px;
     }
 
     @media (max-width: 767px) {

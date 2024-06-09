@@ -1,4 +1,3 @@
-
 .container__registration {
     display: flex;
     justify-content: space-around;
@@ -62,8 +61,7 @@
     width: 100%;
     flex-direction: column;
     display: flex;
-    //width: 500px;
-    width: 100%;
+    margin-top: 27px;
     align-items: center;
     gap: 10px;
 }
@@ -143,6 +141,7 @@
     line-height: 130%;
     color: #519057;
     cursor: pointer;
+    text-decoration: none;
 }
 
 .accaunt {

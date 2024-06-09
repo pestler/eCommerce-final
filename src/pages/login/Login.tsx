@@ -56,13 +56,13 @@ const Login: React.FC = () => {
         <h3 className={styles.titleForm}>Войти в личный кабинет</h3>
         <Input
           {...register('email', loginValidation())}
-          placeholder="Enter email"
+          placeholder="Введите электронную почту"
           type="text"
           error={errors.email}
         />
         <Input
           {...register('password', passwordValidation())}
-          placeholder="Enter password"
+          placeholder="Введите пароль"
           type="password"
           error={errors.password}
         />

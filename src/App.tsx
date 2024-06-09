@@ -1,38 +1,36 @@
 import { SnackbarProvider } from 'notistack';
-import React, {useEffect} from 'react';
+import React from 'react';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import './App.scss';
 import Layout from './Layout.tsx';
 import {AuthProvider, LoaderProvider} from './providers';
 import { router } from './router';
-import {cartService} from "./services";
+import {CartProvider} from "./providers/CartProvider.tsx";
 
 const App: React.FC = () => {
-
-    useEffect(() => {
-        cartService.createCart();
-    }, []);
-
   return (
       <LoaderProvider>
-          <AuthProvider>
+          <SnackbarProvider
+              anchorOrigin={{
+                  vertical: 'top',
+                  horizontal: 'right',
+              }}
+          >
+          <CartProvider>
+            <AuthProvider>
               <BrowserRouter>
-                  <SnackbarProvider
-                      anchorOrigin={{
-                          vertical: 'top',
-                          horizontal: 'right',
-                      }}
-                  >
+
                       <Layout>
                           <Routes>
                               {router.map((route, index) => (
-                                  <Route key={index} path={route.path} element={route.element} />
+                                  <Route key={index} path={route.path} element={route.element}/>
                               ))}
                           </Routes>
                       </Layout>
-                  </SnackbarProvider>
               </BrowserRouter>
           </AuthProvider>
+          </CartProvider>
+          </SnackbarProvider>
       </LoaderProvider>
   );
 };

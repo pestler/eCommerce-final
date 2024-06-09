@@ -23,9 +23,8 @@ interface Props {
 export const AuthContext = createContext<IAuthContext | undefined>(undefined);
 
 export const AuthProvider = ({ children }: Props) => {
-  const token = localStorageService.get<string | null>(ACCESS_TOKEN);
   const customer = localStorageService.get<Customer | null>(USER_CUSTOMER);
-  const [isAuthenticated, setIsAuthenticated] = useState(!!token);
+  const [isAuthenticated, setIsAuthenticated] = useState(!!customer);
   const [user, setUser] = useState<Customer | null>(customer);
   const { enqueueSnackbar } = useSnackbar();
 
@@ -46,8 +45,8 @@ export const AuthProvider = ({ children }: Props) => {
   };
 
   return (
-    <AuthContext.Provider value={{ user, isAuthenticated, login, logout }}>
-      {children}
-    </AuthContext.Provider>
+        <AuthContext.Provider value={{ user, isAuthenticated, login, logout }}>
+          {children}
+        </AuthContext.Provider>
   );
 };

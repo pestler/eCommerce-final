@@ -17,7 +17,7 @@ const Card: React.FC<Props> = ({product, addToCart, removeFromCart, changeCount}
     const [counter, setCounter] = useState(product.cartCount);
 
     useEffect(() => {
-        setCounter(product.cartCount)
+        setCounter(product.cartCount ?? 1);
     }, [product]);
 
     const changeCounter = (count: number) => {

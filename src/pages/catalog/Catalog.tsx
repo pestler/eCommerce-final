@@ -1,7 +1,7 @@
 import React, {useCallback, useEffect, useState} from 'react';
 import styles from './catalog.module.scss';
 import Filter from "../../components/filter/Filter.tsx";
-import {cartService, productsService} from "../../services";
+import {productsService} from "../../services";
 import {CircularProgress, Pagination} from "@mui/material";
 import CatalogAppliedFilter from "../../components/catalogAppliedFilter/CatalogAppliedFilter.tsx";
 import BasicMenu from "../../components/menu/Menu.tsx";
@@ -19,15 +19,18 @@ import {Filters} from "../../interface/filters.type.ts";
 import {useLoader} from "../../hooks/useLoader.ts";
 import {useSnackbar} from "notistack";
 import {BadRequest} from "../../interface/responseError.interface.ts";
-import {cartMapper} from "../../mappers/cart.mapper.ts";
+import {useCart} from "../../hooks/useCart.ts";
+import {Cart} from "@commercetools/platform-sdk";
 
 const ITEMS_PER_PAGE = 6;
 
 const Catalog: React.FC = () => {
     const {showLoader, hideLoader} = useLoader();
     const { enqueueSnackbar } = useSnackbar();
+    const {cart, addToCart, removeFromCart, changeCount} = useCart();
     const navigate = useNavigate();
     const [searchParams] = useSearchParams();
+
     const param = searchParams.get('categories');
     const decodedParam = param ? decodeURIComponent(param) : null;
 
@@ -69,26 +72,28 @@ const Catalog: React.FC = () => {
         setCategories(categories);
     }, [decodedParam]);
 
+    const updateProductsCarts = (products: ProductProjectionInterface[], cart: Cart): ProductProjectionInterface[] => {
+        return products.map((product) => {
+            const cartProduct = cart.lineItems.find((cartProduct) => cartProduct.productId === product.id);
+            if (cartProduct) {
+                return {
+                    ...product,
+                    cart: true,
+                    cartCount: cartProduct.quantity,
+                    lineCartId: cartProduct.id,
+                }
+            }
+            return {...product, cart: false, cartCount: 1, lineCartId: null};
+        })
+    }
+
     const getProducts = useCallback(async (filters: Filters, pagination: {limit: number, offset: number}, sort: ISort) => {
         showLoader();
         try {
             const { body } = await productsService.getAllSearch(filters, pagination, sort);
             const products = body.results.map((product) => productProjectionMapper.fromDto(product));
-            const cart = await cartService.getCart();
             if (cart) {
-                const data = products.map((product) => {
-                    const cartProduct = cart.body.lineItems.find((cartProduct) => cartProduct.productId === product.id);
-                    if (cartProduct) {
-                        return {
-                            ...product,
-                            cart: true,
-                            cartCount: cartProduct.quantity,
-                            lineCartId: cartProduct.id,
-                        }
-                    }
-                    return product;
-                })
-                setProducts(data);
+                setProducts(updateProductsCarts(products, cart));
             } else {
                 setProducts(products);
             }
@@ -113,6 +118,11 @@ const Catalog: React.FC = () => {
     useEffect(() => {
         getCategories();
     }, [getCategories]);
+
+    useEffect(() => {
+        if (!cart) return;
+        setProducts(updateProductsCarts(products, cart));
+    }, [cart]);
 
     const setQueryParam = (filters: string) => {
         const params = new URLSearchParams(window.location.search);
@@ -203,111 +213,16 @@ const Catalog: React.FC = () => {
         }
     };
 
-    const addToCart = async (product: ProductProjectionInterface, count: number) => {
-        showLoader()
-        try {
-            const version = cartService.versionCart;
-            if (!version) return;
-            const res = await cartService.addProductToCart(cartMapper.toAddToCartDto(product, count, +version));
-            if (res) {
-                cartService.versionCart = res.body.version.toString();
-                enqueueSnackbar(
-                    `Товар добавлен в корзину`,
-                    { variant: 'success' },
-                );
-                const lineCartId = res.body.lineItems.find((productCart) => productCart.productId === product.id)?.id;
-                const newProducts = products.map((tempProduct) => {
-                    if (tempProduct.id === product.id) {
-                        return {
-                            ...product,
-                            cart: true,
-                            cartCount: count,
-                            lineCartId: lineCartId!,
-                        }
-                    }
-                    return tempProduct;
-                })
-                setProducts(newProducts);
-            }
-            hideLoader();
-        } catch (e: unknown) {
-            const { message } = e as BadRequest;
-            enqueueSnackbar(
-                `Ошибка при добавлении товара в корзину: ${message}`,
-                { variant: 'error' },
-            );
-            hideLoader();
-        }
+    const addToCartHandler = async (product: ProductProjectionInterface, count: number) => {
+        addToCart(product.id, product.variantId, count);
     }
 
-    const removeFromCart = async (product: ProductProjectionInterface) => {
-        showLoader()
-        try {
-            const version = cartService.versionCart;
-            if (!version) return;
-            const res = await cartService.removeProductCart(cartMapper.toRemoveItemCartDto(product.lineCartId!, +version));
-            if (res) {
-                cartService.versionCart = res.body.version.toString();
-                enqueueSnackbar(
-                    `Товар удален из корзины`,
-                    { variant: 'success' },
-                );
-                const newProducts = products.map((tempProduct) => {
-                    if (tempProduct.id === product.id) {
-                        return {
-                            ...tempProduct,
-                            cart: false,
-                            cartCount: 1,
-                        }
-                    }
-                    return tempProduct;
-                })
-                setProducts(newProducts);
-            }
-            hideLoader();
-        } catch (e: unknown) {
-            const { message } = e as BadRequest;
-            enqueueSnackbar(
-                `Ошибка при удалении товара из корзины: ${message}`,
-                { variant: 'error' },
-            );
-            hideLoader();
-        }
+    const removeFromCartHandler = async (product: ProductProjectionInterface) => {
+        removeFromCart(product.lineCartId!)
     }
 
-    const changeCount = async (product: ProductProjectionInterface, count: number) => {
-        showLoader()
-        try {
-            const version = cartService.versionCart;
-            if (!version) return;
-            const res = await cartService.changeCount(cartMapper.changeCountItemCartDto(product.lineCartId!, +version, count));
-            if (res) {
-                cartService.versionCart = res.body.version.toString();
-                enqueueSnackbar(
-                    `Количество товара изменено`,
-                    { variant: 'success' },
-                );
-                const newProducts = products.map((tempProduct) => {
-                    if (tempProduct.id === product.id) {
-                        return {
-                            ...product,
-                            cart: true,
-                            cartCount: count,
-                        }
-                    }
-                    return tempProduct;
-                })
-                setProducts(newProducts);
-            }
-            hideLoader();
-        } catch (e: unknown) {
-            const { message } = e as BadRequest;
-            enqueueSnackbar(
-                `Ошибка при изменении количества товара в корзине: ${message}`,
-                { variant: 'error' },
-            );
-            hideLoader();
-        }
+    const changeCountHandler = async (product: ProductProjectionInterface, count: number) => {
+        changeCount(product.lineCartId!, count);
     }
 
   return (
@@ -358,9 +273,9 @@ const Catalog: React.FC = () => {
                     <Card
                         product={product}
                         key={product.id}
-                        addToCart={addToCart}
-                        removeFromCart={removeFromCart}
-                        changeCount={changeCount}
+                        addToCart={addToCartHandler}
+                        removeFromCart={removeFromCartHandler}
+                        changeCount={changeCountHandler}
                     />
                 )}
                 {!products && <CircularProgress color="success" />}

@@ -10,6 +10,7 @@
   border: 0;
   border-radius: 5px;
   cursor: pointer;
+  white-space: nowrap;
   &:disabled {
     background-color: #404740;
     cursor: not-allowed;

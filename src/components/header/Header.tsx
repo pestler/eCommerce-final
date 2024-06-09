@@ -10,6 +10,7 @@ import ProfileSvg from "../../assets/svg/profile.svg";
 import InputSearch from "../inputSearch/InputSearch.tsx";
 import {useAuth} from "../../hooks/useAuth.ts";
 import Cart from '../../assets/svg/cart.svg';
+import {useCart} from "../../hooks/useCart.ts";
 
 export type EventsMenuType = 'Войти' | 'Зарегистрироваться' | 'Выйти' | 'Профиль' | 'Главная' | 'Каталог';
 
@@ -24,6 +25,8 @@ const eventsMenu: EventsMenuType[] = [
 
 const Header: React.FC = () => {
   const {isAuthenticated, logout, user} = useAuth();
+  const { getCount } = useCart();
+
   const navigate = useNavigate();
 
   const menuEvent = (event: string) => {
@@ -84,7 +87,10 @@ const Header: React.FC = () => {
                     menuEvent={menuEvent}
                 />
                 <Link to={'./cart'}>
-                  <Cart></Cart>
+                  <div className={style.cart}>
+                    <Cart></Cart>
+                    {!!getCount() && <div className={style.cartBadge}>{getCount()}</div>}
+                  </div>
                 </Link>
               <div className={style.burger}>
                 <BasicMenu

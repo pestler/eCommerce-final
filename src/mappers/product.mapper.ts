@@ -2,8 +2,9 @@ import { ProductData } from '@commercetools/platform-sdk';
 import { ProductDto } from './dto/product.dto';
 
 class ProductMapper {
-  public fromDto(data: ProductData): ProductDto {
+  public fromDto(data: ProductData, id: string): ProductDto {
     const product: ProductDto = {
+      id,
       name: data.name['ru-BY'],
       images: data.masterVariant.images?.length
         ? data.masterVariant.images
@@ -13,6 +14,10 @@ class ProductMapper {
         discounted: null,
         currency: null,
       },
+      cartCount: null,
+      cart: false,
+      lineCartId: null,
+      variantId: data.masterVariant.id,
     };
     const priceProduct = data.masterVariant.prices;
 
@@ -26,9 +31,6 @@ class ProductMapper {
         product.price.discounted = +priceDiscount.slice(0, -2);
       }
     }
-
-
-
     }
 
     data.masterVariant.attributes?.forEach((attr) => {

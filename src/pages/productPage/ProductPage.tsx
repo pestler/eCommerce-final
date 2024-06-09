@@ -9,6 +9,8 @@ import { ProductDto } from '../../mappers/dto/product.dto';
 import { productMapper } from '../../mappers/product.mapper';
 import { productsService } from '../../services';
 import styles from './product.module.scss';
+import {useCart} from "../../hooks/useCart.ts";
+import Counter from "../../components/counter/Counter.tsx";
 
 const descriptionProduct = [
   {
@@ -31,11 +33,13 @@ const descriptionProduct = [
 
 const ProductPage: React.FC = () => {
   const { id } = useParams();
+  const { cart, getProductById, removeFromCart, addToCart, changeCount } = useCart();
+
   const getData = async (id: string) => {
     try {
       const { statusCode, body } = await productsService.getByID(id);
       if (statusCode === 200) {
-        return productMapper.fromDto(body.masterData.staged);
+        return productMapper.fromDto(body.masterData.staged, body.id);
       }
     } catch (e) {
       console.error(e);
@@ -43,16 +47,25 @@ const ProductPage: React.FC = () => {
   };
 
   const [product, setProduct] = useState<ProductDto>();
+  const [counter, setCounter] = useState<number>(1);
   const [currentSlide, setCurrentSlide] = useState(0);
   const [isOpenModal, setIsOpenModal] = useState(false);
 
   useEffect(() => {
     const fetchData = async () => {
       const product = await getData(id!);
-      setProduct(product);
+      const productCart = getProductById(id!);
+      if (productCart && product) {
+        const newProduct: ProductDto = {...product, cart: true, cartCount: productCart.quantity, lineCartId: productCart.id};
+        setProduct(newProduct);
+        setCounter(newProduct.cartCount ?? 1);
+      } else {
+        setProduct(product);
+        setCounter(1);
+      }
     };
     fetchData();
-  }, [id]);
+  }, [id, cart]);
 
   const handleOpenModal = (e: React.MouseEvent<HTMLElement, MouseEvent>) => {
     const target = e.target as HTMLElement;
@@ -69,10 +82,21 @@ const ProductPage: React.FC = () => {
     }
   };
 
+  const changeCounter = (count: number) => {
+    setCounter(count);
+    if (product && product.lineCartId) {
+      changeCount(product.lineCartId, count);
+    }
+  }
+
+  const addToCartHandler = () => {
+    if (!product) return;
+    addToCart(product.id, product.variantId, counter);
+  }
+
   return product ? (
 
     <div className={styles.main__wrapper}>
-
       {isOpenModal ? (
         <div className="modal__overlay" id="modalOverlay" onClick={handleCloseModal} >
           <div className="modal__container">
@@ -131,18 +155,29 @@ const ProductPage: React.FC = () => {
               ) : (
                 ''
               )}
+              <Counter
+                  count={counter}
+                  changeCounter={changeCounter}
+              ></Counter>
             </div>
             {product.price.discounted ? (
               <div
                 className={styles.price}
               >{`${product.price.discounted} ${product.price.currency}`} <span>{`${product.price.centAmount} ${product.price.currency}`}</span></div>
             ) : (
-              `${product.price.centAmount} ${product.price.currency}`
+              <div className={styles.price}>{product.price.centAmount} {product.price.currency}</div>
             )}
           </div>
           <div className={styles.buttons}>
-            <Button className={styles.btn}>В избранное</Button>
-            <Button className={styles.btn}>В корзину</Button>
+            {product.cart ?
+                <Button className={'outline'}
+                        onClick={() => removeFromCart(product!.lineCartId!)}
+                >В корзине</Button>
+                :
+                <Button className={styles.btn}
+                        onClick={() => addToCartHandler()}
+                >В корзину</Button>
+            }
           </div>
         </div>
       </div>
