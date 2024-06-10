@@ -1,0 +1,41 @@
+.aboutus{
+    display: flex;    
+    flex-direction: column;
+    flex-wrap: wrap;
+    width: 30%;
+    grid-area: 20px;
+    @media (max-width:768px) {
+     width: 232px;   
+    }
+}
+.aboutus__picture{
+    display: flex;
+    overflow: hidden;
+    position: relative;
+    width: 232px;
+    height: 232px;   
+}
+
+@media (hover: hover) {
+    .aboutus:hover img {
+        scale: 1.1;
+        border-radius: 10px;
+    }
+}
+
+
+.aboutus__photo{
+    width: 100%;
+    border-radius: 10px;
+}
+.description__text{
+    display: flex;
+}
+.aboutus__github{
+    display: flex;
+    cursor: pointer;
+    a{
+        text-decoration: none;
+        color: black;
+    }
+}
