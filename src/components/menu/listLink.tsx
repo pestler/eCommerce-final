@@ -11,4 +11,10 @@ export const listLinks = [
     textLink: 'Каталог',
     testid: 'catalog-link',
   },
+  {
+    id: 3,
+    to: 'about',
+    textLink: 'О нас',
+    testid: 'about-link',
+  },
 ];
