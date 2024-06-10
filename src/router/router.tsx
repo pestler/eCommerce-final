@@ -43,7 +43,7 @@ export const router: Route[] = [
   },
   {
     path: '/basket',
-    element: <AuthGuard element={<Basket />} />,
+    element:<Basket />,
   },
   {
     path: '*',
