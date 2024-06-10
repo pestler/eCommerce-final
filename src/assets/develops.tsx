@@ -1,4 +1,5 @@
 const Develops = [
+    
     {
         "name": "Иван Кирик",
         "img": "./../../assets/images/Ivankirik.jfif",
@@ -18,6 +19,7 @@ const Develops = [
         "github":"https://github.com/Pestler"
     }
 ]
+
 
 export default Develops
 
