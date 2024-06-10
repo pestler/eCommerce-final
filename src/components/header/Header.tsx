@@ -93,7 +93,7 @@ const Header: React.FC = () => {
                 )}
                 menuEvent={menuEvent}
               />
-              <Link to={'./cart'}>
+              <Link to={'./basket'}>
                 <div className={style.cart}>
                   <Cart></Cart>
                   {!!getCount() && (

@@ -8,6 +8,7 @@ import Profile from '../pages/profile/Profile.tsx';
 import Registration from '../pages/registration/Registration.tsx';
 import AuthGuard from './guards/auth.guard.tsx';
 import NonAuthGuard from './guards/non-auth.guard.tsx';
+import Basket from '../pages/basket/Basket.tsx';
 
 interface Route {
   path: string;
@@ -39,6 +40,10 @@ export const router: Route[] = [
   {
     path: '/registration',
     element: <AuthGuard element={<Registration />} />,
+  },
+  {
+    path: '/basket',
+    element: <AuthGuard element={<Basket />} />,
   },
   {
     path: '*',
