@@ -4,15 +4,6 @@ import styles from './developer.module.scss';
 import Github from './../../assets/images/github.png'
 
 
-type Dev={
-  id: number;
-  name: string;
-  img: string;
-  about: string;
-  github: string;
-}[]
-
-
 const Developer: React.FC = () => {
   return Develops.map((develop) => {
     return (
