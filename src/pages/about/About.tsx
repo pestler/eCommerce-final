@@ -17,7 +17,7 @@ const About: React.FC = () => {
     <div className={styles.containerAbout}>
       <div className={styles.wrapper}>
         <h2>О нашей команде!</h2>
-    {aboutTitle}
+            {aboutTitle}
         <div className={styles.aboutRegardsContainer}>
           <p className={styles.aboutRegards}>Большое спасибо</p>
           <a

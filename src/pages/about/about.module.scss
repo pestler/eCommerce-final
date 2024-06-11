@@ -87,9 +87,9 @@ p {
 }
 
 .developer__container {
+    width: 100%;
     display: flex;
-    flex-wrap: wrap;
-    gap: 10px; 
+    flex-wrap: wrap;    
     justify-content: space-between;  
     @media (max-width:768px) {
         flex-direction: column;
