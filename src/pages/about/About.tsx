@@ -14,10 +14,10 @@ const About: React.FC = () => {
   return (
     <div className={styles.containerAbout}>
       <div className={styles.wrapper}>
-        <h2>О нашей команде!</h2>
+        <h1>О нашей команде!</h1>
         {aboutTitle}
         <div className={styles.aboutRegardsContainer}>
-          <p className={styles.aboutRegards}>Большое спасибо</p>
+          <h2 className={styles.aboutRegards}>Большое спасибо школе RS School</h2>
           <a
             href="https://rs.school/"
             target="_blank"

@@ -25,6 +25,7 @@ const Developer: React.FC = () => {
         </div>      
         <div className={styles.description__text}>
           <span > {develop.about}</span>
+          <span > {develop.сontributions}</span>
         </div>
       </div>
     );
