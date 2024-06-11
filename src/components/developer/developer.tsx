@@ -1,7 +1,7 @@
 import React from 'react';
 import { Develops } from './../../assets/develops';
 import styles from './developer.module.scss';
-import Github from './../../assets/images/github.png'
+import Github from './../../assets/images/github2.png'
 
 
 const Developer: React.FC = () => {
