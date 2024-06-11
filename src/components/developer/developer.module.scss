@@ -1,10 +1,8 @@
-
-
 .aboutus {
     position: relative;
     display: flex;
     flex-direction: column;
-    flex-wrap: wrap;    
+    flex-wrap: wrap;
     /* @media (max-width:768px) {
         width: 232px;
     } */
@@ -13,7 +11,7 @@
 .aboutus__picture {
     display: flex;
     overflow: hidden;
-    position: relative;    
+    position: relative;
     width: 232px;
     height: 232px;
 }
@@ -36,17 +34,24 @@
 .description__text {
     display: flex;
     gap: 10px;
-    
-    span{
+
+    span {
+        display: flex;
         width: 45%;
-    text-align: start;
-    font-family: Montserrat, sans-serif;
-    font-weight: 400;
-    font-size: 18px;
-    color: #202B21;
-    line-height: 20px;
-    font-size: 12px;
+        text-align: start;
+        font-family: Montserrat, sans-serif;
+        font-weight: 400;
+        font-size: 18px;
+        color: #202B21;
+        line-height: 20px;
+        font-size: 12px;
+        @media (max-width:768px) {
+        width: 90%;
+        } 
     }
+    @media (max-width:768px) {
+        flex-direction: column;
+    } 
 }
 
 .aboutus__github {
@@ -58,7 +63,7 @@
     //display: none;
     display: flex;
     cursor: pointer;
-    transition: 1s all ease-in-out;   
+    transition: 1s all ease-in-out;
 
     a {
         text-decoration: none;
@@ -68,9 +73,8 @@
 
 @media (hover: hover) {
     .aboutus__picture:hover .aboutus__github {
-        //display: flex;
         width: 100px;
-        height: 100px;             
+        height: 100px;
         cursor: pointer;
     }
 }
