@@ -7,6 +7,7 @@ import {
   SubcategoryType,
 } from '../../interface/productCategory.type.ts';
 import styles from './filter.module.scss';
+import { Checkbox } from '@mui/material';
 
 type PropsFilter = {
   category?: ProductCategory;
@@ -47,18 +48,28 @@ const Filter: React.FC<PropsFilter> = ({
       currentFilters.categories &&
       currentFilters.categories.length
     ) {
-      const open = category.subcategories.find(
-        (sub) => sub.id === currentFilters.categories[0].id,
-      );
-      setOpen(!!open);
+      currentFilters.categories.forEach((current) => {
+        category.subcategories.forEach((category) => {
+          if (current.id === category.id) {
+            setOpen(true);
+            return;
+          }
+        })
+      })
     }
     if (type === 'height') {
       setFromValue(currentFilters.attributes.heightFrom ?? '');
       setToValue(currentFilters.attributes.heightTo ?? '');
+      if (currentFilters.attributes.heightFrom || currentFilters.attributes.heightTo) {
+        setOpen(true);
+      }
     }
     if (type === 'diameter') {
       setFromValue(currentFilters.attributes.diameterFrom ?? '');
       setToValue(currentFilters.attributes.diameterTo ?? '');
+      if (currentFilters.attributes.diameterFrom || currentFilters.attributes.diameterTo) {
+        setOpen(true);
+      }
     }
   }, [category, currentFilters, type]);
 
@@ -101,14 +112,12 @@ const Filter: React.FC<PropsFilter> = ({
               className={styles.catalogFilterCheckbox}
               key={subCategory.id}
             >
-              <input
-                className={styles.input}
-                type="checkbox"
-                checked={currentFilters.categories
-                  .map((c) => c.id)
-                  .includes(subCategory.id)}
-                onChange={() => emitValue!(subCategory)}
-              />
+              <Checkbox
+                  checked={currentFilters.categories
+                      .map((c) => c.id)
+                      .includes(subCategory.id)}
+                  onChange={() => emitValue!(subCategory)}
+                  color="success" />
               <span>{subCategory.name}</span>
             </label>
           ))}

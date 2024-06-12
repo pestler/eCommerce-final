@@ -168,7 +168,7 @@ const Catalog: React.FC = () => {
 
   useEffect(() => {
     getCategories();
-  }, [getCategories]);
+  }, []);
 
   useEffect(() => {
     if (!cart) return;
