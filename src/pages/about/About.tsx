@@ -1,5 +1,5 @@
 import Developer from '../../components/developer/developer';
-import { AboutUs } from './../../assets/develops';
+import { AboutUs } from '../../contstants/develops';
 import styles from './about.module.scss';
 
 const aboutTitle = AboutUs.map((about) => {
