@@ -1,11 +1,11 @@
-import React, {useCallback, useEffect, useState} from 'react';
+import React, { useCallback, useEffect, useState } from 'react';
+import { Link } from 'react-router-dom';
 import Button from '../../components/button/Button';
 import CardBasket from '../../components/cardBasket/CardBasket.tsx';
 import { useCart } from '../../hooks/useCart.ts';
 import { ProductBasketDto } from '../../mappers/dto/productBasket.dto.ts';
 import { productBasketMapper } from '../../mappers/productBasket.mapper.ts';
 import styles from './basket.module.scss';
-import { Link } from 'react-router-dom';
 
 const Basket: React.FC = () => {
   const { getCartItems, changeCount } = useCart();
@@ -15,7 +15,7 @@ const Basket: React.FC = () => {
   const getProducts = useCallback(() => {
     try {
       const products: ProductBasketDto[] = getCartItems().map((product) =>
-          productBasketMapper.fromDto(product),
+        productBasketMapper.fromDto(product),
       );
       setProducts(products);
     } catch (e) {
@@ -48,7 +48,8 @@ const Basket: React.FC = () => {
               />
             ))
           ) : (
-            <div className={styles.basket__null}>Корзина пуста
+            <div className={styles.basket__null}>
+              Корзина пуста
               <Link className={styles.link} to="/catalog">
                 в каталог
               </Link>
