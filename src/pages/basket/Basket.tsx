@@ -3,6 +3,7 @@ import styles from './basket.module.scss';
 import Button from '../../components/button/Button';
 import {useCart} from "../../hooks/useCart.ts";
 import Counter from '../../components/counter/Counter.tsx';
+import deleteImg from '../../assets/images/delete.png';
 
 const Basket: React.FC = () => {
 
@@ -36,10 +37,14 @@ const Basket: React.FC = () => {
           <div className={styles.list_product}>
             {listProduct.map((item) => {
               return (
-                <div>
-                  <img src={item.variant.images ? item.variant.images[0].url : undefined} />
-                  <p>{item.name["ru-BY"]}</p>
-                  <Counter count={counter} changeCounter={changeCounter}></Counter>
+                <div className={styles.product__item}>
+                  <img src={item.variant.images ? item.variant.images[0].url : undefined} className={styles.product__img}/>
+                  <div className={styles.product__description}>
+                    <p className={styles.product__name}>{item.name["ru-BY"]}</p>
+                    <div className={styles.product__counter}><Counter count={counter} changeCounter={changeCounter}></Counter></div>
+                    <div className={styles.product__price}>100 USD</div>
+                    <div className={styles.product__delete}><img src={deleteImg}/></div>
+                  </div>
                 </div>
               )
             })}
@@ -50,11 +55,11 @@ const Basket: React.FC = () => {
               <p>Товаров: <span>0</span></p>
               <p>Общая стоимость: <span>USD</span></p>
             </div>
-            <div className={styles.basket_buttons}>
-              <Button className={styles.basket_button}>
+            <div className={styles.basket__buttons}>
+              <Button className={styles.basket__button}>
                 Продолжить покупки
               </Button>
-              <Button className={styles.basket_button}>
+              <Button className={styles.basket__button}>
                 Оформить заказ
               </Button>
             </div>
