@@ -21,7 +21,7 @@
     .aboutus:hover .aboutus__photo {
         //scale: 1.1;
         //border-radius: 10px;
-        filter: brightness(120%);
+        filter: brightness(70%);
     }
 }
 
@@ -55,8 +55,8 @@
 
 .aboutus__github {
     position: absolute;
-    top: 30%;
-    left: 30%;
+    top: 15%;
+    left: 15%;
     width: 0px;
     height: 0px;
     //display: none;
@@ -72,10 +72,10 @@
 
 @media (hover: hover) {
     .aboutus__picture:hover .aboutus__github {
-        width: 100px;
-        height: 100px;
+        width: 150px;
+        height: 150px;
         cursor: pointer;
-        border: 2px solid  #202B21;
+        border: 10px solid  green;
         border-radius: 50%;
     }
 }
