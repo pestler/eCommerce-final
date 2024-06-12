@@ -21,7 +21,11 @@
     .aboutus:hover .aboutus__photo {
         //scale: 1.1;
         //border-radius: 10px;
+<<<<<<< HEAD
         filter: brightness(70%);
+=======
+        filter: brightness(60%);
+>>>>>>> c5a9b97817323600db1fa802af533df40373586f
     }
 }
 
@@ -40,7 +44,7 @@
         width: 45%;
         text-align: start;
         font-family: Montserrat, sans-serif;
-        font-weight: 400;        
+        font-weight: 500;        
         color: #202B21;
         line-height: 20px;
         font-size: 14px;
@@ -55,8 +59,13 @@
 
 .aboutus__github {
     position: absolute;
+<<<<<<< HEAD
     top: 15%;
     left: 15%;
+=======
+    top: 18%;
+    left: 18%;
+>>>>>>> c5a9b97817323600db1fa802af533df40373586f
     width: 0px;
     height: 0px;
     //display: none;
@@ -75,7 +84,11 @@
         width: 150px;
         height: 150px;
         cursor: pointer;
+<<<<<<< HEAD
         border: 10px solid  green;
+=======
+        border: none;
+>>>>>>> c5a9b97817323600db1fa802af533df40373586f
         border-radius: 50%;
     }
 }

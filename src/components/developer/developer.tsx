@@ -1,7 +1,7 @@
 import React from 'react';
-import { Develops } from './../../assets/develops';
+import { Develops } from '../../contstants/develops';
 import styles from './developer.module.scss';
-import Github from './../../assets/images/github2.png'
+import Github from './../../assets/images/github1.png'
 
 
 const Developer: React.FC = () => {
@@ -22,6 +22,12 @@ const Developer: React.FC = () => {
         </div>
         <div className={styles.description__name}>
           <p > {develop.name}</p>
+        </div>      
+        <div className={styles.description__name}>
+          <p > {develop.city}</p>
+        </div>      
+        <div className={styles.description__name}>
+          <p > {develop.role}</p>
         </div>      
         <div className={styles.description__text}>
           <span > {develop.about}</span>
