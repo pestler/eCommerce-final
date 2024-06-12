@@ -5,6 +5,7 @@ import { useCart } from '../../hooks/useCart.ts';
 import { ProductBasketDto } from '../../mappers/dto/productBasket.dto.ts';
 import { productBasketMapper } from '../../mappers/productBasket.mapper.ts';
 import styles from './basket.module.scss';
+import { Link } from 'react-router-dom';
 
 const Basket: React.FC = () => {
   const { getCartItems, getTotalCoast, getCount, changeCount } = useCart();
@@ -41,7 +42,7 @@ const Basket: React.FC = () => {
       <h2>Корзина</h2>
       <div className={styles.basket__container}>
         <div className={styles.list_product}>
-          {products ? (
+          {products && products.length > 0 ? (
             products.map((product) => (
               <CardBasket
                 product={product}
@@ -50,7 +51,11 @@ const Basket: React.FC = () => {
               />
             ))
           ) : (
-            <div>Корзина пуста</div>
+            <div className={styles.basket__null}>Корзина пуста
+              <Link className={styles.link} to="/catalog">
+                в каталог
+              </Link>
+            </div>
           )}
         </div>
         <div className={styles.basket__order}>
