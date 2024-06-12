@@ -1,5 +1,5 @@
 import { Cart } from '@commercetools/platform-sdk';
-import { CircularProgress, Pagination } from '@mui/material';
+import { Pagination } from '@mui/material';
 import { useSnackbar } from 'notistack';
 import React, { useCallback, useEffect, useState } from 'react';
 import { useNavigate, useSearchParams } from 'react-router-dom';
@@ -417,7 +417,7 @@ const Catalog: React.FC = () => {
                 changeCount={changeCountHandler}
               />
             ))}
-          {!products && <CircularProgress color="success" />}
+          {!products.length && <div className={styles.noData}>Нет данных</div>}
         </div>
       </div>
       <div className={styles.pagination}>
