@@ -1,29 +1,33 @@
 import React, { useEffect, useState } from 'react';
-import deleteImg from '../../assets/images/delete.png';
 import Button from '../../components/button/Button';
-import Counter from '../../components/counter/Counter.tsx';
+import CardBasket from '../../components/cardBasket/CardBasket.tsx';
 import { useCart } from '../../hooks/useCart.ts';
+import { ProductBasketDto } from '../../mappers/dto/productBasket.dto.ts';
+import { productBasketMapper } from '../../mappers/productBasket.mapper.ts';
 import styles from './basket.module.scss';
 
 const Basket: React.FC = () => {
   const { getCartItems, getTotalCoast, getCount } = useCart();
 
+  const [products, setProducts] = useState<ProductBasketDto[]>([]);
+
+  const getProducts = () => {
+    try {
+      const products: ProductBasketDto[] = getCartItems().map((product) =>
+        productBasketMapper.fromDto(product),
+      );
+      setProducts(products);
+    } catch (e) {
+      console.error(e);
+    }
+  };
+
   useEffect(() => {
     console.log(getCartItems());
     console.log(getTotalCoast());
     console.log(getCount());
+    getProducts();
   }, []);
-
-  const listProduct = getCartItems();
-
-  const [counter, setCounter] = useState<number>(1);
-
-  const changeCounter = (count: number) => {
-    setCounter(count);
-    // if (product && product.lineCartId) {
-    //   changeCount(product.lineCartId, count);
-    //}
-  };
 
   // const remove = (id: string) => {
   //     removeFromCart(id);
@@ -34,31 +38,13 @@ const Basket: React.FC = () => {
       <h2>Корзина</h2>
       <div className={styles.basket__container}>
         <div className={styles.list_product}>
-          {listProduct.map((item) => {
-            return (
-              <div className={styles.product__item}>
-                <img
-                  src={
-                    item.variant.images ? item.variant.images[0].url : undefined
-                  }
-                  className={styles.product__img}
-                />
-                <div className={styles.product__description}>
-                  <p className={styles.product__name}>{item.name['ru-BY']}</p>
-                  <div className={styles.product__counter}>
-                    <Counter
-                      count={counter}
-                      changeCounter={changeCounter}
-                    ></Counter>
-                  </div>
-                  <div className={styles.product__price}>100 USD</div>
-                  <div className={styles.product__delete}>
-                    <img src={deleteImg} />
-                  </div>
-                </div>
-              </div>
-            );
-          })}
+          {products ? (
+            products.map((product) => (
+              <CardBasket product={product} key={product.id} />
+            ))
+          ) : (
+            <div>Корзина пуста</div>
+          )}
         </div>
         <div className={styles.basket__order}>
           <div className={styles.basket__description}>
