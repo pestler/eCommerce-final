@@ -86,7 +86,10 @@ const Header: React.FC = () => {
               )}
               <BasicMenu
                 buttonContent={!isAuthenticated ? <LoginSvg /> : <ProfileSvg />}
-                menuItems={eventsMenu.filter((item: string) =>
+                menuItems={
+                eventsMenu
+                    .filter((item) => item !== 'Каталог' && item !== 'Главная')
+                    .filter((item: string) =>
                   isAuthenticated
                     ? item === 'Выйти' || item === 'Профиль'
                     : item !== 'Выйти' && item !== 'Профиль',
