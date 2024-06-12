@@ -1,4 +1,5 @@
 import { ReactNode } from 'react';
+import Basket from '../pages/basket/Basket.tsx';
 import Catalog from '../pages/catalog/Catalog.tsx';
 import Login from '../pages/login/Login.tsx';
 import Main from '../pages/main/Main.tsx';
@@ -8,7 +9,6 @@ import Profile from '../pages/profile/Profile.tsx';
 import Registration from '../pages/registration/Registration.tsx';
 import AuthGuard from './guards/auth.guard.tsx';
 import NonAuthGuard from './guards/non-auth.guard.tsx';
-import Basket from '../pages/basket/Basket.tsx';
 
 interface Route {
   path: string;
@@ -43,7 +43,7 @@ export const router: Route[] = [
   },
   {
     path: '/basket',
-    element:<Basket />,
+    element: <Basket />,
   },
   {
     path: '*',
