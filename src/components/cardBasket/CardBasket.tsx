@@ -1,22 +1,31 @@
 import { useState } from 'react';
 import deleteImg from '../../assets/images/delete.png';
+import { useCart } from '../../hooks/useCart.ts';
 import { ProductBasketDto } from '../../mappers/dto/productBasket.dto.ts';
 import Counter from '../counter/Counter.tsx';
 import styles from './cardBasket.module.scss';
 
 type Props = React.HTMLProps<HTMLElement> & {
   product: ProductBasketDto;
+  changeCount: (payload: ProductBasketDto, count: number) => void;
 };
 
-const CardBasket: React.FC<Props> = ({ product }) => {
-  const [counter, setCounter] = useState<number>(1);
+const CardBasket: React.FC<Props> = ({ product, changeCount }) => {
+  const { removeFromCart } = useCart();
+
+  const [counter, setCounter] = useState(product.cartCount);
 
   const changeCounter = (count: number) => {
     setCounter(count);
-    //   if (product && product.lineCartId) {
-    //     changeCount(product.lineCartId, count);
-    //   }
+    if (product && product.id) {
+      changeCount(product, count);
+    }
   };
+
+  const remove = (id: string) => {
+    removeFromCart(id);
+  };
+
   return (
     <div className={styles.product__item}>
       <img
@@ -31,7 +40,10 @@ const CardBasket: React.FC<Props> = ({ product }) => {
         <div
           className={styles.product__price}
         >{`${product.price.centAmount} ${product.price.currency}`}</div>
-        <div className={styles.product__delete}>
+        <div
+          className={styles.product__delete}
+          onClick={() => remove(product.id)}
+        >
           <img src={deleteImg} />
         </div>
       </div>

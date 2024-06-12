@@ -7,7 +7,7 @@ import { productBasketMapper } from '../../mappers/productBasket.mapper.ts';
 import styles from './basket.module.scss';
 
 const Basket: React.FC = () => {
-  const { getCartItems, getTotalCoast, getCount } = useCart();
+  const { getCartItems, getTotalCoast, getCount, changeCount } = useCart();
 
   const [products, setProducts] = useState<ProductBasketDto[]>([]);
 
@@ -22,16 +22,19 @@ const Basket: React.FC = () => {
     }
   };
 
+  const changeCountHandler = async (
+    product: ProductBasketDto,
+    count: number,
+  ) => {
+    changeCount(product.id!, count);
+  };
+
   useEffect(() => {
     console.log(getCartItems());
     console.log(getTotalCoast());
     console.log(getCount());
     getProducts();
   }, []);
-
-  // const remove = (id: string) => {
-  //     removeFromCart(id);
-  // }
 
   return (
     <div className={styles.basket__wrapper}>
@@ -40,7 +43,11 @@ const Basket: React.FC = () => {
         <div className={styles.list_product}>
           {products ? (
             products.map((product) => (
-              <CardBasket product={product} key={product.id} />
+              <CardBasket
+                product={product}
+                key={product.id}
+                changeCount={changeCountHandler}
+              />
             ))
           ) : (
             <div>Корзина пуста</div>
