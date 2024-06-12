@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, {useCallback, useEffect, useState} from 'react';
 import Button from '../../components/button/Button';
 import CardBasket from '../../components/cardBasket/CardBasket.tsx';
 import { useCart } from '../../hooks/useCart.ts';
@@ -8,20 +8,20 @@ import styles from './basket.module.scss';
 import { Link } from 'react-router-dom';
 
 const Basket: React.FC = () => {
-  const { getCartItems, getTotalCoast, getCount, changeCount } = useCart();
+  const { getCartItems, changeCount } = useCart();
 
   const [products, setProducts] = useState<ProductBasketDto[]>([]);
 
-  const getProducts = () => {
+  const getProducts = useCallback(() => {
     try {
       const products: ProductBasketDto[] = getCartItems().map((product) =>
-        productBasketMapper.fromDto(product),
+          productBasketMapper.fromDto(product),
       );
       setProducts(products);
     } catch (e) {
       console.error(e);
     }
-  };
+  }, [getCartItems]);
 
   const changeCountHandler = async (
     product: ProductBasketDto,
@@ -31,11 +31,8 @@ const Basket: React.FC = () => {
   };
 
   useEffect(() => {
-    console.log(getCartItems());
-    console.log(getTotalCoast());
-    console.log(getCount());
     getProducts();
-  }, []);
+  }, [getProducts]);
 
   return (
     <div className={styles.basket__wrapper}>
