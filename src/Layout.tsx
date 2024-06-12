@@ -10,21 +10,22 @@ type Props = {
 };
 
 const Layout: React.FC<Props> = ({ children }) => {
-  const { load } = useLoader();
-  return (
-    <>
-      <div className={style.loaderContainer}>
-        {load && (
-          <div className={style.loader}>
-            <LinearProgress color="success" />
-          </div>
-        )}
-      </div>
-      <Header />
-      <main className="container">{children}</main>
-      <Footer />
-    </>
-  );
+    const { load } = useLoader();
+
+    return (
+        <div style={{ display: "flex", flexDirection: "column", minHeight: "100vh" }}>
+            <div className={style.loaderContainer}>
+                {load && (
+                    <div className={style.loader} style={{ position: "absolute", top: 0, left: 0, right: 0 }}>
+                        <LinearProgress color="success" />
+                    </div>
+                )}
+            </div>
+            <Header />
+            <main style={{ flex: 1 }} className="container">{children}</main>
+            <Footer />
+        </div>
+    );
 };
 
 export default Layout;

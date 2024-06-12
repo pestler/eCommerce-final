@@ -4,6 +4,13 @@
   --third-family: "Suisse Intl", sans-serif;
 }
 
+#root {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+}
+
 * {
   box-sizing: border-box;
   transition: all .3s;
@@ -16,6 +23,7 @@ body {
 }
 
 .container {
+  width: 100%;
   max-width: 1240px;
   margin: 0 auto;
   position: relative;
