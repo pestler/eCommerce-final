@@ -1,3 +1,4 @@
+import { Checkbox } from '@mui/material';
 import React, { useEffect, useState } from 'react';
 import ArrowBottom from '../../assets/svg/arrow-bottom.svg';
 import ArrowTop from '../../assets/svg/arrow-top.svg';
@@ -7,7 +8,6 @@ import {
   SubcategoryType,
 } from '../../interface/productCategory.type.ts';
 import styles from './filter.module.scss';
-import { Checkbox } from '@mui/material';
 
 type PropsFilter = {
   category?: ProductCategory;
@@ -54,20 +54,26 @@ const Filter: React.FC<PropsFilter> = ({
             setOpen(true);
             return;
           }
-        })
-      })
+        });
+      });
     }
     if (type === 'height') {
       setFromValue(currentFilters.attributes.heightFrom ?? '');
       setToValue(currentFilters.attributes.heightTo ?? '');
-      if (currentFilters.attributes.heightFrom || currentFilters.attributes.heightTo) {
+      if (
+        currentFilters.attributes.heightFrom ||
+        currentFilters.attributes.heightTo
+      ) {
         setOpen(true);
       }
     }
     if (type === 'diameter') {
       setFromValue(currentFilters.attributes.diameterFrom ?? '');
       setToValue(currentFilters.attributes.diameterTo ?? '');
-      if (currentFilters.attributes.diameterFrom || currentFilters.attributes.diameterTo) {
+      if (
+        currentFilters.attributes.diameterFrom ||
+        currentFilters.attributes.diameterTo
+      ) {
         setOpen(true);
       }
     }
@@ -113,11 +119,12 @@ const Filter: React.FC<PropsFilter> = ({
               key={subCategory.id}
             >
               <Checkbox
-                  checked={currentFilters.categories
-                      .map((c) => c.id)
-                      .includes(subCategory.id)}
-                  onChange={() => emitValue!(subCategory)}
-                  color="success" />
+                checked={currentFilters.categories
+                  .map((c) => c.id)
+                  .includes(subCategory.id)}
+                onChange={() => emitValue!(subCategory)}
+                color="success"
+              />
               <span>{subCategory.name}</span>
             </label>
           ))}

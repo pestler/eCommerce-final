@@ -11,3 +11,13 @@ export type FilterByAttributes = {
   diameterTo?: number;
   diameterFrom?: number;
 };
+
+type KeyValuePair<K extends string | number | symbol, T> = {
+  key: K;
+  value: T;
+};
+
+export type FilterKeyValueByAttributes = KeyValuePair<
+  keyof FilterByAttributes,
+  number | undefined
+>;

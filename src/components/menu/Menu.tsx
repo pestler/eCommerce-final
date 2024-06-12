@@ -52,7 +52,11 @@ export const BasicMenu: React.FC<PropsMenu> = forwardRef(
           }}
         >
           {menuItems.map((menuItem: string, index: number) => (
-            <MenuItem className={style.menuItem} key={index} onClick={() => handleMenuItemClick(menuItem)}>
+            <MenuItem
+              className={style.menuItem}
+              key={index}
+              onClick={() => handleMenuItemClick(menuItem)}
+            >
               {menuItem}
             </MenuItem>
           ))}

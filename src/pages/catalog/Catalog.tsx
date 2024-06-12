@@ -10,7 +10,11 @@ import BasicMenu from '../../components/menu/Menu.tsx';
 import { SORTS } from '../../contstants/sorts.constants.ts';
 import { useCart } from '../../hooks/useCart.ts';
 import { useLoader } from '../../hooks/useLoader.ts';
-import { Filters } from '../../interface/filters.type.ts';
+import {
+  FilterByAttributes,
+  FilterKeyValueByAttributes,
+  Filters,
+} from '../../interface/filters.type.ts';
 import {
   ProductCategory,
   SubcategoryType,
@@ -226,17 +230,51 @@ const Catalog: React.FC = () => {
     setSortParam({ name, value });
   };
 
-  const checkFilters = (payload: SubcategoryType) => {
-    const updateFilters = updateArrayUtil<SubcategoryType>(
-      filters!.categories,
-      payload,
-      'id',
-    );
-    const queryParamString = updateFilters.map((cat) => cat.name).join(',');
+  const checkFilters = (
+    filter: SubcategoryType | FilterKeyValueByAttributes,
+  ) => {
+    if (typeof filter === 'object' && 'name' in filter) {
+      const updateFilters = updateArrayUtil<SubcategoryType>(
+        filters!.categories,
+        filter,
+        'id',
+      );
+      const queryParamString = updateFilters.map((cat) => cat.name).join(',');
+      setQueryParam(queryParamString);
+      setFilters({ ...filters, categories: updateFilters });
+    } else {
+      if (filter.key === 'heightTo') {
+        setFilters({
+          ...filters,
+          attributes: { ...filters.attributes, heightTo: undefined },
+        });
+        setAttrParamHeight(filters.attributes.heightFrom, undefined);
+      }
+      if (filter.key === 'heightFrom') {
+        setFilters({
+          ...filters,
+          attributes: { ...filters.attributes, heightFrom: undefined },
+        });
+        setAttrParamHeight(undefined, filters.attributes.heightTo);
+      }
+      if (filter.key === 'diameterTo') {
+        setFilters({
+          ...filters,
+          attributes: { ...filters.attributes, diameterTo: undefined },
+        });
+        setAttrParamDiameter(filters.attributes.heightTo, undefined);
+      }
+      if (filter.key === 'diameterFrom') {
+        setFilters({
+          ...filters,
+          attributes: { ...filters.attributes, diameterFrom: undefined },
+        });
+        setAttrParamDiameter(undefined, filters.attributes.heightTo);
+      }
+    }
+
     setPagination({ limit: ITEMS_PER_PAGE, offset: 0 });
     setPaginationParam({ limit: ITEMS_PER_PAGE, offset: 0 });
-    setQueryParam(queryParamString);
-    setFilters({ ...filters, categories: updateFilters });
   };
 
   const checkFiltersAttr = ({
@@ -321,6 +359,22 @@ const Catalog: React.FC = () => {
                     key={filter.id}
                   />
                 ))}
+              {filters &&
+                Object.keys(filters.attributes).map((key) => {
+                  const keyString = key as keyof FilterByAttributes;
+                  if (filters.attributes[keyString]) {
+                    return (
+                      <CatalogAppliedFilter
+                        deleteFilter={checkFilters}
+                        filter={{
+                          key: keyString,
+                          value: filters.attributes[keyString],
+                        }}
+                        key={key}
+                      />
+                    );
+                  }
+                })}
             </div>
             <div>
               <BasicMenu
