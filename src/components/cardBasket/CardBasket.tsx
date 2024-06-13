@@ -37,9 +37,20 @@ const CardBasket: React.FC<Props> = ({ product, changeCount }) => {
         <div className={styles.product__counter}>
           <Counter count={counter} changeCounter={changeCounter}></Counter>
         </div>
-        <div
-          className={styles.product__price}
-        >{`${product.price.centAmount} ${product.price.currency}`}</div>
+        <div className={styles.product__price}>
+          <div className={styles.price__discount}>
+            {product.price.discounted &&
+              product.price.currency &&
+              `${product.price.discounted * counter} ${product.price.currency}`}
+          </div> 
+          <div
+            className={product.price.discounted ? styles.price__amount : styles.price__discount}
+          >
+            {product.price.centAmount &&
+              product.price.currency &&
+              `${product.price.centAmount * counter} ${product.price.currency}`}
+          </div>
+        </div>
         <div
           className={styles.product__delete}
           onClick={() => remove(product.id)}

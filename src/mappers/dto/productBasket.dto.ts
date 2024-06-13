@@ -5,7 +5,7 @@ export interface ProductBasketDto {
   id: string;
   name: string;
   price: IPrice;
-  cartCount: null | number;
+  cartCount: number;
   image?: Image;
 }
 
