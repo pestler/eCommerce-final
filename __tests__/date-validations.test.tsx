@@ -1,6 +1,6 @@
 import { describe, expect, test } from 'vitest';
 
-import { validateDate } from './../src/validators/date-validation';
+import { validateDate } from '../src/validators/date-validation';
 
 describe('Function validateDate works correctly', () => {
   test('expect correct returned value from validateDate', () => {

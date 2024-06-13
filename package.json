@@ -12,8 +12,9 @@
     "format": "prettier --write ./src/**/*.{ts,tsx} --config ./.prettierrc",
     "precommit": "lint-staged",
     "prepare": "husky",
-    "test": "vitest run",
-    "coverage": "vitest run --coverage"
+    "test": "vitest  --typecheck run",
+    "coverage": "vitest run --coverage",
+    "test-coverage": "vitest --coverage"
   },
   "husky": {
     "hooks": {
