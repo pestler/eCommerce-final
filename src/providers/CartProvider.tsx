@@ -56,9 +56,6 @@ export const CartProvider = ({ children }: Props) => {
   const [cartCount, setCartCount] = useState<number | null>(
     cartData?.lineItems.length ?? null,
   );
-  const [totalCoast, setTotalCoast] = useState<CentPrecisionMoney | undefined>(
-    undefined,
-  );
 
   const getCount = () => {
     return cartCount;
@@ -73,7 +70,7 @@ export const CartProvider = ({ children }: Props) => {
   };
 
   const getTotalCoast = () => {
-    return totalCoast;
+    return cart?.totalPrice;
   };
 
   const updateCart = (cart: Cart) => {
@@ -169,7 +166,6 @@ export const CartProvider = ({ children }: Props) => {
     if (!cart) {
       createCart();
     }
-    setTotalCoast(cart?.totalPrice);
   }, [cart]);
 
   return (

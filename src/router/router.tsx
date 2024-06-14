@@ -1,4 +1,5 @@
 import { ReactNode } from 'react';
+import Basket from '../pages/basket/Basket.tsx';
 import Catalog from '../pages/catalog/Catalog.tsx';
 import Login from '../pages/login/Login.tsx';
 import Main from '../pages/main/Main.tsx';
@@ -39,6 +40,10 @@ export const router: Route[] = [
   {
     path: '/registration',
     element: <AuthGuard element={<Registration />} />,
+  },
+  {
+    path: '/basket',
+    element: <Basket />,
   },
   {
     path: '*',
