@@ -42,9 +42,13 @@ const CardBasket: React.FC<Props> = ({ product, changeCount }) => {
             {product.price.discounted &&
               product.price.currency &&
               `${product.price.discounted * counter} ${product.price.currency}`}
-          </div> 
+          </div>
           <div
-            className={product.price.discounted ? styles.price__amount : styles.price__discount}
+            className={
+              product.price.discounted
+                ? styles.price__amount
+                : styles.price__discount
+            }
           >
             {product.price.centAmount &&
               product.price.currency &&

@@ -1,3 +1,4 @@
+import { CentPrecisionMoney } from '@commercetools/platform-sdk/dist/declarations/src/generated/models/common';
 import React, { useCallback, useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import Button from '../../components/button/Button';
@@ -8,9 +9,11 @@ import { productBasketMapper } from '../../mappers/productBasket.mapper.ts';
 import styles from './basket.module.scss';
 
 const Basket: React.FC = () => {
-  const { getCartItems, changeCount } = useCart();
+  const { getCartItems, changeCount, getTotalCoast, getCount } = useCart();
 
   const [products, setProducts] = useState<ProductBasketDto[]>([]);
+  const [total, setTotal] = useState<CentPrecisionMoney>();
+  const [countProduct, setCountProduct] = useState<number>(0);
 
   const getProducts = useCallback(() => {
     try {
@@ -30,9 +33,33 @@ const Basket: React.FC = () => {
     changeCount(product.id!, count);
   };
 
+  const getTotal = useCallback(() => {
+    try {
+      const total = getTotalCoast();
+      if (total) {
+        setTotal(total);
+      }
+    } catch (e) {
+      console.error(e);
+    }
+  }, [getTotalCoast]);
+
+  const getCountProduct = useCallback(() => {
+    try {
+      const countProduct = getCount();
+      if (countProduct) {
+        setCountProduct(countProduct);
+      }
+    } catch (e) {
+      console.error(e);
+    }
+  }, [getCount]);
+
   useEffect(() => {
     getProducts();
-  }, [getProducts]);
+    getTotal();
+    getCountProduct();
+  }, [getProducts, getTotal, getCountProduct]);
 
   return (
     <div className={styles.basket__wrapper}>
@@ -60,10 +87,21 @@ const Basket: React.FC = () => {
           <div className={styles.basket__description}>
             <h3>Ваш заказ</h3>
             <p>
-              Товаров: <span>0</span>
+              Товаров:{' '}
+              <span className={styles.order__count}>
+                {countProduct && `${countProduct}`}
+                {!countProduct && '0'}
+              </span>
             </p>
             <p>
-              Общая стоимость: <span>USD</span>
+              Общая стоимость:{' '}
+              <span className={styles.order__total}>
+                {total &&
+                  total.centAmount &&
+                  total.fractionDigits &&
+                  `${total.centAmount.toString().slice(0, -2)} ${total.currencyCode}`}
+                {!total && '0'}
+              </span>
             </p>
           </div>
           <div className={styles.basket__buttons}>

@@ -37,8 +37,13 @@
 
 .basket__order {
     width: 40%;
+    font-family: "Montserrat", sans-serif;
+    font-size: 16px;
+    line-height: 160%;
 
     h3 {
+        padding-bottom: 20px;
+        font-family: Lora, sans-serif;
         font-size: 20px;
         line-height: 130%;
     }
@@ -46,6 +51,12 @@
     @media (max-width: 767px) {
         width: 100%;
     }
+}
+
+.order__total,
+.order__count {
+    font-weight: bold;
+    font-size: 20px;
 }
 
 .basket__description {
