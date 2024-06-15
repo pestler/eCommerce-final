@@ -4,7 +4,11 @@ import { generalValidation } from '../src/validators/general-validation';
 
 describe('Function generalValidation works correctly', () => {
   test('expect correct returned value from generalValidation', () => {
-    expect(generalValidation()).toBe( generalValidation() );  
-  }
-);
+    expect(generalValidation()).toStrictEqual({
+      required: {
+        message: 'Поле обязательно для заполнения!',
+        value: true,
+      },
+    });
+  });
 });
