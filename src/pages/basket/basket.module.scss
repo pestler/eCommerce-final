@@ -61,7 +61,6 @@
 
 .basket__description {
     padding: 30px;
-    margin-bottom: 20px;
     background-color: #E7F1E8;
     border-radius: 5px;
 }
@@ -95,4 +94,13 @@
         color: #519057;
     }
 
+}
+
+.basket__promo {
+    margin: 10px 0;
+
+    button {
+        width: 100%;
+        margin-top: 5px;
+    }
 }
