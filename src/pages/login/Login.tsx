@@ -3,11 +3,11 @@ import React from 'react';
 import { SubmitHandler, useForm } from 'react-hook-form';
 import { Link, useNavigate } from 'react-router-dom';
 import Input from '../../components/Input/Input.tsx';
-import Button from '../../components/button/Button.tsx';
 import { useAuth } from '../../hooks/useAuth.ts';
 import { customerService } from '../../services';
 import { loginValidation, passwordValidation } from '../../validators';
 import styles from './login.module.scss';
+import CustomButton from '../../components/button/CustomButton.tsx';
 
 export type LoginForm = {
   email: string;
@@ -66,9 +66,9 @@ const Login: React.FC = () => {
           type="password"
           error={errors.password}
         />
-        <Button className={styles.button} disabled={!isValid}>
+        <CustomButton className={styles.button} disabled={!isValid}>
           Войти
-        </Button>
+        </CustomButton>
         <div className={styles.submit}>
           <div className={styles.noaccaunt}>Нет аккаунта?</div>
           <Link className={styles.registration} to="/registration">

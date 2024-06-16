@@ -18,6 +18,10 @@
   padding: 0;
 }
 
+a {
+  text-decoration: none;
+}
+
 body {
   position: relative;
 }
@@ -35,6 +39,16 @@ body {
   justify-content: space-between;
   align-items: center;
   max-width: 100%;
+
+  .slick-slide {
+    div {
+      div {
+        img {
+          border-radius: 3px;
+        }
+      }
+    }
+  }
 
   @media (max-width: 940px) {
     justify-content: space-around;
@@ -145,5 +159,6 @@ input[type="number"] {
 
   .slick-slider {
     gap: 10px;
+
   }
 }

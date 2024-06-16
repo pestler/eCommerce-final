@@ -98,9 +98,19 @@
 
 .basket__promo {
     margin: 10px 0;
-
+    width: 100%;
     button {
         width: 100%;
-        margin-top: 5px;
+        margin-top: 20px;
     }
+}
+
+.promo__button {
+    width: 100%;
+}
+
+.oldPrice {
+    margin-left: 10px;
+    text-decoration: line-through;
+    font-size: 14px;
 }

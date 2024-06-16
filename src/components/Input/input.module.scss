@@ -29,6 +29,10 @@
   font-weight: 400;
   font-size: 14px;
 
+  &:read-only {
+    background-color: #E7F1E8;
+  }
+
   &:disabled {
     border-color: gray;
     background: #80808080;

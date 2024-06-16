@@ -2,9 +2,9 @@ import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import Dotted from '../../assets/svg/dotted.svg';
 import { ProductProjectionInterface } from '../../interface/productProjection.interface.ts';
-import Button from '../button/Button';
 import Counter from '../counter/Counter.tsx';
 import styles from './card.module.scss';
+import CustomButton from "../button/CustomButton.tsx";
 
 type Props = React.HTMLProps<HTMLInputElement> & {
   product: ProductProjectionInterface;
@@ -67,16 +67,20 @@ const Card: React.FC<Props> = ({
           )}
         </div>
         {product.cart ? (
-          <Button className={'outline'} onClick={() => removeFromCart(product)}>
+          <CustomButton className={'outline'}
+                        style={{maxWidth: '150px'}}
+                  alternativeText={'Удалить'}
+                  onClick={() => removeFromCart(product)}>
             В корзине
-          </Button>
+          </CustomButton>
         ) : (
-          <Button
+          <CustomButton
+              style={{maxWidth: '150px'}}
             className={styles.btn}
             onClick={() => addToCart(product, counter)}
           >
             В корзину
-          </Button>
+          </CustomButton>
         )}
       </div>
       <div className={styles.line}></div>

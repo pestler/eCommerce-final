@@ -9,20 +9,9 @@
 }
 
 @media (hover: hover) {
-
-    /*   .card__container:hover {
-        box-shadow: 0 0 10px #6e8f70
-    }
- */
     .card__container:hover .card__img {
         scale: 1.1
     }
-
-    //.card__container:hover .card__title {
-    //    background-color: #456F49;
-    //    color: white;
-    //    border-radius: 3px;
-    //}
 }
 
 h1 {

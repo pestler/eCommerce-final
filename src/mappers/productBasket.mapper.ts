@@ -11,6 +11,7 @@ class ProductBasketMapper {
         discounted: null,
         currency: null,
       },
+      productId: data.productId,
       cartCount: data.quantity,
       image: data.variant.images?.length ? data.variant.images[0] : undefined,
     };

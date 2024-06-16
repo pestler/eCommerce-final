@@ -2,6 +2,8 @@ import { CartActions } from '../interface/cartActions.enum.ts';
 import { AddProductToCartDto } from './dto/addProductToCart.dto.ts';
 import { ChangeProductCountToCartDto } from './dto/changeProductCountToCart.dto.ts';
 import { RemoveCartDto } from './dto/removeCart.dto.ts';
+import {AddPromoCodeDto} from "./dto/addPromocode.dto.ts";
+import {RemovePromoCodeDto} from "./dto/removeDiscountCode.dto.ts";
 
 class CartMapper {
   public toAddToCartDto(
@@ -50,6 +52,39 @@ class CartMapper {
           action: CartActions.CHANGE_COUNT,
           lineItemId,
           quantity,
+        },
+      ],
+    };
+  }
+
+  public addPromoCodeDto(
+      version: number,
+      code: string,
+  ): AddPromoCodeDto {
+    return {
+      version,
+      actions: [
+        {
+          action: 'addDiscountCode',
+          code
+        },
+      ],
+    };
+  }
+
+  public removePromoCodeDto(
+      version: number,
+      id: string,
+  ): RemovePromoCodeDto {
+    return {
+      version,
+      actions: [
+        {
+          action: 'removeDiscountCode',
+          discountCode: {
+            typeId: 'discount-code',
+            id
+          }
         },
       ],
     };

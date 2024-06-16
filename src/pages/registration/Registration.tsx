@@ -4,7 +4,6 @@ import React from 'react';
 import { Controller, SubmitHandler, useForm } from 'react-hook-form';
 import { Link, useNavigate } from 'react-router-dom';
 import Input from '../../components/Input/Input.tsx';
-import Button from '../../components/button/Button.tsx';
 import SelectCustom from '../../components/select/SelectCustom.tsx';
 import { countries } from '../../contstants/countries.constants.ts';
 import { useAuth } from '../../hooks/useAuth.ts';
@@ -26,6 +25,7 @@ import { dateValidation } from '../../validators/date-validation.ts';
 import { generalValidation } from '../../validators/general-validation.ts';
 import { surnameValidation } from '../../validators/name-surname-validation.ts';
 import styles from './registration.module.scss';
+import CustomButton from "../../components/button/CustomButton.tsx";
 
 const Registration: React.FC = () => {
   const navigate = useNavigate();
@@ -266,7 +266,7 @@ const Registration: React.FC = () => {
         </div>
       </div>
       <div className={styles.actions}>
-        <Button className={styles.button}>Регистрация</Button>
+        <CustomButton className={styles.button}>Регистрация</CustomButton>
         <div className={styles.submit}>
           <div className={styles.accaunt}>Уже есть аккаунт?</div>
           <Link className={styles.login} to="/login">

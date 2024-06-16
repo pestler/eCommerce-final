@@ -3,7 +3,6 @@ import { useParams } from 'react-router-dom';
 import imghumidity from '../../assets/images/humidity.png';
 import imglightning from '../../assets/images/lightning.png';
 import imgtemperature from '../../assets/images/temperature.png';
-import Button from '../../components/button/Button';
 import Counter from '../../components/counter/Counter.tsx';
 import SliderSimple from '../../components/slider/Slider';
 import { useCart } from '../../hooks/useCart.ts';
@@ -11,6 +10,7 @@ import { ProductDto } from '../../mappers/dto/product.dto';
 import { productMapper } from '../../mappers/product.mapper';
 import { productsService } from '../../services';
 import styles from './product.module.scss';
+import CustomButton from '../../components/button/CustomButton.tsx';
 
 const descriptionProduct = [
   {
@@ -191,16 +191,17 @@ const ProductPage: React.FC = () => {
           </div>
           <div className={styles.buttons}>
             {product.cart ? (
-              <Button
+              <CustomButton
                 className={'outline'}
+                alternativeText={'Удалить'}
                 onClick={() => removeFromCart(product!.lineCartId!)}
               >
                 В корзине
-              </Button>
+              </CustomButton>
             ) : (
-              <Button className={styles.btn} onClick={() => addToCartHandler()}>
+              <CustomButton className={styles.btn} onClick={() => addToCartHandler()}>
                 В корзину
-              </Button>
+              </CustomButton>
             )}
           </div>
         </div>

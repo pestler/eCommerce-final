@@ -10,9 +10,10 @@ type BtnProps = DetailedHTMLProps<
   HTMLButtonElement
 > & {
   className: string | undefined;
+  alternativeText?: string;
 };
 
-const Button: React.FC<BtnProps> = ({ children, className, ...props }) => {
+const CustomButton: React.FC<BtnProps> = ({ children, className, alternativeText, ...props }) => {
   const [isHovered, setIsHovered] = useState(false);
 
   return (
@@ -22,9 +23,9 @@ const Button: React.FC<BtnProps> = ({ children, className, ...props }) => {
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
     >
-      {isHovered && className === 'outline' ? 'Удалить' : children}
+      {isHovered && className === 'outline' ? alternativeText! : children}
     </button>
   );
 };
 
-export default Button;
+export default CustomButton;

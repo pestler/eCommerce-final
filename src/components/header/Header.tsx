@@ -48,7 +48,6 @@ const Header: React.FC = () => {
         break;
       case 'Выйти':
         logout();
-        navigate('/login');
         break;
       case 'Главная':
         navigate('/');
