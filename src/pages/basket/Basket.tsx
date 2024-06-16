@@ -170,7 +170,7 @@ const Basket: React.FC = () => {
                   message: 'Поле обязательно для заполнения!',
                 },
               })}
-              placeholder="Введите промокод"
+              placeholder="Введите промокод (*RSSTAGE2)"
               type="text"
               readOnly={!!cart?.discountCodes.length}
               error={errors.code}

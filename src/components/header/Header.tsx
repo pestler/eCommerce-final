@@ -18,7 +18,8 @@ export type EventsMenuType =
   | 'Выйти'
   | 'Профиль'
   | 'Главная'
-  | 'Каталог';
+  | 'Каталог'
+  | 'О нас';
 
 const eventsMenu: EventsMenuType[] = [
   'Войти',
@@ -27,6 +28,7 @@ const eventsMenu: EventsMenuType[] = [
   'Профиль',
   'Главная',
   'Каталог',
+  'О нас',
 ];
 
 const Header: React.FC = () => {
@@ -54,6 +56,9 @@ const Header: React.FC = () => {
         break;
       case 'Каталог':
         navigate('/catalog');
+        break;
+      case 'О нас':
+        navigate('/about');
         break;
     }
   };
@@ -106,7 +111,10 @@ const Header: React.FC = () => {
                 <BasicMenu
                   buttonContent={<MenuIcon></MenuIcon>}
                   menuItems={eventsMenu.filter(
-                    (item: string) => item === 'Главная' || item === 'Каталог',
+                    (item: string) =>
+                      item === 'Главная' ||
+                      item === 'Каталог' ||
+                      item === 'О нас',
                   )}
                   menuEvent={menuEvent}
                 />

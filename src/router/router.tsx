@@ -1,4 +1,5 @@
 import { ReactNode } from 'react';
+import About from '../pages/about/About.tsx';
 import Basket from '../pages/basket/Basket.tsx';
 import Catalog from '../pages/catalog/Catalog.tsx';
 import Login from '../pages/login/Login.tsx';
@@ -24,6 +25,10 @@ export const router: Route[] = [
   {
     path: '/catalog',
     element: <Catalog />,
+  },
+  {
+    path: '/about',
+    element: <About />,
   },
   {
     path: '/profile',
