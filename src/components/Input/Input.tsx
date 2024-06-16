@@ -5,7 +5,7 @@ import { FieldError } from 'react-hook-form';
 import styles from './input.module.scss';
 
 type InputProps = React.HTMLProps<HTMLInputElement> & {
-  error: FieldError | undefined;
+  error?: FieldError | undefined;
 };
 
 const Input: FC<InputProps> = forwardRef(({ label, error, ...props }, ref) => {

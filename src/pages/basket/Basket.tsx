@@ -1,6 +1,7 @@
 import { CentPrecisionMoney } from '@commercetools/platform-sdk/dist/declarations/src/generated/models/common';
 import React, { useCallback, useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
+import Input from '../../components/Input/Input.tsx';
 import Button from '../../components/button/Button';
 import CardBasket from '../../components/cardBasket/CardBasket.tsx';
 import { useCart } from '../../hooks/useCart.ts';
@@ -103,6 +104,10 @@ const Basket: React.FC = () => {
                 {!total && '0'}
               </span>
             </p>
+          </div>
+          <div className={styles.basket__promo}>
+            <Input placeholder="Введите промокод" type="text" />
+            <Button className={styles.promo__button}>Применить</Button>
           </div>
           <div className={styles.basket__buttons}>
             <Button className={styles.basket__button}>
