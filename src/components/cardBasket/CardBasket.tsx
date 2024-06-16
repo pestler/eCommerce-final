@@ -1,9 +1,9 @@
 import React, { useState } from 'react';
+import { Link } from 'react-router-dom';
 import deleteImg from '../../assets/images/delete.png';
 import { ProductBasketDto } from '../../mappers/dto/productBasket.dto.ts';
 import Counter from '../counter/Counter.tsx';
 import styles from './cardBasket.module.scss';
-import {Link} from "react-router-dom";
 
 type Props = React.HTMLProps<HTMLElement> & {
   product: ProductBasketDto;
@@ -11,7 +11,11 @@ type Props = React.HTMLProps<HTMLElement> & {
   removeProduct: (payload: ProductBasketDto) => void;
 };
 
-const CardBasket: React.FC<Props> = ({ product, changeCount, removeProduct }) => {
+const CardBasket: React.FC<Props> = ({
+  product,
+  changeCount,
+  removeProduct,
+}) => {
   const [counter, setCounter] = useState(product.cartCount);
 
   const changeCounter = (count: number) => {
@@ -25,8 +29,8 @@ const CardBasket: React.FC<Props> = ({ product, changeCount, removeProduct }) =>
     <div className={styles.product__item}>
       <Link to={`../catalog/${product.productId}`}>
         <img
-            src={product.image ? product.image.url : undefined}
-            className={styles.product__img}
+          src={product.image ? product.image.url : undefined}
+          className={styles.product__img}
         />
       </Link>
       <div className={styles.product__description}>

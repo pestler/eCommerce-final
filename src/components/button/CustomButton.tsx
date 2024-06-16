@@ -13,7 +13,12 @@ type BtnProps = DetailedHTMLProps<
   alternativeText?: string;
 };
 
-const CustomButton: React.FC<BtnProps> = ({ children, className, alternativeText, ...props }) => {
+const CustomButton: React.FC<BtnProps> = ({
+  children,
+  className,
+  alternativeText,
+  ...props
+}) => {
   const [isHovered, setIsHovered] = useState(false);
 
   return (

@@ -9,19 +9,21 @@ import {
   useEffect,
   useState,
 } from 'react';
-import {APP_CART, CART_PROMO_CODE} from '../contstants/storage-keys.constants.ts';
-import { useLoader } from '../hooks/useLoader.ts';
+import {
+  APP_CART,
+  CART_PROMO_CODE,
+} from '../contstants/storage-keys.constants.ts';
+import { useLoader } from '../hooks';
 import { BadRequest } from '../interface/responseError.interface.ts';
-import { cartMapper } from '../mappers/cart.mapper.ts';
+import { cartMapper } from '../mappers';
 import { cartService, localStorageService } from '../services';
 
 export interface ICartContext {
   cart: Cart | null;
-  promoCode: string | null,
+  promoCode: string | null;
   getCartItems: () => LineItem[] /** Получение списка товаров, добавленных в корзину */;
   updateCart: (cart: Cart) => void /** Обновление состояние корзины */;
-  getCount: () => number | undefined /** Общее количество товаров в корзине */
-  ;
+  getCount: () => number | undefined /** Общее количество товаров в корзине */;
   getTotalCoast: () =>
     | CentPrecisionMoney
     | undefined /** Общая стоимость товаров в корзине */;
@@ -40,15 +42,9 @@ export interface ICartContext {
     lineCartId: string,
     count: number,
   ) => void /** Изменение количества товара в корзине */;
-  addPromoCode: (
-      code: string,
-  ) => void /** Добавление промокода */
-  ;
-  removePromoCode: (
-      id: string,
-  ) => void /** Удаление промокода */
-  ;
-  clearCart: () => void; /** Очистить корзину */
+  addPromoCode: (code: string) => void /** Добавление промокода */;
+  removePromoCode: (id: string) => void /** Удаление промокода */;
+  clearCart: () => void /** Очистить корзину */;
 }
 
 interface Props {
@@ -64,7 +60,9 @@ export const CartProvider = ({ children }: Props) => {
   const cartData = localStorageService.get<Cart | null>(APP_CART);
 
   const [cart, setCart] = useState<Cart | null>(cartData);
-  const [promoCode, setPromoCode] = useState<string | null>(localStorageService.get<string>(CART_PROMO_CODE));
+  const [promoCode, setPromoCode] = useState<string | null>(
+    localStorageService.get<string>(CART_PROMO_CODE),
+  );
 
   const getCount = () => {
     return cart?.totalLineItemQuantity;
@@ -174,65 +172,63 @@ export const CartProvider = ({ children }: Props) => {
     try {
       if (!cart) return;
       const res = await cartService.addPromoCode(
-          cart,
-          cartMapper.addPromoCodeDto(cart.version, code),
+        cart,
+        cartMapper.addPromoCodeDto(cart.version, code),
       );
       if (res) {
         updateCart(res.body);
-        enqueueSnackbar(`Промокод применен`, {variant: 'success'});
+        enqueueSnackbar(`Промокод применен`, { variant: 'success' });
         localStorageService.set<string>(CART_PROMO_CODE, code);
         setPromoCode(code);
       }
       hideLoader();
     } catch (e: unknown) {
-      const {message} = e as BadRequest;
-      enqueueSnackbar(
-          `Ошибка при применении промокода: ${message}`,
-          {variant: 'error'},
-      );
+      const { message } = e as BadRequest;
+      enqueueSnackbar(`Ошибка при применении промокода: ${message}`, {
+        variant: 'error',
+      });
       hideLoader();
     }
-  }
+  };
 
   const removePromoCode = async (id: string) => {
     showLoader();
     try {
       if (!cart) return;
       const res = await cartService.removePromoCode(
-          cart,
-          cartMapper.removePromoCodeDto(cart.version, id),
+        cart,
+        cartMapper.removePromoCodeDto(cart.version, id),
       );
       if (res) {
         updateCart(res.body);
-        enqueueSnackbar(`Промокод удален`, {variant: 'success'});
+        enqueueSnackbar(`Промокод удален`, { variant: 'success' });
         localStorageService.remove(CART_PROMO_CODE);
         setPromoCode(null);
       }
       hideLoader();
     } catch (e: unknown) {
-      const {message} = e as BadRequest;
-      enqueueSnackbar(
-          `Ошибка при удалении промокода: ${message}`,
-          {variant: 'error'},
-      );
+      const { message } = e as BadRequest;
+      enqueueSnackbar(`Ошибка при удалении промокода: ${message}`, {
+        variant: 'error',
+      });
       hideLoader();
     }
-  }
+  };
 
   const clearCart = async () => {
     showLoader();
     try {
       createCart();
-      enqueueSnackbar(`Корзина очищена`, {variant: 'success'});
+      enqueueSnackbar(`Корзина очищена`, { variant: 'success' });
       hideLoader();
     } catch (e: unknown) {
-      const {message} = e as BadRequest;
+      const { message } = e as BadRequest;
       enqueueSnackbar(`Ошибка при удалении товара из корзины: ${message}`, {
         variant: 'error',
       });
       hideLoader();
     }
-  }
+  };
 
   useEffect(() => {
     if (!cart) {
@@ -255,7 +251,7 @@ export const CartProvider = ({ children }: Props) => {
         getTotalCoast,
         addPromoCode,
         removePromoCode,
-        clearCart
+        clearCart,
       }}
     >
       {children}

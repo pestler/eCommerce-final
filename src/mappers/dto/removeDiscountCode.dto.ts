@@ -1,12 +1,12 @@
 export type RemovePromoCodeDto = {
-    version: number;
-    actions: RemovePromoCodeAction[];
+  version: number;
+  actions: RemovePromoCodeAction[];
 };
 
 export type RemovePromoCodeAction = {
-    action: 'removeDiscountCode';
-    discountCode: {
-        typeId: 'discount-code',
-        id: string,
-    }
-}
+  action: 'removeDiscountCode';
+  discountCode: {
+    typeId: 'discount-code';
+    id: string;
+  };
+};

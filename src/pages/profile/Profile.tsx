@@ -2,8 +2,8 @@ import { useSnackbar } from 'notistack';
 import React, { useCallback, useEffect, useState } from 'react';
 import { SubmitHandler, useForm } from 'react-hook-form';
 import Input from '../../components/Input/Input.tsx';
-import { useAuth } from '../../hooks/useAuth.ts';
-import { useLoader } from '../../hooks/useLoader.ts';
+import CustomButton from '../../components/button/CustomButton.tsx';
+import { useAuth, useLoader } from '../../hooks';
 import { IChangePasswordForm } from '../../interface/changePasswordForm.interface.ts';
 import { UpdateUserInfo } from '../../interface/registrationForm.interface.ts';
 import { BadRequest } from '../../interface/responseError.interface.ts';
@@ -13,7 +13,6 @@ import { dateValidation } from '../../validators/date-validation.ts';
 import { generalValidation } from '../../validators/general-validation.ts';
 import { surnameValidation } from '../../validators/name-surname-validation.ts';
 import styles from './profile.module.scss';
-import CustomButton from "../../components/button/CustomButton.tsx";
 
 const Profile: React.FC = () => {
   const { showLoader, hideLoader } = useLoader();
@@ -178,7 +177,10 @@ const Profile: React.FC = () => {
                 error={errorsPassForm.newPassword}
               />
               <div className="action">
-                <CustomButton className={styles.button} disabled={!isValidPassForm}>
+                <CustomButton
+                  className={styles.button}
+                  disabled={!isValidPassForm}
+                >
                   Сменить пароль
                 </CustomButton>
               </div>

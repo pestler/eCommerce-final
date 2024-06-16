@@ -3,7 +3,7 @@ import React, { ReactNode } from 'react';
 import Footer from './components/footer/Footer.tsx';
 import Header from './components/header/Header.tsx';
 import style from './components/menu/menu.module.scss';
-import { useLoader } from './hooks/useLoader.ts';
+import { useLoader } from './hooks';
 
 type Props = {
   children: ReactNode;

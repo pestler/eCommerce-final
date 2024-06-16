@@ -7,7 +7,7 @@ export interface ProductBasketDto {
   price: IPrice;
   cartCount: number;
   image?: Image;
-  productId: string,
+  productId: string;
 }
 
 export interface IPrice {

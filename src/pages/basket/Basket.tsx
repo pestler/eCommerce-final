@@ -1,19 +1,18 @@
 import { CentPrecisionMoney } from '@commercetools/platform-sdk/dist/declarations/src/generated/models/common';
 import React, { useCallback, useEffect, useState } from 'react';
-import {Link, useNavigate} from 'react-router-dom';
+import { SubmitHandler, useForm } from 'react-hook-form';
+import { Link, useNavigate } from 'react-router-dom';
 import Input from '../../components/Input/Input.tsx';
+import CustomButton from '../../components/button/CustomButton.tsx';
 import CardBasket from '../../components/cardBasket/CardBasket.tsx';
-import { useCart } from '../../hooks/useCart.ts';
+import { useCart, useModal } from '../../hooks';
+import { productBasketMapper } from '../../mappers';
 import { ProductBasketDto } from '../../mappers/dto/productBasket.dto.ts';
-import { productBasketMapper } from '../../mappers/productBasket.mapper.ts';
 import styles from './basket.module.scss';
-import {SubmitHandler, useForm} from "react-hook-form";
-import CustomButton from "../../components/button/CustomButton.tsx";
-import {useModal} from "../../hooks/useModal.ts";
 
 type PromoCodeForm = {
-  code: string,
-}
+  code: string;
+};
 
 const Basket: React.FC = () => {
   const {
@@ -26,7 +25,7 @@ const Basket: React.FC = () => {
     removePromoCode,
     removeFromCart,
     promoCode,
-    clearCart
+    clearCart,
   } = useCart();
 
   const { openModal, closeModal } = useModal();
@@ -40,16 +39,16 @@ const Basket: React.FC = () => {
     register,
     setValue,
     handleSubmit,
-    formState: {errors, isValid},
+    formState: { errors, isValid },
   } = useForm<PromoCodeForm>({
     mode: 'onChange',
   });
 
   const getProducts = useCallback(() => {
-    const products: ProductBasketDto[] = getCartItems()
-        .map((product) =>
-            productBasketMapper.fromDto(product))
-      setProducts(products);
+    const products: ProductBasketDto[] = getCartItems().map((product) =>
+      productBasketMapper.fromDto(product),
+    );
+    setProducts(products);
   }, [getCartItems]);
 
   const changeCountHandler = async (
@@ -64,20 +63,20 @@ const Basket: React.FC = () => {
     setTotal(total);
   }, [getTotalCoast]);
 
-  const onSubmit: SubmitHandler<PromoCodeForm> = async ({code}) => {
-    addPromoCode(code)
-  }
+  const onSubmit: SubmitHandler<PromoCodeForm> = async ({ code }) => {
+    addPromoCode(code);
+  };
 
   const backCatalog = () => {
-    navigate('../catalog')
-  }
+    navigate('../catalog');
+  };
 
   const deleteCart = (agree: boolean): void => {
-      closeModal();
-      if (agree) clearCart();
-  }
+    closeModal();
+    if (agree) clearCart();
+  };
 
-  const deleteProduct = ({name, id}: ProductBasketDto) => {
+  const deleteProduct = ({ name, id }: ProductBasketDto) => {
     openModal({
       open: true,
       title: `Вы действительно хотите удалить "${name}" из корзины?`,
@@ -85,19 +84,19 @@ const Basket: React.FC = () => {
       handleClose: (agree: boolean) => {
         closeModal();
         if (agree) removeFromCart(id);
-      }
-    })
-  }
+      },
+    });
+  };
 
   const deletePromoCode = (agree: boolean): void => {
     closeModal();
     if (agree) removePromoCode(cart!.discountCodes[0].discountCode.id);
-  }
+  };
 
   useEffect(() => {
     getProducts();
     getTotal();
-    setValue('code', promoCode ? promoCode : '')
+    setValue('code', promoCode ? promoCode : '');
   }, [cart]);
 
   return (
@@ -141,67 +140,93 @@ const Basket: React.FC = () => {
                   total.fractionDigits &&
                   `${total.centAmount.toString().slice(0, -2)} ${total.currencyCode}`}
                 {!total && '0'}
-                {total && cart && cart.discountOnTotalPrice && cart.discountOnTotalPrice.discountedAmount.centAmount ?
-                    <span className={styles.oldPrice}>
-                      {(cart.discountOnTotalPrice.discountedAmount.centAmount + total.centAmount).toString().slice(0, -2)} {cart.discountOnTotalPrice.discountedAmount.currencyCode}
-                  </span> : ''
-                }
+                {total &&
+                cart &&
+                cart.discountOnTotalPrice &&
+                cart.discountOnTotalPrice.discountedAmount.centAmount ? (
+                  <span className={styles.oldPrice}>
+                    {(
+                      cart.discountOnTotalPrice.discountedAmount.centAmount +
+                      total.centAmount
+                    )
+                      .toString()
+                      .slice(0, -2)}{' '}
+                    {cart.discountOnTotalPrice.discountedAmount.currencyCode}
+                  </span>
+                ) : (
+                  ''
+                )}
               </span>
             </p>
           </div>
-          <form className={styles.basket__promo} onSubmit={handleSubmit(onSubmit)}>
+          <form
+            className={styles.basket__promo}
+            onSubmit={handleSubmit(onSubmit)}
+          >
             <Input
-                {...register('code', {
-                  required: {
-                    value: true,
-                    message: 'Поле обязательно для заполнения!',
-                  },
-                })}
-                placeholder="Введите промокод"
-                type="text"
-                readOnly={!!cart?.discountCodes.length}
-                error={errors.code}
+              {...register('code', {
+                required: {
+                  value: true,
+                  message: 'Поле обязательно для заполнения!',
+                },
+              })}
+              placeholder="Введите промокод"
+              type="text"
+              readOnly={!!cart?.discountCodes.length}
+              error={errors.code}
             />
-            {!cart?.discountCodes.length &&
-                <CustomButton
-                    disabled={!isValid}
-                    className={styles.promo__button}>
-                  Применить
-                </CustomButton>
-            }
-          </form>
-          {cart?.discountCodes.length ?
+            {!cart?.discountCodes.length && (
               <CustomButton
-                  className={'outline'}
-                  style={{width: '100%', marginBottom: '10px',  marginTop: '10px'}}
-                  alternativeText={'Удалить'}
-                  onClick={() => openModal({
-                    open: true,
-                    title: 'Вы действительно хотите удалить промокод?',
-                    description: '',
-                    handleClose: deletePromoCode
-                  })}
+                disabled={!isValid}
+                className={styles.promo__button}
               >
-                Промокод применен
+                Применить
               </CustomButton>
-              : ''
-          }
-          <div>
-          </div>
+            )}
+          </form>
+          {cart?.discountCodes.length ? (
+            <CustomButton
+              className={'outline'}
+              style={{ width: '100%', marginBottom: '10px', marginTop: '10px' }}
+              alternativeText={'Удалить'}
+              onClick={() =>
+                openModal({
+                  open: true,
+                  title: 'Вы действительно хотите удалить промокод?',
+                  description: '',
+                  handleClose: deletePromoCode,
+                })
+              }
+            >
+              Промокод применен
+            </CustomButton>
+          ) : (
+            ''
+          )}
+          <div></div>
           <div className={styles.basket__buttons}>
-            <CustomButton className={styles.basket__button}
-            onClick={backCatalog}
+            <CustomButton
+              className={styles.basket__button}
+              onClick={backCatalog}
             >
               {getCount() ? 'Продолжить покупки' : 'Начать покупки'}
             </CustomButton>
-            {getCount() && <CustomButton className={styles.basket__button}
-                                       onClick={() => openModal({
-                                         open: true,
-                                         title: 'Вы действительно хотите очистить корзину?',
-                                         description: 'Из корзины будут удалены все товары и очищен промокод, если он применен.',
-                                         handleClose: deleteCart
-                                       })}
-            >Очистить корзину</CustomButton>}
+            {getCount() && (
+              <CustomButton
+                className={styles.basket__button}
+                onClick={() =>
+                  openModal({
+                    open: true,
+                    title: 'Вы действительно хотите очистить корзину?',
+                    description:
+                      'Из корзины будут удалены все товары и очищен промокод, если он применен.',
+                    handleClose: deleteCart,
+                  })
+                }
+              >
+                Очистить корзину
+              </CustomButton>
+            )}
           </div>
         </div>
       </div>

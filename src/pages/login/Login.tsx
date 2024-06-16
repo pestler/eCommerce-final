@@ -3,11 +3,11 @@ import React from 'react';
 import { SubmitHandler, useForm } from 'react-hook-form';
 import { Link, useNavigate } from 'react-router-dom';
 import Input from '../../components/Input/Input.tsx';
-import { useAuth } from '../../hooks/useAuth.ts';
+import CustomButton from '../../components/button/CustomButton.tsx';
+import { useAuth } from '../../hooks';
 import { customerService } from '../../services';
 import { loginValidation, passwordValidation } from '../../validators';
 import styles from './login.module.scss';
-import CustomButton from '../../components/button/CustomButton.tsx';
 
 export type LoginForm = {
   email: string;

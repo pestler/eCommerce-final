@@ -1,15 +1,15 @@
 import { Customer } from '@commercetools/platform-sdk';
 import { useSnackbar } from 'notistack';
 import { createContext, ReactNode, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import {
   ACCESS_TOKEN,
   EXPIRATION_TIME,
   REFRESH_TOKEN,
   USER_CUSTOMER,
 } from '../contstants/storage-keys.constants.ts';
+import { useModal } from '../hooks';
 import { localStorageService } from '../services';
-import {useModal} from "../hooks/useModal.ts";
-import {useNavigate} from "react-router-dom";
 
 export interface IAuthContext {
   user: Customer | null;
@@ -55,8 +55,8 @@ export const AuthProvider = ({ children }: Props) => {
           navigate('/login');
           enqueueSnackbar('Вы вышли из системы', { variant: 'success' });
         }
-      }
-    })
+      },
+    });
   };
 
   return (

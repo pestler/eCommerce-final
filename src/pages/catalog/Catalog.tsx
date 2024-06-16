@@ -8,8 +8,7 @@ import CatalogAppliedFilter from '../../components/catalogAppliedFilter/CatalogA
 import Filter from '../../components/filter/Filter.tsx';
 import BasicMenu from '../../components/menu/Menu.tsx';
 import { SORTS } from '../../contstants/sorts.constants.ts';
-import { useCart } from '../../hooks/useCart.ts';
-import { useLoader } from '../../hooks/useLoader.ts';
+import { useCart, useLoader } from '../../hooks';
 import {
   FilterByAttributes,
   FilterKeyValueByAttributes,
@@ -22,9 +21,11 @@ import {
 import { ProductProjectionInterface } from '../../interface/productProjection.interface.ts';
 import { BadRequest } from '../../interface/responseError.interface.ts';
 import { ISort } from '../../interface/sort.interface.ts';
-import { categoryMapper } from '../../mappers/category.mapper.ts';
-import { productProjectionMapper } from '../../mappers/productProjection.mapper.ts';
-import { queryParamMapper } from '../../mappers/queryParam.mapper.ts';
+import {
+  categoryMapper,
+  productProjectionMapper,
+  queryParamMapper,
+} from '../../mappers';
 import { productsService } from '../../services';
 import { updateArrayUtil } from '../../utils';
 import styles from './catalog.module.scss';
