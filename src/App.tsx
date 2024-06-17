@@ -10,17 +10,18 @@ import {
   ModalProvider,
 } from './providers';
 import { router } from './router';
+import { ErrorBoundary } from "react-error-boundary";
 
 const App: React.FC = () => {
   return (
+    <ErrorBoundary fallback={<div>Something went wrong</div>}>
     <LoaderProvider>
       <SnackbarProvider
         autoHideDuration={800}
         anchorOrigin={{
           vertical: 'top',
           horizontal: 'right',
-        }}
-      >
+        }}>
         <ModalProvider>
           <CartProvider>
             <BrowserRouter>
@@ -42,6 +43,7 @@ const App: React.FC = () => {
         </ModalProvider>
       </SnackbarProvider>
     </LoaderProvider>
+    </ErrorBoundary>
   );
 };
 

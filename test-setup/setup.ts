@@ -1,10 +1,23 @@
-//import matchers from '@testing-library/jest-dom/matchers';
-//import { expect } from 'vitest';
-import { afterEach } from 'vitest'
-import { cleanup } from '@testing-library/react'
-import '@testing-library/jest-dom/vitest'
+import Enzyme from 'enzyme';
+import Adapter from '@cfaester/enzyme-adapter-react-18';
+/* import { expect, afterEach } from 'vitest';
+import matchers from '@testing-library/jest-dom/matchers';
+import { cleanup } from '@testing-library/react'; */
 
-// runs a clean after each test case (e.g. clearing jsdom)
-afterEach(() => {
+Enzyme.configure({ adapter: new Adapter() });
+//expect.extend(matchers);
+
+//Очистка DOM после каждого теста
+/* afterEach(() => {
     cleanup();
-})
+}); */
+
+window.matchMedia =
+    window.matchMedia ||
+    function() {
+        return {
+            matches: false,
+            addListener: function() {},
+            removeListener: function() {}
+        };
+    };

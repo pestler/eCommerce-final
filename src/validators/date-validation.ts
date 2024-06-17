@@ -10,7 +10,7 @@ export const dateValidation = () => ({
   validate: validateDate,
 });
 
-const validateDate = (value: string): boolean | string => {
+export const validateDate = (value: string): boolean | string => {
   const date: Date = new Date(value);
   if (date.getFullYear() < 1940) {
     return 'Неверный год рождения. Год должен быть больше или равен 1940.';
