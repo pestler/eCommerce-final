@@ -11,6 +11,7 @@ import {
   ModalProvider,
 } from './providers';
 import { router } from './router';
+import PageTitle from "./components/pageTitle/PageTitle.tsx";
 
 const App: React.FC = () => {
   return (
@@ -33,7 +34,12 @@ const App: React.FC = () => {
                         <Route
                           key={index}
                           path={route.path}
-                          element={route.element}
+                          element={
+                            <>
+                              {route.pageTitle && <PageTitle title={route.pageTitle}/>}
+                              {route.element}
+                            </>
+                          }
                         />
                       ))}
                     </Routes>

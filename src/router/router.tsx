@@ -14,6 +14,7 @@ import NonAuthGuard from './guards/non-auth.guard.tsx';
 interface Route {
   path: string;
   element: ReactNode;
+  pageTitle?: string,
   children?: Route[];
 }
 
@@ -21,18 +22,22 @@ export const router: Route[] = [
   {
     path: '/',
     element: <Main />,
+    pageTitle: 'Home Decor'
   },
   {
     path: '/catalog',
     element: <Catalog />,
+    pageTitle: 'Каталог'
   },
   {
     path: '/about',
     element: <About />,
+    pageTitle: 'О нас'
   },
   {
     path: '/profile',
     element: <NonAuthGuard element={<Profile />} />,
+    pageTitle: 'Профиль'
   },
   {
     path: '/catalog/:id',
@@ -41,17 +46,21 @@ export const router: Route[] = [
   {
     path: '/login',
     element: <AuthGuard element={<Login />} />,
+    pageTitle: 'Вход'
   },
   {
     path: '/registration',
     element: <AuthGuard element={<Registration />} />,
+    pageTitle: 'Регистрация'
   },
   {
     path: '/basket',
     element: <Basket />,
+    pageTitle: 'Корзина'
   },
   {
     path: '*',
     element: <NotFoundPage />,
+    pageTitle: '404'
   },
 ];
