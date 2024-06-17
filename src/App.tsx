@@ -4,6 +4,7 @@ import { ErrorBoundary } from 'react-error-boundary';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import './App.scss';
 import Layout from './Layout.tsx';
+import PageTitle from './components/pageTitle/PageTitle.tsx';
 import {
   AuthProvider,
   CartProvider,
@@ -11,7 +12,6 @@ import {
   ModalProvider,
 } from './providers';
 import { router } from './router';
-import PageTitle from "./components/pageTitle/PageTitle.tsx";
 
 const App: React.FC = () => {
   return (
@@ -36,7 +36,9 @@ const App: React.FC = () => {
                           path={route.path}
                           element={
                             <>
-                              {route.pageTitle && <PageTitle title={route.pageTitle}/>}
+                              {route.pageTitle && (
+                                <PageTitle title={route.pageTitle} />
+                              )}
                               {route.element}
                             </>
                           }
