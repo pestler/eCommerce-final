@@ -8,10 +8,13 @@ import { IChangePasswordForm } from '../../interface/changePasswordForm.interfac
 import { UpdateUserInfo } from '../../interface/registrationForm.interface.ts';
 import { BadRequest } from '../../interface/responseError.interface.ts';
 import { customerService } from '../../services';
-import { loginValidation, passwordValidation } from '../../validators';
-import { dateValidation } from '../../validators/date-validation.ts';
-import { generalValidation } from '../../validators/general-validation.ts';
-import { surnameValidation } from '../../validators/name-surname-validation.ts';
+import {
+  dateValidation,
+  generalValidation,
+  loginValidation,
+  passwordValidation,
+  surnameValidation,
+} from '../../validators';
 import styles from './profile.module.scss';
 
 const Profile: React.FC = () => {
@@ -122,7 +125,7 @@ const Profile: React.FC = () => {
         <h1>Личный кабинет</h1>
         <div className={styles.forms}>
           <div className={styles.userInfo}>
-            <h2>Личная информация</h2>
+            <h3>Личная информация</h3>
             <form className={styles.form} onSubmit={handleSubmit(onSubmit)}>
               <Input
                 {...register('firstName', surnameValidation())}
@@ -159,7 +162,7 @@ const Profile: React.FC = () => {
             </form>
           </div>
           <div className={styles.userInfo}>
-            <h2>Сменить пароль</h2>
+            <h3>Сменить пароль</h3>
             <form
               className={styles.form}
               onSubmit={handleSubmitPassForm(changePasswordSubmit)}

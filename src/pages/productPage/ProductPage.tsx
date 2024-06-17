@@ -6,9 +6,9 @@ import imgtemperature from '../../assets/images/temperature.png';
 import CustomButton from '../../components/button/CustomButton.tsx';
 import Counter from '../../components/counter/Counter.tsx';
 import SliderSimple from '../../components/slider/Slider';
-import { useCart } from '../../hooks/useCart.ts';
+import { useCart } from '../../hooks';
+import { productMapper } from '../../mappers';
 import { ProductDto } from '../../mappers/dto/product.dto';
-import { productMapper } from '../../mappers/product.mapper';
 import { productsService } from '../../services';
 import styles from './product.module.scss';
 

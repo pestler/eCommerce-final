@@ -7,24 +7,23 @@ import Input from '../../components/Input/Input.tsx';
 import CustomButton from '../../components/button/CustomButton.tsx';
 import SelectCustom from '../../components/select/SelectCustom.tsx';
 import { countries } from '../../contstants/countries.constants.ts';
-import { useAuth } from '../../hooks/useAuth.ts';
+import { useAuth } from '../../hooks';
 import { IRegistrationForm } from '../../interface/registrationForm.interface.ts';
 import { BadRequest } from '../../interface/responseError.interface.ts';
-import { registrationMapper } from '../../mappers/registration.mapper.ts';
+import { registrationMapper } from '../../mappers';
 import { customerService } from '../../services';
 import {
+  cityValidation,
+  dateValidation,
+  generalValidation,
   loginValidation,
+  nameValidation,
   passwordValidation,
   postalCodeValidation,
   repeatPasswordValidation,
-} from '../../validators';
-import {
-  cityValidation,
   streetValidation,
-} from '../../validators/city-validation.ts';
-import { dateValidation } from '../../validators/date-validation.ts';
-import { generalValidation } from '../../validators/general-validation.ts';
-import { surnameValidation } from '../../validators/name-surname-validation.ts';
+  surnameValidation,
+} from '../../validators';
 import styles from './registration.module.scss';
 
 const Registration: React.FC = () => {
@@ -83,7 +82,7 @@ const Registration: React.FC = () => {
           <h4 className={styles.info__title}>Личная информация</h4>
 
           <Input
-            {...register('firstName', surnameValidation())}
+            {...register('firstName', nameValidation())}
             placeholder="Имя"
             type="text"
             error={errors.firstName}
@@ -244,6 +243,7 @@ const Registration: React.FC = () => {
                   ? countries.find((item) => shippingCountry === item.code)!
                       .postalPattern!
                   : /^\b\d{5}\b(?:[- ]{1}\d{4})?$/,
+                !sameAddress,
               ),
             )}
             placeholder="Индекс"
@@ -266,7 +266,9 @@ const Registration: React.FC = () => {
         </div>
       </div>
       <div className={styles.actions}>
-        <CustomButton className={styles.button}>Регистрация</CustomButton>
+        <CustomButton style={{ maxWidth: '350px' }} className={styles.button}>
+          Регистрация
+        </CustomButton>
         <div className={styles.submit}>
           <div className={styles.accaunt}>Уже есть аккаунт?</div>
           <Link className={styles.login} to="/login">

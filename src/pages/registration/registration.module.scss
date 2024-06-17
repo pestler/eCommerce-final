@@ -82,7 +82,6 @@
 }
 
 .title {
-    text-align: center;
     font-family: var(--second-family);
     font-weight: 400;
     font-size: 36px;
@@ -90,6 +89,7 @@
     color: #202b21;
     text-transform: none;
     margin-bottom: 35px;
+    text-align: left;
 }
 
 .info__container {

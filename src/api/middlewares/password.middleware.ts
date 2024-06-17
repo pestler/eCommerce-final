@@ -2,7 +2,7 @@ import {
   PasswordAuthMiddlewareOptions,
   UserAuthOptions,
 } from '@commercetools/sdk-client-v2';
-import { configService } from '../../services/config.service.ts';
+import { configService } from '../../services';
 import { tokenCacheUtil } from '../../utils';
 
 export const passwordMiddleware = (

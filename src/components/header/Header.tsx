@@ -1,12 +1,11 @@
 import MenuIcon from '@mui/icons-material/Menu';
 import React from 'react';
 import { Link, NavLink, useNavigate } from 'react-router-dom';
-import LoginSvg from '../../assets/images/login.svg';
-import Logo from '../../assets/images/logo.svg';
 import Cart from '../../assets/svg/cart.svg';
+import LoginSvg from '../../assets/svg/login.svg';
+import Logo from '../../assets/svg/logo.svg';
 import ProfileSvg from '../../assets/svg/profile.svg';
-import { useAuth } from '../../hooks/useAuth.ts';
-import { useCart } from '../../hooks/useCart.ts';
+import { useAuth, useCart } from '../../hooks';
 import InputSearch from '../inputSearch/InputSearch.tsx';
 import BasicMenu from '../menu/Menu.tsx';
 import { listLinks } from '../menu/listLink.tsx';
@@ -66,7 +65,9 @@ const Header: React.FC = () => {
   return (
     <div className="container">
       <div className={style.header}>
-        <Logo />
+        <Link to={'./'}>
+          <Logo />
+        </Link>
         <div className={style.header__container}>
           <div className={style.header__menu}>
             <nav className={style.navbar}>

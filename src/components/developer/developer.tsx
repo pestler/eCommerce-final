@@ -1,12 +1,12 @@
 import React from 'react';
-import { Develops } from '../../contstants/develops';
+import { AboutUs } from '../../contstants/aboutUs.constants.ts';
 import Github from './../../assets/images/github1.png';
 import styles from './developer.module.scss';
 
 const Developer: React.FC = () => {
-  return Develops.map((develop) => {
+  return AboutUs.map((develop) => {
     return (
-      <div key={develop.id} className={styles.aboutus}>
+      <div key={develop.id} className={styles.about__us}>
         <div className={styles.aboutus__picture}>
           <img
             className={styles.aboutus__photo}
@@ -23,18 +23,14 @@ const Developer: React.FC = () => {
             </a>
           </div>
         </div>
-        <div className={styles.description__name}>
-          <p> {develop.name}</p>
+        <div className={styles.about__develop}>
+          <p>{develop.name}</p>
+          <p>{develop.city}</p>
+          <p>{develop.role}</p>
+          <p>{develop.about}</p>
         </div>
-        <div className={styles.description__name}>
-          <p> {develop.city}</p>
-        </div>
-        <div className={styles.description__name}>
-          <p> {develop.role}</p>
-        </div>
-        <div className={styles.description__text}>
-          <span> {develop.about}</span>
-          <span> {develop.сontributions}</span>
+        <div className={styles.description__develop}>
+          <p>{develop.сontributions}</p>
         </div>
       </div>
     );

@@ -115,9 +115,9 @@ const Basket: React.FC = () => {
             ))
           ) : (
             <div className={styles.basket__empty}>
-              Корзина пуста
+              В корзине нет товаров
               <Link className={styles.link} to="/catalog">
-                в каталог
+                В каталог
               </Link>
             </div>
           )}
