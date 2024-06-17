@@ -40,7 +40,7 @@
     font-family: "Montserrat", sans-serif;
     font-size: 16px;
     line-height: 160%;
-
+    
     h3 {
         padding-bottom: 20px;
         font-family: Lora, sans-serif;
@@ -48,11 +48,7 @@
         line-height: 130%;
     }
 
-    @media (max-width: 1024px) {
-        width: 50%;
-    }
-
-    @media (max-width: 767px) {
+    @media (max-width: 800px) {
         width: 100%;
     }
 }
@@ -64,7 +60,7 @@
 }
 
 .basket__description {
-    padding: 30px;
+    padding: 35px 25px;
     background-color: #E7F1E8;
     border-radius: 5px;
 }
