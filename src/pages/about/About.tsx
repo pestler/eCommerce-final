@@ -1,6 +1,7 @@
 import Developer from '../../components/developer/developer';
 import { AboutUs } from '../../contstants/develops';
 import styles from './about.module.scss';
+import React from "react";
 
 const aboutTitle = AboutUs.map((about) => {
   return (
