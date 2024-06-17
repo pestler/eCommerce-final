@@ -24,6 +24,7 @@ export const LoaderProvider = ({ children }: Props) => {
   const hideLoader = () => {
     setLoad(false);
   };
+  console.log(children);
 
   return (
     <LoaderContext.Provider value={{ load, showLoader, hideLoader }}>
