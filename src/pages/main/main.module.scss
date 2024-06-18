@@ -58,3 +58,24 @@
   bottom: -10px;
   width: 30%;
 }
+
+.promo__code {
+  display: flex;
+  align-items: center;
+  margin-top: 20px;
+  gap: 8px;
+  font-family: Montserrat, sans-serif;
+  font-weight: 400;
+  width: fit-content;
+  font-size: 18px;
+  color: #202B21;
+  line-height: 25px;
+  span {
+    padding: 10px;
+    border-radius: 8px;
+    border: 1px solid #2A592E;;
+
+    color: #2A592E;
+    font-weight: 500;
+  }
+}
