@@ -1,0 +1,15 @@
+
+.slider__image {
+    cursor: pointer;
+    max-width: 400px;
+
+    @media (max-width: 1150px) {
+      max-width: 300px;
+    }
+
+    @media (max-width: 940px) {
+        max-width: 200px;
+    }
+    
+}
+

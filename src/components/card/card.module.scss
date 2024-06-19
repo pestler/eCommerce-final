@@ -1,0 +1,119 @@
+.card__container {
+    width: 291px;
+    height: 498px;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    transition: box-shadow 1s ease-in-out;
+    border-radius: 3px;
+}
+
+@media (hover: hover) {
+    .card__container:hover .card__img {
+        scale: 1.1
+    }
+}
+
+h1 {
+    text-align: center;
+}
+
+.card__img__container {
+    width: 291px;
+    height: 291px;
+    overflow: hidden;
+    position: relative;
+    border-radius: 4px;
+}
+
+.card__img {
+    width: 291px;
+    height: 291px;
+    background-color: gainsboro;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    position: relative;
+    transition: scale 1s ease-in-out;
+    cursor: pointer;
+}
+
+.card__title {
+    font-family: Montserrat;
+    font-size: 20px;
+    font-weight: 400;
+    line-height: 26px;
+    text-align: left;
+    height: 52px;
+    transition: background-color 1s ease-in-out;
+}
+
+.card__favorite,
+.card__favorite__active {
+    position: absolute;
+    top: 17px;
+    right: 17px;
+    background: url('./../../assets/images/favorites-icon.png') no-repeat;
+    width: 24px;
+    height: 24px;
+    cursor: pointer;
+    z-index: 10;
+}
+
+.card__favorite__active {
+    background: url('./../../assets/images/favorites-icon-active.png') no-repeat;
+}
+
+
+
+.price__container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-family: "Montserrat", sans-serif;
+    font-weight: 600;
+    color: #202B21;
+    font-size: 18px;
+}
+
+.discount {
+    text-decoration: line-through;
+    font-size: 12px;
+}
+
+.line {
+    border: 1px solid #C7C7C7
+}
+
+.quantity__container {
+    display: flex;
+    justify-content: space-between;
+    gap: 70px;
+}
+
+.stepper {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100px;
+    height: 30px;
+    gap: 15px;
+}
+
+.number {
+    width: 100%;
+    display: flex;
+}
+
+.detailed {
+    font-family: Montserrat, sans-serif;
+    font-size: 16px;
+    font-weight: 400;
+    line-height: 20.8px;
+    align-items: center;
+    cursor: pointer;
+    color: #9AA89B;
+    display: flex;
+    text-decoration: none;
+    gap: 8px;
+}

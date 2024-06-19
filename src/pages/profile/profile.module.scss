@@ -1,0 +1,36 @@
+.profile {
+  padding: 50px 0 110px;
+   h1 {
+    text-align: left;
+     color: #202B21;
+     font-family: Lora, sans-serif;
+     font-size: 32px;
+     line-height: 41px;
+     font-weight: 400;
+     margin-bottom: 30px;
+   }
+}
+
+.forms {
+  display: flex;
+  flex-direction: column;
+  gap: 45px;
+}
+
+.userInfo {
+  h3 {
+    color: #2C2C2C;
+    font-family: "Montserrat", sans-serif;
+    font-weight: 500;
+    font-size: 16px;
+    margin-bottom: 16px;
+    text-align: left;
+  }
+}
+
+.form {
+  display: grid;
+  width: 60%;
+  grid-template-columns: 1fr 1fr;
+  gap: 20px;
+}

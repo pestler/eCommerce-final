@@ -1,0 +1,86 @@
+.container__login {
+    display: flex;
+    width: 100%;
+    padding: 50px 0;
+    background-image: url(/src/assets/images/login.png);
+    background-position: 100% 112%;
+    background-size: 28%;
+    background-repeat: no-repeat;
+}
+
+.form {
+    display: flex;
+    flex-direction: column;
+    width: 430px;
+    align-items: center;
+    gap: 27px;
+}
+
+@media screen and (max-width: 500px) {
+    .form {
+        width: 100%;
+    }
+}
+
+.titleForm {
+    text-align: center;
+    font-family: var(--second-family);
+    font-weight: 400;
+    font-size: 36px;
+    line-height: 46px;
+    color: #202b21;
+    text-transform: none;
+    margin-bottom: 35px;
+}
+
+.input {
+    border: 1.50px solid #2a592e;
+    border-radius: 3px;
+    padding: 20px 64px 20px 20px;
+    width: 100%;
+    height: 53px;
+}
+
+.checkbox {
+    position: absolute;
+    top: 25px;
+    right: 10px;
+}
+
+.button {
+    width: 100%;
+}
+
+.submit {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    text-align: center;
+    justify-content: center;
+}
+
+.noaccaunt {
+    font-family: var(--font-family);
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 130%;
+    color: #2c2c2c;
+}
+
+.registration {
+    font-family: var(--font-family);
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 130%;
+    color: #519057;
+    display: flex;
+    cursor: pointer;
+    text-align: center;
+    text-decoration: none;
+}
+
+.picbox {
+    display: flex;
+    align-items: flex-end;
+}

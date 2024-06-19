@@ -1,0 +1,117 @@
+.basket__wrapper {
+    padding-bottom: 50px;
+    padding-top: 20px;
+
+    h2 {
+        padding-bottom: 10px;
+        font-family: Lora, sans-serif;
+        font-weight: 400;
+        font-size: 36px;
+        line-height: 130%;
+        color: #000;
+        text-align: left;
+
+        @media (max-width: 980px) {
+          font-size: 26px;
+        }
+    }
+
+    @media (max-width: 1300px) {
+      padding-left: 50px;
+      padding-right: 50px;
+    }
+
+    @media (max-width: 900px) {
+      padding: 20px 20px 10px 20px;
+    }
+}
+
+.basket__container {
+    display: flex;
+    justify-content: space-between;
+
+    @media (max-width: 767px) {
+        flex-direction: column;
+        gap: 30px;
+    }
+}
+
+.basket__order {
+    width: 40%;
+    font-family: "Montserrat", sans-serif;
+    font-size: 16px;
+    line-height: 160%;
+
+    h3 {
+        padding-bottom: 20px;
+        font-family: Lora, sans-serif;
+        font-size: 20px;
+        line-height: 130%;
+    }
+
+    @media (max-width: 800px) {
+        width: 100%;
+    }
+}
+
+.order__total,
+.order__count {
+    font-weight: bold;
+    font-size: 20px;
+}
+
+.basket__description {
+    padding: 35px 25px;
+    background-color: #E7F1E8;
+    border-radius: 5px;
+}
+
+.basket__buttons {
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 10px;
+
+    button {
+        width: 100%;
+    }
+}
+
+.basket__empty {
+    font-family: "Montserrat", sans-serif;
+    font-size: 20px;
+    padding-top: 50px;
+
+    .link {
+        display: block;
+        padding-top: 20px;
+        font-family: var(--font-family);
+        font-size: 16px;
+        color: #519057;
+    }
+
+}
+
+.basket__promo {
+    margin: 10px 0;
+    width: 100%;
+    button {
+        width: 100%;
+        margin-top: 20px;
+    }
+}
+
+.promo__button {
+    width: 100%;
+}
+
+.oldPrice {
+    display: block;
+    margin-left: 175px;
+    text-decoration: line-through;
+    font-size: 14px;
+
+    @media (max-width: 980px) {
+        margin-left: 140px;
+    }
+}
